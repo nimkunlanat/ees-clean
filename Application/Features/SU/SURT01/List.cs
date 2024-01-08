@@ -1,12 +1,10 @@
-﻿using Application.Common.Models;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using MediatR;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using Domain.Entities.SU;
 using System.Collections.Generic;
-using Application.Common.Constants;
 
 namespace Application.Features.SU.SURT01;
 

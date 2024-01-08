@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
-using Application.Exceptions;
-using System.Net;
 
 namespace Application.Features.SU.SURT01;
 
