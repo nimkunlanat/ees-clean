@@ -31,11 +31,11 @@ namespace Application.Features.DB.DBRT01
                 StringBuilder sql = new StringBuilder();
 
                 sql.AppendLine(@"select s.code ""Code"" 
-                                                , desc_th ""DescTH""
-                                                , desc_en ""DescEN""
-                                                , table_name ""TableName""
-                                                , column_name ""ColumnName""
-                                                , active ""Active""
+                                                , desc_th ""descTH""
+                                                , desc_en ""descEN""
+                                                , table_name ""tableName""
+                                                , column_name ""columnName""
+                                                , active ""active""
                                                 , s.xmin ""rowVersion""
                                                 from db.status s
                                                 where 1=1");
