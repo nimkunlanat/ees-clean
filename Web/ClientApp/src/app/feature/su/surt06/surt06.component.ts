@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Parameter } from '@app/models/su/parameter';
 import { Surt06Service } from './surt06.service';
 import { ActivatedRoute } from '@angular/router';
@@ -8,10 +8,9 @@ import { filter, switchMap } from 'rxjs';
 
 @Component({
   selector: 'x-surt06',
-  templateUrl: './surt06.component.html',
-  styleUrl: './surt06.component.scss'
+  templateUrl: './surt06.component.html'
 })
-export class Surt06Component implements OnInit{
+export class Surt06Component {
 
   parameters : Parameter[] = []
 
@@ -20,11 +19,7 @@ export class Surt06Component implements OnInit{
     private activatedRoute: ActivatedRoute,
     private md: ModalService,
     private ms: NotifyService) {
-    this.activatedRoute.data.subscribe(({ parameters }) => this.parameters = parameters)
-  }
-
-  ngOnInit(): void {
-      this.search();
+    this.activatedRoute.data.subscribe(({ list }) => this.parameters = list)
   }
 
   search(value: string = '') {

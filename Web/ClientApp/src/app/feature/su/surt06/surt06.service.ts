@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Parameter } from '@app/models/su/parameter';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,7 @@ export class Surt06Service {
   constructor(private http:HttpClient) { }
 
 
-  list = (keywords) => this.http.get('surt06' , {params : {keywords}});
+  list = (keywords:string = ''): Observable<Parameter[]> => this.http.disableLoading().get<Parameter[]>('surt06/list' , {params : {keywords}});
 
-  delete = (parameterGroupCode) => this.http.delete('surt06' , {params : {parameterGroupCode}});
+  delete = (parameterGroupCode:string): Observable<Parameter[]> => this.http.delete<Parameter[]>('surt06' , {params : {parameterGroupCode}});
 }
