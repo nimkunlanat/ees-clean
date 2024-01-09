@@ -18,12 +18,10 @@ public class List
     public class Handler : IRequestHandler<Query, List<Parameter>>
     {
         private readonly ICleanDbContext _context;
-        private readonly ICurrentUserAccessor _user;
 
-        public Handler(ICleanDbContext context, ICurrentUserAccessor user)
+        public Handler(ICleanDbContext context)
         {
             _context = context;
-            _user = user;
         }
 
         public async Task<List<Parameter>> Handle(Query request, CancellationToken cancellationToken)
