@@ -14,6 +14,9 @@ import { profile, profiles, master as surt03Master } from './surt03/surt03.resol
 import { Surt04Component } from './surt04/surt04.component';
 import { Surt04DetailComponent } from './surt04/surt04-detail/surt04-detail.component';
 import { user, users, master as surt04Master } from './surt04/surt04.resolver';
+import { Surt05Component } from './surt05/surt05.component';
+import { messages } from './surt05/surt05.resolver';
+import { Surt05DetailComponent } from './surt05/surt05-detail/surt05-detail.component';
 import { Surt06Component } from './surt06/surt06.component';
 import { list } from './surt06/surt06.resolver';
 
@@ -26,7 +29,8 @@ const routes: Routes = [
   { path: 'surt03/detail', component: Surt03DetailComponent, title: 'Permission Detail', resolve: { profile, master: surt03Master }, canDeactivate: [CanDeactivate], data: { code: 'surt03' } },
   { path: 'surt04', component: Surt04Component, title: 'User', resolve: { users }, data: { code: 'surt04' } },
   { path: 'surt04/detail', component: Surt04DetailComponent, title: 'User Detail', resolve: { user, master: surt04Master }, canDeactivate: [CanDeactivate], data: { code: 'surt04' } },
-  { path: 'surt06', component: Surt06Component, title: 'Parameter' , resolve : {list} , data: { code: 'surt06' } },
+  { path: 'surt05', component: Surt05Component, title: 'Message', resolve: { messages }, data: { code: 'surt05' } },
+
 ];
 
 @NgModule({
