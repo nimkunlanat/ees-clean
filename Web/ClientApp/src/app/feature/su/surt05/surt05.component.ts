@@ -4,6 +4,7 @@ import { NotifyService } from '@app/core/services/notify.service';
 import { Message } from '@app/models/su/message';
 import { ModalService } from '@app/shared/components/modal/modal.service';
 import { Surt05Service } from './surt05.service';
+import { filter, switchMap } from 'rxjs';
 
 @Component({
   selector: 'x-surt05',
@@ -35,4 +36,14 @@ export class Surt05Component {
     //     this.ms.success('message.STD00016');
     //   })
   }
+
+  delete(messageCode: string) {
+    this.md.confirm('message.STD00015').pipe(
+      filter(confirm => confirm),
+      switchMap(() => this.sv.delete(messageCode)))
+      .subscribe((res: any) => {
+        this.search()
+        this.ms.success('message.STD00016');
+      })
+}
 }
