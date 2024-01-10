@@ -15,4 +15,6 @@ public partial class CleanDbContext : DbContext, ICleanDbContext
     public DbSet<MenuLabel> MenuLabels { get; set; }
     public DbSet<Profile> Profiles { get; set; }
     public DbSet<ProfileMenu> ProfileMenus { get; set; }
+    public DbSet<Message> Message { get; set; }
+
 }
