@@ -22,7 +22,7 @@
                 <ng-template pTemplate="body" let-row>
                     <tr>
                         <td class="text-center">
-                            <a [routerLink]="['detail']" [state]="{ parameterGroupCode: row.parameterGroupCode }">
+                            <a [routerLink]="['detail']" [state]="{ parameterGroupCode: row.parameterGroupCode , parameterCode : row.parameterCode}">
                                 {{row.parameterGroupCode}}
                             </a>
                         </td>
@@ -30,7 +30,7 @@
                         <td>{{row.parameterValue}}</td>
                         <td>{{row.remark}}</td>
                         <td class="text-center w-1">
-                            <button icon="pi pi-trash" (click)="delete(row.parameterGroupCode)"></button>
+                            <button icon="pi pi-trash" (click)="delete(row.parameterGroupCode ,row.parameterCode)"></button>
                         </td>
                     </tr>
                 </ng-template>

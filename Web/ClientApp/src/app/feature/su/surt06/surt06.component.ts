@@ -28,10 +28,10 @@ export class Surt06Component {
     })
   }
 
-  delete(parameterGroupCode: string) {
+  delete(parameterGroupCode: string ,parameterCode : string) {
     this.md.confirm('message.STD00015').pipe(
       filter(confirm => confirm), 
-      switchMap(() => this.sv.delete(parameterGroupCode)))
+      switchMap(() => this.sv.delete(parameterGroupCode ,parameterCode)))
       .subscribe((res: any) => {
         this.search()
         this.ms.success('message.STD00016');

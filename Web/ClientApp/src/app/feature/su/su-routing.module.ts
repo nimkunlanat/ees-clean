@@ -15,7 +15,8 @@ import { Surt04Component } from './surt04/surt04.component';
 import { Surt04DetailComponent } from './surt04/surt04-detail/surt04-detail.component';
 import { user, users, master as surt04Master } from './surt04/surt04.resolver';
 import { Surt06Component } from './surt06/surt06.component';
-import { list } from './surt06/surt06.resolver';
+import { detail, list } from './surt06/surt06.resolver';
+import { Surt06DetailComponent } from './surt06/surt06-detail/surt06-detail.component';
 
 const routes: Routes = [
   { path: 'surt01', component: Surt01Component, title: 'Program', resolve: { programs }, data: { code: 'surt01' } },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'surt04', component: Surt04Component, title: 'User', resolve: { users }, data: { code: 'surt04' } },
   { path: 'surt04/detail', component: Surt04DetailComponent, title: 'User Detail', resolve: { user, master: surt04Master }, canDeactivate: [CanDeactivate], data: { code: 'surt04' } },
   { path: 'surt06', component: Surt06Component, title: 'Parameter' , resolve : {list} , data: { code: 'surt06' } },
+  { path: 'surt06/detail', component: Surt06DetailComponent, title: 'Parameter Detail', resolve: { detail }, canDeactivate: [CanDeactivate], data: { code: 'surt06' } }
 ];
 
 @NgModule({

@@ -13,6 +13,7 @@ import { Surt03DetailComponent } from './surt03/surt03-detail/surt03-detail.comp
 import { Surt04Component } from './surt04/surt04.component';
 import { Surt04DetailComponent } from './surt04/surt04-detail/surt04-detail.component';
 import { Surt06Component } from './surt06/surt06.component';
+import { Surt06DetailComponent } from './surt06/surt06-detail/surt06-detail.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { Surt06Component } from './surt06/surt06.component';
     Surt04Component,
     Surt04DetailComponent,
     Surt06Component,
+    Surt06DetailComponent,
   ],
   imports: [
     CommonModule,
