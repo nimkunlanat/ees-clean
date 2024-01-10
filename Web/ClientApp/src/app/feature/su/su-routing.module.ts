@@ -30,7 +30,6 @@ const routes: Routes = [
   { path: 'surt04', component: Surt04Component, title: 'User', resolve: { users }, data: { code: 'surt04' } },
   { path: 'surt04/detail', component: Surt04DetailComponent, title: 'User Detail', resolve: { user, master: surt04Master }, canDeactivate: [CanDeactivate], data: { code: 'surt04' } },
   { path: 'surt05', component: Surt05Component, title: 'Message', resolve: { messages }, data: { code: 'surt05' } },
-  { path: 'surt05/detail', component: Surt05DetailComponent, title: 'Message Detail', resolve: { messages }, canDeactivate: [CanDeactivate], data: { code: 'surt05' } },
   { path: 'surt06', component: Surt06Component, title: 'Parameter', resolve: { list }, data: { code: 'surt06' } },
 
 
