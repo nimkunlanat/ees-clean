@@ -7,15 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Persistense.Configurations.SU
+namespace Persistense.Configurations.SU;
+
+public class MessageConfiguration : BaseConfiguration<Message>
 {
-    public class MessageConfiguration : BaseConfiguration<Message>
+    public override void Configure(EntityTypeBuilder<Message> builder)
     {
-        public override void Configure(EntityTypeBuilder<Message> builder)
-        {
-            base.Configure(builder);
-            builder.ToTable("message", "su");
-            builder.HasKey(e => new {e.MessageCode , e.LanguageCode});
-        }
+        base.Configure(builder);
+        builder.ToTable("message", "su");
+        builder.HasKey(e => new {e.MessageCode , e.LanguageCode});
     }
 }

@@ -8,10 +8,9 @@ import { Surt05Service } from './surt05.service';
 @Component({
   selector: 'x-surt05',
   templateUrl: './surt05.component.html',
-  styleUrl: './surt05.component.scss'
 })
 export class Surt05Component {
-  message: Message[] = []
+  messages: Message[] = []
 
   constructor(
     private sv: Surt05Service,
@@ -19,13 +18,12 @@ export class Surt05Component {
     private md: ModalService,
     private ms: NotifyService) {
     this.activatedRoute.data.subscribe(({ messages }) => {
-      console.log(messages)
-      this.message = messages
+      this.messages = messages
     })
   }
 
   search(value?: string) {
-    this.sv.list(value).subscribe((message: Message[]) => this.message = message)
+    this.sv.list(value).subscribe((message: Message[]) => this.messages = message)
   }
 
   edit(messageCode: number) {
@@ -35,6 +33,6 @@ export class Surt05Component {
     //   .subscribe((res: any) => {
     //     this.search()
     //     this.ms.success('message.STD00016');
-      // })
+    //   })
   }
 }
