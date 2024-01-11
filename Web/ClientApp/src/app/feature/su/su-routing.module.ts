@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CanDeactivate } from '@app/core/guard/core.guard';
-
 import { Surt01Component } from './surt01/surt01.component';
 import { Surt01DetailComponent } from './surt01/surt01-detail/surt01-detail.component';
 import { program, programs, master as surt01Master } from './surt01/surt01.resolver';
@@ -16,10 +15,10 @@ import { Surt04DetailComponent } from './surt04/surt04-detail/surt04-detail.comp
 import { user, users, master as surt04Master } from './surt04/surt04.resolver';
 import { Surt05Component } from './surt05/surt05.component';
 import { messages,message } from './surt05/surt05.resolver';
-import { Surt05DetailComponent } from './surt05/surt05-detail/surt05-detail.component';
 import { Surt06Component } from './surt06/surt06.component';
 import { detail, list } from './surt06/surt06.resolver';
 import { Surt06DetailComponent } from './surt06/surt06-detail/surt06-detail.component';
+import { Surt05DetailComponent } from './surt05/surt05-detail/surt05-detail.component';
 
 const routes: Routes = [
   { path: 'surt01', component: Surt01Component, title: 'Program', resolve: { programs }, data: { code: 'surt01' } },
