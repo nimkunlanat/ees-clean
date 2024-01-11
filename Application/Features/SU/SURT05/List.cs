@@ -1,7 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Entities.SU;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace Application.Features.SU.SURT05;
-
 public class List
 {
     public class Query : IRequest<List<Message>>
@@ -35,10 +33,14 @@ public class List
                                     m.message_desc ""messageDesc"",
                                     m.remark                                
                     FROM su.message m 
-                    where lower(concat(m.message_code,m.message_desc,m.remark)) ilike lower(concat('%',@Keywords,'%'))
-                    and lower(language_code) = lower(@Lang) ");
+                    where m.message_desc is not null");
 
-            List<Message> test = await _context.QueryAsync<Message>(sql.ToString(), new { Lang = _user.Language, request.Keywords }, cancellationToken) as List<Message>;
+            if (!string.IsNullOrEmpty(request.Keywords)) sql.AppendLine("and concat(m.message_code,m.message_desc,m.remark) ilike concat('%',@Keywords,'%')");
+
+            sql.AppendLine("and lower(language_code) = lower(@Lang)");
+            
+            sql.AppendLine("order by \"messageCode\"");
+
             return await _context.QueryAsync<Message>(sql.ToString(), new { Lang = _user.Language, request.Keywords }, cancellationToken) as List<Message>;
         }
     }

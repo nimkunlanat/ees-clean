@@ -27,15 +27,6 @@ export class Surt05Component {
     this.sv.list(value).subscribe((message: Message[]) => this.messages = message)
   }
 
-  edit(messageCode: number) {
-    // this.md.confirm('message.STD00015').pipe(
-    //   filter(confirm => confirm),
-    //   switchMap(() => this.sv.delete(userId)))
-    //   .subscribe((res: any) => {
-    //     this.search()
-    //     this.ms.success('message.STD00016');
-    //   })
-  }
 
   delete(messageCode: string) {
     this.md.confirm('message.STD00015').pipe(
