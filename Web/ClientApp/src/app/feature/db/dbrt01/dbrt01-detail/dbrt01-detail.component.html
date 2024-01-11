@@ -21,13 +21,13 @@
             <div class="col-12 lg:col-3">
               <textbox formControlName="columnName"> {{ 'label.DBRT01.ColumnName' | translate }}</textbox>
             </div>
-            <div class="col-12 lg:col-3 flex flex-column gap-2">
+            <div class="col-12 lg:col-3 flex flex-wrap gap-2">
               <label for="backgroundColor">{{ 'label.DBRT01.backgroundColor' | translate }}</label>
-                <input pInputText type="color" id="backgroundColor" formControlName="backgroundColor" style="height: 100%;">
+                <input pInputText type="color" id="backgroundColor" formControlName="backgroundColor" style="height: 60%; padding: 5px !important;">
             </div>
-            <div class="col-12 lg:col-3 flex flex-column gap-2">
+            <div class="col-12 lg:col-3 flex flex-wrap gap-2">
               <label for="fontColor">{{ 'label.DBRT01.fontColor' | translate }}</label>
-                <input  pInputText type="color" id="fontColor" formControlName="fontColor" style="height: 100%;">
+              <input pInputText type="color" id="fontColor" formControlName="fontColor" style="height: 60%; padding: 5px !important;">
             </div>
             <div class="col-12 lg:col-3 align-items-center flex flex-wrap">
                   <checkbox formControlName="active" style="height: 20%;"[label]="'label.ALL.Active' | translate"></checkbox>

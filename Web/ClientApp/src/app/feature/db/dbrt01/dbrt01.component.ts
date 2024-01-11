@@ -10,14 +10,6 @@ import { Guid } from 'guid-typescript';
 @Component({
   selector: 'x-dbrt01',
   templateUrl: './dbrt01.component.html',
-  styles: `
-  ::ng-deep .p-tabview-panels {
-    padding: 0 !important;
-  }
-  ::ng-deep .p-fieldset-content {
-    max-width: 80vw
-  }
-  `
 })
 export class Dbrt01Component {
 

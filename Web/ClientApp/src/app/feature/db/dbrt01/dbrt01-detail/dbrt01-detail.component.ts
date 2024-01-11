@@ -16,7 +16,6 @@ import { Dbrt01Service,  } from '../dbrt01.service';
 export class Dbrt01DetailComponent {
   form: FormGroup;
   data: Status;
-  parameter: { Code: string }
   breadcrumbItems: MenuItem[] = [
     { label: 'label.DBRT01.ProgramName', routerLink: '/db/dbrt01' },
     { label: 'label.DBRT01.Detail', routerLink: '/db/dbrt01/detail' },
