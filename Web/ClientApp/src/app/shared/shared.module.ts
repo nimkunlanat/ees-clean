@@ -31,6 +31,9 @@ import { ModalService } from './components/modal/modal.service';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { FileComponent } from './components/attachment/file/file.component';
+import { ImageComponent } from './components/attachment/image/image.component';
+import { DragDropDirective } from './components/attachment/image/drag-drop.directive';
 
 const components = [
   TextboxComponent,
@@ -59,7 +62,10 @@ const components = [
   TableComponent,
   ModalComponent,
   ConfirmComponent,
-  BreadcrumbComponent
+  BreadcrumbComponent,
+  FileComponent,
+  ImageComponent,
+  DragDropDirective
 ]
 
 @NgModule({

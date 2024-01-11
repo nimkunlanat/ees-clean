@@ -19,3 +19,12 @@ export type ModalConfig = {
 export enum RowState {
     Normal, Add, Edit, Delete
 }
+
+export enum AttachmentType {
+    Image = "Image",
+    File = "File"
+}
+
+export enum Category {
+    Defalt = "default"
+}

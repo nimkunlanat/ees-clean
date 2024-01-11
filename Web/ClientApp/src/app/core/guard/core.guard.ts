@@ -61,7 +61,8 @@ export class GuardService {
             "overlay",
             "message",
             "charts",
-            "icons"
+            "icons",
+            "attachment"
           ].map(m => m.toUpperCase())
 
           if (!roles.some(s => DEMO.includes(s))) {
