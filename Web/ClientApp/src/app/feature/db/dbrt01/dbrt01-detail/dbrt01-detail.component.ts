@@ -38,8 +38,8 @@ export class Dbrt01DetailComponent {
     this.form = this.fb.group({
       id: [null],
       code: [null, [Validators.required, Validators.maxLength(200)]],
-      descTh: [null,[Validators.pattern(/^[ก-๙]+$/)] ],
-      descEn: [null, [Validators.required, Validators.maxLength(200),Validators.pattern(/^[A-Za-z]+$/)]],
+      descTh: [null,[Validators.pattern(/^[ก-๙ ]+$/)] ],
+      descEn: [null, [Validators.required, Validators.maxLength(200),Validators.pattern(/^[A-Z a-z]+$/)]],
       tableName: [null, [Validators.required, Validators.maxLength(200)]],
       columnName: [null, [Validators.required, Validators.maxLength(200)]],
       active: [null],
@@ -55,7 +55,7 @@ export class Dbrt01DetailComponent {
       this.form.controls["code"].disable();
       this.form.controls["rowState"].setValue(RowState.Normal);
     }
-    else {
+    else{
       this.form.controls["rowState"].setValue(RowState.Add);
       this.form.controls["active"].setValue(true);
     }
@@ -79,12 +79,15 @@ export class Dbrt01DetailComponent {
       this.sv.save(data).pipe(
         switchMap((res: any) => this.sv.detail(res.id))
       ).subscribe(res => {
+        this.data = res
+        this.data.rowState = RowState.Normal;
         this.form.patchValue(res)
         this.rebuildData()
         this.ms.success("message.STD00014");
       })
     }
   }
+
   canDeactivate(): Observable<boolean> {
     if (this.form.dirty) return this.md.confirm("message.STD00010");
     return of(true);
