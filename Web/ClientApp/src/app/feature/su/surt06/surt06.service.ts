@@ -15,7 +15,7 @@ export class Surt06Service {
 
   detail = (parameterGroupCode:string ,parameterCode: string): Observable<Parameter> => this.http.get<Parameter>("surt06/detail", { params: { parameterGroupCode, parameterCode }})
 
-  delete = (parameterGroupCode:string ,parameterCode: string): Observable<Parameter[]> => this.http.delete<Parameter[]>("surt06/delete" , {params : { parameterGroupCode, parameterCode}});
+  delete = (parameterGroupCode:string ,parameterCode: string): Observable<Parameter[]> => this.http.delete<any>("surt06/delete" , {params : { parameterGroupCode, parameterCode}});
 
   save = (data) => this.http.post('surt06/update', data);
 }
