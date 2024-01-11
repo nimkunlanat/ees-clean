@@ -36,7 +36,7 @@ public class List
             if (!string.IsNullOrEmpty(request.Keywords)) sql.AppendLine("and concat(m.message_code,m.message_desc,m.remark) ilike concat('%',@Keywords,'%')");
 
             sql.AppendLine("and lower(language_code) = lower(@Lang)");
-            sql.AppendLine("order by \"messageCode\"");
+            sql.AppendLine("order by m.message_code");
 
             return await _context.QueryAsync<Message>(sql.ToString(), new { Lang = _user.Language, request.Keywords }, cancellationToken) as List<Message>;
         }
