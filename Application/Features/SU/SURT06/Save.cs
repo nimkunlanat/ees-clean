@@ -4,11 +4,8 @@ using Domain.Entities.SU;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
-using System.Xml.Linq;
-using Parameter = Domain.Entities.SU.Parameter;
 using Application.Exceptions;
 using System.Linq;
 using System.Net;
@@ -28,12 +25,10 @@ public class Save
         {
             _context = context;
         }
-
         public async Task<Parameter> Handle(Command request, CancellationToken cancellationToken)
         {
             Validate(request);
-
-
+            
             if (request.RowState == RowState.Add)
             {
                 _context.Set<Parameter>().Add(request);
@@ -43,11 +38,10 @@ public class Save
                 _context.Set<Parameter>().Attach(request);
                 _context.Entry(request).State = EntityState.Modified;
             }
-            await _context.SaveChangesAsync(cancellationToken);
+                await _context.SaveChangesAsync(cancellationToken);
 
             return request;
         }
-
         private void Validate(Parameter parameter)
         {
             if (_context.Set<Parameter>().Any(a => parameter.RowState == RowState.Add && a.ParameterGroupCode == parameter.ParameterGroupCode && a.ParameterCode == parameter.ParameterCode)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00004", parameter.ParameterGroupCode);

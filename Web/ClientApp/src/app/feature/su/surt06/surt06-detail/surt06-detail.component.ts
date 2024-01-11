@@ -31,8 +31,10 @@ export class Surt06DetailComponent {
     
     this.createForm();
     this.route.data.subscribe(({detail}) => {
-      this.form.patchValue(detail)
-      this.data = detail
+      if(detail){
+        this.form.patchValue(detail)
+        this.data = detail
+      }
       this.rebuildForm()
     })
 
@@ -50,13 +52,12 @@ export class Surt06DetailComponent {
   }
 
   rebuildForm() {
-    if (this.data.parameterGroupCode) {
+    if (this.form.get('rowVersion').value) {
       this.form.controls["parameterGroupCode"].disable()
       this.form.controls["parameterCode"].disable()
       this.form.controls["rowState"].setValue(RowState.Edit)
     }
     else this.form.controls["rowState"].setValue(RowState.Add)
-
     this.form.markAsPristine();
   }
 

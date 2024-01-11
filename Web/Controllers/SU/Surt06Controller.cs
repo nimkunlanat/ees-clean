@@ -7,7 +7,6 @@ namespace Web.Controllers.SU;
 public class Surt06Controller : BaseController
 {
     [HttpGet("list")]
-
     public async Task<ActionResult> List([FromQuery] List.Query query) => Ok(await Mediator.Send(query));
 
     [HttpDelete("delete")]

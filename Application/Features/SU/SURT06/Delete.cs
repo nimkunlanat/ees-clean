@@ -1,6 +1,4 @@
-﻿
-
-using Application.Behaviors;
+﻿using Application.Behaviors;
 using Application.Interfaces;
 using Domain.Entities.SU;
 using MediatR;
