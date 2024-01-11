@@ -15,7 +15,7 @@ import { Surt04Component } from './surt04/surt04.component';
 import { Surt04DetailComponent } from './surt04/surt04-detail/surt04-detail.component';
 import { user, users, master as surt04Master } from './surt04/surt04.resolver';
 import { Surt05Component } from './surt05/surt05.component';
-import { messages } from './surt05/surt05.resolver';
+import { messages,message } from './surt05/surt05.resolver';
 import { Surt05DetailComponent } from './surt05/surt05-detail/surt05-detail.component';
 import { Surt06Component } from './surt06/surt06.component';
 import { detail, list } from './surt06/surt06.resolver';
@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'surt04', component: Surt04Component, title: 'User', resolve: { users }, data: { code: 'surt04' } },
   { path: 'surt04/detail', component: Surt04DetailComponent, title: 'User Detail', resolve: { user, master: surt04Master }, canDeactivate: [CanDeactivate], data: { code: 'surt04' } },
   { path: 'surt05', component: Surt05Component, title: 'Message', resolve: { messages }, data: { code: 'surt05' } },
-  { path: 'surt05/detail', component: Surt05DetailComponent, title: 'Message Detail', resolve: { messages }, canDeactivate: [CanDeactivate], data: { code: 'surt05' } },
+  { path: 'surt05/detail', component: Surt05DetailComponent, title: 'Message Detail', resolve: { message }, canDeactivate: [CanDeactivate], data: { code: 'surt05' } },
   { path: 'surt06', component: Surt06Component, title: 'Parameter', resolve: { list }, data: { code: 'surt06' } },
   { path: 'surt06/detail', component: Surt06DetailComponent, title: 'Parameter Detail', resolve: { detail }, canDeactivate: [CanDeactivate], data: { code: 'surt06' } }
 ];

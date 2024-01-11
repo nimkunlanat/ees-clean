@@ -1,28 +1,29 @@
-﻿using Application.Behaviors;
-using Application.Interfaces;
-using Domain.Entities.SU;
+﻿using Application.Interfaces;
 using MediatR;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
+using System.Threading;
+using Application.Behaviors;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using System;
 
-namespace Application.Features.SU.SURT05;
+namespace Application.Features.DB.DBRT01;
+
 public class Delete
 {
     public class Command : ICommand
     {
-        public string MessageCode { get; set; }
-        public string LanguageCode { get; set; }
+        public Guid Id { get; set; }
     }
     public class Handler : IRequestHandler<Command, Unit>
     {
         private readonly ICleanDbContext _context;
         public Handler(ICleanDbContext context) => _context = context;
+
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            List<Message> message = _context.Set<Message>().Where(w => w.MessageCode == request.MessageCode).ToList();
-            _context.Set<Message>().RemoveRange(message);
+            Domain.Entities.DB.Status dbStatus = await _context.Set<Domain.Entities.DB.Status>().Where(w => w.Id == request.Id).FirstOrDefaultAsync();
+            _context.Set<Domain.Entities.DB.Status>().RemoveRange(dbStatus);
             await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
