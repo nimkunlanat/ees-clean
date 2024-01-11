@@ -33,7 +33,8 @@ public class List
                                     p.parameter_group_code ""parameterGroupCode"", 
                                     p.parameter_code ""parameterCode"" , 
                                     p.parameter_value ""parameterValue"" , 
-                                    p.remark  
+                                    p.remark,
+                                    p.xmin ""rowVersion""
                                 from su.""parameter"" p 
                                 where 1 = 1
                 ");

@@ -11,7 +11,11 @@ export class Surt06Service {
   constructor(private http:HttpClient) { }
 
 
-  list = (keywords:string = ''): Observable<Parameter[]> => this.http.disableLoading().get<Parameter[]>('surt06/list' , {params : {keywords}});
+  list = (keywords:string = ''): Observable<Parameter[]> => this.http.disableLoading().get<Parameter[]>("surt06/list" , {params : {keywords}});
 
-  delete = (parameterGroupCode:string): Observable<Parameter[]> => this.http.delete<Parameter[]>('surt06' , {params : {parameterGroupCode}});
+  detail = (parameterGroupCode:string ,parameterCode: string): Observable<Parameter> => this.http.get<Parameter>("surt06/detail", { params: { parameterGroupCode, parameterCode }})
+
+  delete = (parameterGroupCode:string ,parameterCode: string): Observable<Parameter[]> => this.http.delete<any>("surt06/delete" , {params : { parameterGroupCode, parameterCode}});
+
+  save = (data) => this.http.post('surt06/update', data);
 }
