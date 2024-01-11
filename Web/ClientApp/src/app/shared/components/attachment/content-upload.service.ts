@@ -25,11 +25,11 @@ export class ContentUploadService {
     return this.ps.getParameter('ContentPath');
   }
 
-  getContent(id) {
+  getContent(id: number) {
     return this.getContentUrl().pipe(
-      switchMap(path => this.http.disableApiPrefix().skipErrorHandler().disableLoading().get<Content>(`${path.ApiUrl}/api/content`, { params: { id: id } }).pipe(
-        map(content => {
-          content.path = `${path.DisplayUrl}/${content.container}/${content.path}`
+      switchMap((contentPath: ContentPath) => this.http.disableApiPrefix().skipErrorHandler().disableLoading().get<Content>(`${contentPath.ApiUrl}/api/content`, { params: { id } }).pipe(
+        map((content: Content) => {
+          content.path = `${contentPath.DisplayUrl}/${content.container}/${content.path}`
           return content;
         })
       )),
@@ -40,19 +40,20 @@ export class ContentUploadService {
   }
 
   upload(file: File, type: AttachmentType, category: Category): Observable<Content | HttpEvent<Content>> {
-    var formData: any = new FormData();
+    const formData: FormData = new FormData();
     formData.append("file", file);
     formData.append("type", type);
     formData.append("category", category || Category.Defalt);
+
     return this.getContentUrl().pipe(
-      switchMap(path => this.http.disableApiPrefix().skipErrorHandler().disableLoading().post<Content>(`${path.ApiUrl}/api/content`, formData, {
+      switchMap((contentPath: ContentPath) => this.http.disableApiPrefix().skipErrorHandler().disableLoading().post<Content>(`${contentPath.ApiUrl}/api/content`, formData, {
         reportProgress: true,
         observe: 'events'
       }).pipe(
         map(event => {
           if (event.type == HttpEventType.Response) {
             const content = event.body;
-            content.path = `${path.DisplayUrl}/${content.container}/${content.path}`
+            content.path = `${contentPath.DisplayUrl}/${content.container}/${content.path}`
             return content;
           }
           return event;
