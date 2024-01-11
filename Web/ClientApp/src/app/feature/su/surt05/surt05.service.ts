@@ -4,6 +4,14 @@ import { Message } from '@app/models/su/message';
 import { RowState } from '@app/shared/types/data.types';
 import { Observable } from 'rxjs';
 
+
+
+export class MessageDTO extends Message {
+  messageCodeTh :string
+  messageCodeEn :string
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,9 +23,9 @@ export class Surt05Service {
 
   detail = (messageCode: string) => this.http.get<Message>('surt05/detail', { params: { messageCode } })
 
-  save = (data: Message) => {
-    if (data.rowState == RowState.Add) return this.http.post("surt02/create", data);
-    else return this.http.put("surt02/update", data);
+  save = (data: MessageDTO) => {
+    if (data.rowState == RowState.Add) return this.http.post("surt05/create", data);
+    else return this.http.put("surt05/update", data);
   }
 
   delete = (messageCode: string) => this.http.delete("surt05/delete", { params: { messageCode } })

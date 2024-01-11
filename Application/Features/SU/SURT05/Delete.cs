@@ -10,9 +10,6 @@ using System.Threading.Tasks;
 namespace Application.Features.SU.SURT05;
 public class Delete
 {
-
-
-
     public class Command : ICommand
     {
         public string MessageCode { get; set; }
@@ -22,7 +19,6 @@ public class Delete
     {
         private readonly ICleanDbContext _context;
         public Handler(ICleanDbContext context) => _context = context;
-
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
             List<Message> message = _context.Set<Message>().Where(w => w.MessageCode == request.MessageCode).ToList();

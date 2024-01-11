@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistense.Configurations.SU;
-
 public class MessageConfiguration : BaseConfiguration<Message>
 {
     public override void Configure(EntityTypeBuilder<Message> builder)
