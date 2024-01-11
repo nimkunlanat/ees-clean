@@ -16,6 +16,7 @@ const routes: Routes = [
   LayoutRoute.childRoutes([
     { path: 'demo', loadChildren: () => import("./feature/demo/demo.module").then(m => m.DemoModule) },
     { path: 'su', loadChildren: () => import("./feature/su/su.module").then(m => m.SuModule) },
+    { path: 'db', loadChildren: () => import("./feature/db/db.module").then(m => m.DbModule) },
   ]),
   { path: '**', redirectTo: '/notfound', pathMatch: 'full' }
 ];
