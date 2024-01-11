@@ -6,7 +6,3 @@ export class Message extends EntityBase {
     remark: string;
     languageCode : string
 }
-export class MessageDTO extends Message {
-    messageCodeTh :string
-    messageCodeEn :string
-}

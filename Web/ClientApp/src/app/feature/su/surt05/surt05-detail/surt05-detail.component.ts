@@ -31,9 +31,7 @@ export class Surt05DetailComponent {
     private md: ModalService) {
     this.createForm()
     this.route.data.subscribe(({ message}) => {
-      this.messages = message ?? new Message()
-      console.log(message);
-      
+      this.messages = message ?? new Message()      
       this.form.patchValue(message)
       this.rebuildData()
     })
@@ -62,8 +60,8 @@ export class Surt05DetailComponent {
       messageCode: [null, [Validators.required, Validators.maxLength(20)]],
       messageDesc: null,
       remark: null,
-      messageCodeTh: [null, [Validators.required, Validators.pattern(/[ก-๙]/), Validators.maxLength(200)]],
-      messageCodeEn: [null, [Validators.required, Validators.pattern(/[A-z0-9]/g), Validators.maxLength(200)]],
+      messageCodeTh: [null, [Validators.required, Validators.pattern(/^[ก-๙0-9#$^+=!*(){}\[\]@%&]+$/), Validators.maxLength(200)]],
+      messageCodeEn: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9#$^+=!*(){}\[\]@%&]+$/), Validators.maxLength(200)]],
       rowState: null,
       rowVersion: null,
     })

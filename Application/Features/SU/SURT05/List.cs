@@ -2,7 +2,6 @@
 using Domain.Entities.SU;
 using MediatR;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -32,13 +31,11 @@ public class List
 	                                m.message_code ""messageCode"",
                                     m.message_desc ""messageDesc"",
                                     m.remark                                
-                    FROM su.message m 
-                    where m.message_desc is not null");
+                    FROM su.message m");
 
             if (!string.IsNullOrEmpty(request.Keywords)) sql.AppendLine("and concat(m.message_code,m.message_desc,m.remark) ilike concat('%',@Keywords,'%')");
 
             sql.AppendLine("and lower(language_code) = lower(@Lang)");
-            
             sql.AppendLine("order by \"messageCode\"");
 
             return await _context.QueryAsync<Message>(sql.ToString(), new { Lang = _user.Language, request.Keywords }, cancellationToken) as List<Message>;

@@ -1,8 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Message, MessageDTO } from '@app/models/su/message';
+import { Message } from '@app/models/su/message';
 import { RowState } from '@app/shared/types/data.types';
 import { Observable } from 'rxjs';
+
+
+
+export class MessageDTO extends Message {
+  messageCodeTh :string
+  messageCodeEn :string
+}
+
 
 @Injectable({
   providedIn: 'root'
