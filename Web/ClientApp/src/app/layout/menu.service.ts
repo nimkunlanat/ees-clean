@@ -45,6 +45,7 @@ export class MenuService {
                     { label: 'Panel', icon: 'pi pi-fw pi-tablet', routerLink: ['/demo/panel'] },
                     { label: 'Overlay', icon: 'pi pi-fw pi-clone', routerLink: ['/demo/overlay'] },
                     { label: 'Message', icon: 'pi pi-fw pi-comment', routerLink: ['/demo/message'] },
+                    { label: 'Attachment', icon: 'pi pi-fw pi-upload', routerLink: ['/demo/attachment'] },
                     { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/demo/charts'] },
                     { label: 'Icons', icon: 'pi pi-fw pi-prime', routerLink: ['/demo/icons'] },
                     {

@@ -12,6 +12,7 @@ import { MessageComponent } from './message/message.component';
 import { ChartComponent } from './chart/chart.component';
 import { IconsComponent } from './icons/icons.component';
 import { CanDeactivate } from '@app/core/guard/core.guard';
+import { AttachmentComponent } from './attachment/attachment.component';
 
 const routes: Routes = [
   { path: 'formlayout', component: FormlayoutComponent, title: "Form layout", data: { code: "formlayout" } },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'message', component: MessageComponent, title: 'Message', data: { code: "message" } },
   { path: 'charts', component: ChartComponent, title: 'Charts', data: { code: "charts" } },
   { path: 'icons', component: IconsComponent, title: 'Icons', data: { code: "icons" } },
+  { path: 'attachment', component: AttachmentComponent, title: 'Attachment', data: { code: "attachment" } },
 ];
 
 @NgModule({

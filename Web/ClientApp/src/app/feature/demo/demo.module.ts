@@ -17,6 +17,7 @@ import { MessageComponent } from './message/message.component';
 import { ChartComponent } from './chart/chart.component';
 import { IconsComponent } from './icons/icons.component';
 import { ModalComponent, ModalResolveComponent } from './overlay/modal/modal.component';
+import { AttachmentComponent } from './attachment/attachment.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ModalComponent, ModalResolveComponent } from './overlay/modal/modal.com
     ChartComponent,
     IconsComponent,
     ModalComponent,
-    ModalResolveComponent
+    ModalResolveComponent,
+    AttachmentComponent
   ],
   imports: [
     CommonModule,
