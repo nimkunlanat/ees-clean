@@ -30,8 +30,9 @@ public class List
             sql.AppendLine(@"SELECT 
 	                                m.message_code ""messageCode"",
                                     m.message_desc ""messageDesc"",
-                                    m.remark                                
-                    FROM su.message m");
+                                    m.remark   ,
+                                    m.xmin  ""rowVersion""
+                    FROM su.message m where 1 = 1");
 
             if (!string.IsNullOrEmpty(request.Keywords)) sql.AppendLine("and concat(m.message_code,m.message_desc,m.remark) ilike concat('%',@Keywords,'%')");
 

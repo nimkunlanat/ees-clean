@@ -60,10 +60,11 @@ export class Surt05DetailComponent {
       messageCode: [null, [Validators.required, Validators.maxLength(20)]],
       messageDesc: null,
       remark: null,
-      messageCodeTh: [null, [Validators.required, Validators.pattern(/^[ก-๙0-9#$^+=!*(){}\[\]@%&]+$/), Validators.maxLength(200)]],
-      messageCodeEn: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9#$^+=!*(){}\[\]@%&]+$/), Validators.maxLength(200)]],
+      messageCodeTh: [null, [Validators.required, Validators.pattern(/^[ก-๙0-9#$^+=!*(){}\[\]@%& ]+$/), Validators.maxLength(200)]],
+      messageCodeEn: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9#$^+=!*(){}\[\]@%& ]+$/), Validators.maxLength(200)]],
       rowState: null,
       rowVersion: null,
+      active: true
     })
   }
 

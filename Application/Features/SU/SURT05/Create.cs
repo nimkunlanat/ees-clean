@@ -42,19 +42,24 @@ public class Create
         }
 
         public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
-        {
-            if (_context.Set<Domain.Entities.SU.Message>().Any(a => a.MessageCode == request.MessageCode)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00004", request.MessageCode);
+        {   
+            if (_context.Set<Domain.Entities.SU.Message>().Any(a => a.MessageCode == request.MessageCode)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00018", request.MessageCode);
 
-            for (int i = 0; i < 2; i++)
+            if (request.RowVersion == null)
             {
-                Message MessageLang = new Message();
-                MessageLang.MessageCode = request.MessageCode;
-                MessageLang.LanguageCode = i == 0 ? Lang.TH : Lang.EN;
-                MessageLang.MessageDesc = i == 0 ? request.MessageCodeTh : request.MessageCodeEn;
-                MessageLang.Remark = request.Remark;
+                for (int i = 0; i < 2; i++)
+                {
+                    Message MessageLang = new Message();
+                    MessageLang.MessageCode = request.MessageCode;
+                    MessageLang.LanguageCode = i == 0 ? Lang.TH : Lang.EN;
+                    MessageLang.MessageDesc = i == 0 ? request.MessageCodeTh : request.MessageCodeEn;
+                    MessageLang.Remark = request.Remark;
 
-                _context.Set<Message>().Add(MessageLang);
+                    _context.Set<Message>().Add(MessageLang);
+                }
             }
+
+            
 
             await _context.SaveChangesAsync(cancellationToken);
 

@@ -30,6 +30,9 @@ public class Edit
         public Handler(ICleanDbContext context) => _context = context;
         public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
         {
+
+            
+
             Message messageTH = await _context.Set<Message>().Where(w => w.MessageCode == request.MessageCode && w.LanguageCode == "TH").FirstOrDefaultAsync();
             Message messageEN = await _context.Set<Message>().Where(w => w.MessageCode == request.MessageCode && w.LanguageCode == "EN").FirstOrDefaultAsync();
             List<Message> messages = new List<Message>();
