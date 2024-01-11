@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { FileType } from '@app/shared/types/data.types';
 
 @Component({
   selector: 'x-attachment',
@@ -7,8 +8,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styles: ``
 })
 export class AttachmentComponent {
+  imageOnly: FileType = FileType.ALL_IMAGE
+  application: FileType[] = [FileType.DOCX, FileType.XLSX, FileType.PDF, FileType.PPTX]
   form: FormGroup = new FormGroup({
-    i: new FormControl(null, Validators.required),
-    j: new FormControl(null, Validators.required)
+    all: new FormControl(),
+    image: new FormControl(),
+    application: new FormControl()
   })
 }

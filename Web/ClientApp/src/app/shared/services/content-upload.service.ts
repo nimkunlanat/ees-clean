@@ -34,7 +34,7 @@ export class ContentUploadService {
         })
       )),
       catchError(() => {
-        return of({} as Content)
+        return of({ id: null, name: null, path: null } as Content)
       })
     )
   }
