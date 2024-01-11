@@ -1,6 +1,5 @@
 ﻿using Application.Behaviors;
 using Application.Interfaces;
-using Domain.Entities.SU;
 using MediatR;
 using System.Linq;
 using System.Threading;
@@ -24,8 +23,8 @@ public class Delete
         }
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            Parameter parameter =  _context.Set<Parameter>().Where(w => w.ParameterGroupCode == request.ParameterGroupCode && w.ParameterCode == request.ParameterCode).FirstOrDefault();
-            _context.Set<Parameter>().Remove(parameter);
+            Domain.Entities.SU.Parameter parameter =  _context.Set<Domain.Entities.SU.Parameter>().Where(w => w.ParameterGroupCode == request.ParameterGroupCode && w.ParameterCode == request.ParameterCode).FirstOrDefault();
+            _context.Set<Domain.Entities.SU.Parameter>().Remove(parameter);
             await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

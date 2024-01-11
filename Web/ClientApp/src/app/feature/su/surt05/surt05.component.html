@@ -20,7 +20,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-row>
                     <tr>
-                        <td>
+                        <td class="text-center">
                             <a [routerLink]="['detail']" [state]="{ messageCode: row.messageCode}">
                                 {{ row.messageCode }}
                             </a>
