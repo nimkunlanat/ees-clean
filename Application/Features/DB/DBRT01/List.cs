@@ -30,17 +30,18 @@ namespace Application.Features.DB.DBRT01
             {
                 StringBuilder sql = new StringBuilder();
 
-                sql.AppendLine(@"select s.code ""Code"" 
-                                                , desc_th ""descTH""
-                                                , desc_en ""descEN""
-                                                , table_name ""tableName""
-                                                , column_name ""columnName""
-                                                , active ""active""
-                                                , s.xmin ""rowVersion""
-                                                from db.status s
-                                                where 1=1");
+                sql.AppendLine(@"select s.id ""id""
+                                , s.code ""code"" 
+                                , desc_th ""descTh""
+                                , desc_en ""descEn""
+                                , table_name ""tableName""
+                                , column_name ""columnName""
+                                , active ""active""
+                                , s.xmin ""rowVersion""
+                                from db.status s
+                                where 1=1");
 
-                if (request.Keywords != null) sql.AppendLine(@"and lower(concat(s.desc_th,s.desc_en,s.table_name,s.column_name,s.active) like lower(concat('%' , @Keywords , '%'))");
+                if (request.Keywords != null) sql.AppendLine(@"and concat(s.desc_th,s.desc_en,s.table_name,s.column_name) ilike concat('%',@Keywords,'%')");
 
                 sql.AppendLine("order by s.code");
 
