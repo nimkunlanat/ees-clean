@@ -43,7 +43,7 @@ public class Create
 
         public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
         {
-            if (_context.Set<Domain.Entities.SU.Menu>().Any(a => a.MenuCode == request.MenuCode)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00004", request.MenuCode);
+            if (_context.Set<Domain.Entities.SU.Menu>().Any(a => a.MenuCode == request.MenuCode)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00018", request.MenuCode);
             
             _context.Set<Domain.Entities.SU.Menu>().Add((Domain.Entities.SU.Menu)request);
 
