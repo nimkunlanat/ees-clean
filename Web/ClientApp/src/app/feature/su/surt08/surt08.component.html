@@ -1,0 +1,45 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>{{ 'label.SURT08.ProgramName' | translate }}</h5>
+            <div class="flex flex-wrap py-4 justify-content-between gap-3 flex-column lg:flex-row lg:p-fluid">
+                <textbox [placeholder]="'label.ALL.Search' | translate" icon="pi pi-search" [hasLabel]="false"
+                    (onInput)="search($event)" class="w-full lg:w-6">
+                </textbox>
+            </div>
+
+            <datatable [rows]="activityLogs">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="text-center">{{ 'label.SURT08.ActivityTypeCode' | translate}} </th>
+                        <th class="text-center">{{ 'label.SURT08.LogMessage' | translate }} </th>
+                        <th class="text-center">{{ 'label.SURT08.LoggedBy' | translate }} </th>
+                        <th class="text-center">{{ 'label.SURT08.CreatedProgram' | translate }} </th>
+                        <th class="text-center">{{ 'label.SURT08.LoggedDate' | translate }} </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                        <td class="text-center w-15rem">{{ row.activityTypeCode }}</td>
+                        <td>
+                            @if(row.activityTypeCode == "2001" ||
+                            row.activityTypeCode == "2002" ||
+                            row.activityTypeCode == "2003" ||
+                            row.activityTypeCode == "2004" ||
+                            row.activityTypeCode == "2005" ||
+                            row.activityTypeCode == "5000"){
+                            <pre>{{ row.logMessage | json }}</pre>
+                            }
+                            @else {
+                            {{ row.logMessage }}
+                            }
+                        </td>
+                        <td>{{ row.loggedBy }}</td>
+                        <td>{{ row.createdProgram }}</td>
+                        <td class="text-center">{{ row.loggedDate | date: 'dd/MM/yyyy' }}</td>
+                    </tr>
+                </ng-template>
+            </datatable>
+        </div>
+    </div>
+</div>
