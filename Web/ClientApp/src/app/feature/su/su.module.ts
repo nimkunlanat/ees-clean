@@ -15,6 +15,7 @@ import { Surt05Component } from './surt05/surt05.component';
 import { Surt06Component } from './surt06/surt06.component';
 import { Surt06DetailComponent } from './surt06/surt06-detail/surt06-detail.component';
 import { Surt05DetailComponent } from './surt05/surt05-detail/surt05-detail.component';
+import { Surt07Component } from './surt07/surt07.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { Surt05DetailComponent } from './surt05/surt05-detail/surt05-detail.comp
     Surt05DetailComponent,
     Surt06Component,
     Surt06DetailComponent,
+    Surt07Component,
   ],
   imports: [
     CommonModule,
