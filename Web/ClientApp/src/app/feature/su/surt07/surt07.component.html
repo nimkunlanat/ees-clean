@@ -11,11 +11,11 @@
             <datatable [rows]="contents">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th class="text-center">{{ 'label.SURT07.Name' | translate}} </th>
-                        <th class="text-center">{{ 'label.SURT07.Path' | translate }} </th>
-                        <th class="text-center">{{ 'label.SURT07.Size' | translate }} </th>
-                        <th class="text-center">{{ 'label.SURT07.CreateBy' | translate }} </th>
-                        <th class="text-center">{{ 'label.SURT07.CreateDate' | translate }} </th>
+                        <th prop="name" class="text-center">{{ 'label.SURT07.Name' | translate}} </th>
+                        <th prop="path" class="text-center">{{ 'label.SURT07.Path' | translate }} </th>
+                        <th prop="size" class="text-center">{{ 'label.SURT07.Size' | translate }} </th>
+                        <th prop="createdBy" class="text-center">{{ 'label.SURT07.CreateBy' | translate }} </th>
+                        <th prop="createdDate" class="text-center">{{ 'label.SURT07.CreateDate' | translate }} </th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-row>

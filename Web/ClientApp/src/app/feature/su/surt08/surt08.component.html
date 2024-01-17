@@ -11,16 +11,19 @@
             <datatable [rows]="activityLogs">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th class="text-center">{{ 'label.SURT08.ActivityTypeCode' | translate}} </th>
-                        <th class="text-center">{{ 'label.SURT08.LogMessage' | translate }} </th>
-                        <th class="text-center">{{ 'label.SURT08.LoggedBy' | translate }} </th>
-                        <th class="text-center">{{ 'label.SURT08.CreatedProgram' | translate }} </th>
-                        <th class="text-center">{{ 'label.SURT08.LoggedDate' | translate }} </th>
+                        <th prop="activityTypeCode" class="text-center  w-15rem">{{ 'label.SURT08.ActivityTypeCode' |
+                            translate}} </th>
+                        <th prop="logMessage" class="text-center w-4">{{ 'label.SURT08.LogMessage' |
+                            translate }} </th>
+                        <th prop="loggedBy" class="text-center">{{ 'label.SURT08.LoggedBy' | translate }} </th>
+                        <th prop="createdProgram" class="text-center">{{ 'label.SURT08.CreatedProgram' | translate }}
+                        </th>
+                        <th prop="loggedDate" class="text-center">{{ 'label.SURT08.LoggedDate' | translate }} </th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-row>
                     <tr>
-                        <td class="text-center w-15rem">{{ row.activityTypeCode }}</td>
+                        <td class="text-center">{{ row.activityTypeCode }}</td>
                         <td>
                             @if(row.activityTypeCode == "2001" ||
                             row.activityTypeCode == "2002" ||
@@ -28,7 +31,7 @@
                             row.activityTypeCode == "2004" ||
                             row.activityTypeCode == "2005" ||
                             row.activityTypeCode == "5000"){
-                            <pre>{{ row.logMessage | json }}</pre>
+                            <pre class="text-wrap">{{ row.logMessage | json }}</pre>
                             }
                             @else {
                             {{ row.logMessage }}
