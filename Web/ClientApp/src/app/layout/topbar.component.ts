@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Config, LayoutService } from "./service/layout.service";
 import { I18nService } from '@app/core/services/i18n.service';
@@ -17,11 +17,10 @@ export class TopBarComponent {
         { icon: '../../assets/layout/images/th.png', label: 'ไทย', code: 'en' },
         { icon: '../../assets/layout/images/en.png', label: 'EN', code: 'th' }
     ]
+    scroll: number = 0
 
     @ViewChild('menubutton') menuButton!: ElementRef;
-
     @ViewChild('topbarmenubutton') topbarMenuButton!: ElementRef;
-
     @ViewChild('topbarmenu') menu!: ElementRef;
 
     constructor(
@@ -46,5 +45,10 @@ export class TopBarComponent {
         this.ls.show()
         await this.auth.logout()
         this.ls.hide()
+    }
+
+    @HostListener('window:scroll', [])
+    onWindowScroll() {
+        this.scroll = window.scrollY;
     }
 }

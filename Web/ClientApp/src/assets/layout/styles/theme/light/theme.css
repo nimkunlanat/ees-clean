@@ -56,6 +56,8 @@
   --primary-hover: #2563eb;
   --setting-bg: white;
   color-scheme: light;
+  --main-bg: linear-gradient(180deg, #F6F9FC 0%, #ECECF9 100%);
+  --topbar-bg: rgba(255, 255, 255, 0.1)
 }
 
 :root {
@@ -3390,6 +3392,14 @@
     transition: box-shadow 0.2s;
   }
 
+  .p-datatable .p-datatable-thead>tr>th:first-child {
+    border-top-left-radius: 6px;
+  }
+  
+  .p-datatable .p-datatable-thead>tr>th:last-child {
+    border-top-right-radius: 6px;
+  }
+
   .p-datatable .p-datatable-tfoot>tr>td {
     text-align: left;
     padding: 1rem 1rem;
@@ -4008,7 +4018,8 @@
     border: solid #f3f4f6;
     border-width: 0;
     padding: 0.5rem 1rem;
-    border-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
   }
 
   .p-paginator .p-paginator-first,
