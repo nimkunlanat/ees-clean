@@ -4015,8 +4015,8 @@
   .p-paginator {
     background: #ffffff;
     color: #6b7280;
-    border: solid #f3f4f6;
-    border-width: 0;
+    border: solid #e5e7eb;
+    border-width: 1px;
     padding: 0.5rem 1rem;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
