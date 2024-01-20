@@ -3388,8 +3388,8 @@
     border: 1px solid #424b57;
     border-width: 0 0 1px 0;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.87);
-    background: #2b2f37;
+    background: var(--primary-color);
+    color: var(--primary-color-text);
     transition: box-shadow 0.2s;
   }
 

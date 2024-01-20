@@ -3387,8 +3387,8 @@
     border: 1px solid #e5e7eb;
     border-width: 0 0 1px 0;
     font-weight: 700;
-    color: #374151;
-    background: #f9fafb;
+    background: var(--primary-color);
+    color: var(--primary-color-text);
     transition: box-shadow 0.2s;
   }
 
