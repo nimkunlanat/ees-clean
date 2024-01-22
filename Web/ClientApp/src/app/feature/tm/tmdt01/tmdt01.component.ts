@@ -4,20 +4,21 @@ import { TreeNode } from 'primeng/api';
 @Component({
   selector: 'x-tmdt01',
   templateUrl: './tmdt01.component.html',
-  styleUrl: './tmdt01.component.scss'
+  styleUrl: './tmdt01.component.scss',
 })
-export class Tmdt01Component implements OnInit{
-  data = [];
+export class Tmdt01Component implements OnInit {
+  data: TreeNode[] = [];
 
-  constructor(){
-    
+  isDrag;
+  constructor() {}
+
+  ngOnInit(): void {}
+
+  dragStart(data) {
+    this.isDrag = data
   }
 
-  ngOnInit(): void {
-    
-  }
-
-  add(){
-
+  drop(){
+    this.data.unshift(this.isDrag)
   }
 }

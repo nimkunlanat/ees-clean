@@ -10,93 +10,174 @@ export class OrgchartComponent implements OnInit , OnChanges{
   selectedNodes!: TreeNode[];
   dragedEmployee:TreeNode;
   @Input() data: TreeNode[] = [
+//     {
+//       expanded: true,
+//       type: 'person',
+//       data: {
+//           image: '../../../../assets/layout/images/man_logo.png',
+//           name: 'Anuwat',
+//           title: 'Project Manager'
+//       },
+//       children: [
+//           {
+//               expanded: true,
+//               type: 'person',
+//               data: {
+//                   image: '../../../../assets/layout/images/man_logo.png',
+//                   name: 'Phasit',
+//                   title: 'System Analysis'
+//               },
+//               children: [
+//                 {
+//                     expanded: true,
+//                     type: 'person',
+//                     data: {
+//                         image: '../../../../assets/layout/images/man_logo.png',
+//                         name: 'Nattaphong',
+//                         title: 'Software Developer'
+//                     },
+//                     children: []
+//                 },
+//                 {
+//                     expanded: true,
+//                     type: 'person',
+//                     data: {
+//                         image: '../../../../assets/layout/images/women_logo.png',
+//                         name: 'Chayutra',
+//                         title: 'Software Developer'
+//                     },
+//                     children: []
+//                 },
+//                 {
+//                     expanded: true,
+//                     type: 'person',
+//                     data: {
+//                         image: '../../../../assets/layout/images/man_logo.png',
+//                         name: 'Nattanon',
+//                         title: 'Software Developer'
+//                     },
+//                     children: []
+//                 },
+//                 {
+//                     expanded: true,
+//                     type: 'person',
+//                     data: {
+//                         image: '../../../../assets/layout/images/man_logo.png',
+//                         name: 'Kitsakron',
+//                         title: 'Software Developer'
+//                     },
+//                     children: []
+//                 },
+//               ]
+//           },
+//           {
+//               expanded: true,
+//               type: 'person',
+//               data: {
+//                   image: '../../../../assets/layout/images/man_logo.png',
+//                   name: 'Jakarin',
+//                   title: 'System Analysis'
+//               },
+//               children: [
+//                 {
+//                     expanded: true,
+//                     type: 'person',
+//                     data: {
+//                         image: '../../../../assets/layout/images/women_logo.png',
+//                         name: 'Sangnapha',
+//                         title: 'Software Developer'
+//                     },
+//                     children: [
+                        
+//                     ]
+//                 },
+//               ]
+//           }
+//       ]
+//   }
+  ]
+  employees = [
     {
       expanded: true,
       type: 'person',
       data: {
-          image: '../../../../assets/layout/images/man_logo.png',
-          name: 'Anuwat',
-          title: 'Project Manager'
+        image: '../../../../assets/layout/images/man_logo.png',
+        name: 'Anuwat',
+        title: 'Project Manager',
       },
-      children: [
-          {
-              expanded: true,
-              type: 'person',
-              data: {
-                  image: '../../../../assets/layout/images/man_logo.png',
-                  name: 'Phasit',
-                  title: 'System Analysis'
-              },
-              children: [
-                {
-                    expanded: true,
-                    type: 'person',
-                    data: {
-                        image: '../../../../assets/layout/images/man_logo.png',
-                        name: 'Nattaphong',
-                        title: 'Software Developer'
-                    },
-                    children: []
-                },
-                {
-                    expanded: true,
-                    type: 'person',
-                    data: {
-                        image: '../../../../assets/layout/images/women_logo.png',
-                        name: 'Chayutra',
-                        title: 'Software Developer'
-                    },
-                    children: []
-                },
-                {
-                    expanded: true,
-                    type: 'person',
-                    data: {
-                        image: '../../../../assets/layout/images/man_logo.png',
-                        name: 'Nattanon',
-                        title: 'Software Developer'
-                    },
-                    children: []
-                },
-                {
-                    expanded: true,
-                    type: 'person',
-                    data: {
-                        image: '../../../../assets/layout/images/man_logo.png',
-                        name: 'Kitsakron',
-                        title: 'Software Developer'
-                    },
-                    children: []
-                },
-              ]
-          },
-          {
-              expanded: true,
-              type: 'person',
-              data: {
-                  image: '../../../../assets/layout/images/man_logo.png',
-                  name: 'Jakarin',
-                  title: 'System Analysis'
-              },
-              children: [
-                {
-                    expanded: true,
-                    type: 'person',
-                    data: {
-                        image: '../../../../assets/layout/images/women_logo.png',
-                        name: 'Sangnapha',
-                        title: 'Software Developer'
-                    },
-                    children: [
-                        
-                    ]
-                },
-              ]
-          }
-      ]
-  }
+      children: [],
+    },
+    {
+      expanded: true,
+      type: 'person',
+      data: {
+        image: '../../../../assets/layout/images/women_logo.png',
+        name: 'Sangnapha',
+        title: 'Software Developer',
+      },
+      children: [],
+    },
+    {
+      expanded: true,
+      type: 'person',
+      data: {
+        image: '../../../../assets/layout/images/man_logo.png',
+        name: 'Jakarin',
+        title: 'System Analysis',
+      },
+      children: [],
+    },
+    {
+      expanded: true,
+      type: 'person',
+      data: {
+        image: '../../../../assets/layout/images/man_logo.png',
+        name: 'Nattaphong',
+        title: 'Software Developer',
+      },
+      children: [],
+    },
+    {
+      expanded: true,
+      type: 'person',
+      data: {
+        image: '../../../../assets/layout/images/women_logo.png',
+        name: 'Chayutra',
+        title: 'Software Developer',
+      },
+      children: [],
+    },
+    {
+      expanded: true,
+      type: 'person',
+      data: {
+        image: '../../../../assets/layout/images/man_logo.png',
+        name: 'Nattanon',
+        title: 'Software Developer',
+      },
+      children: [],
+    },
+    {
+      expanded: true,
+      type: 'person',
+      data: {
+        image: '../../../../assets/layout/images/man_logo.png',
+        name: 'Kitsakron',
+        title: 'Software Developer',
+      },
+      children: [],
+    },
+    {
+      expanded: true,
+      type: 'person',
+      data: {
+        image: '../../../../assets/layout/images/man_logo.png',
+        name: 'Phasit',
+        title: 'System Analysis',
+      },
+      children: [],
+    },
   ]
-
 ngOnInit(): void {
     this.checkData(this.data)
 }
@@ -110,12 +191,18 @@ ngOnChanges(changes: SimpleChanges): void {
   }
 
   dragEnd(event){
-    this.dragedEmployee = null;
+    
   }
 
-  drop(event:TreeNode){
-    this.checkData(this.data)
-    event.children.unshift(this.dragedEmployee)
+  drop(event:TreeNode = null){
+    if(event){
+        this.checkData(this.data)
+        event.children.unshift(this.dragedEmployee)
+        if(this.dragedEmployee != null) this.employees = this.employees.filter(f => f.data.name != this.dragedEmployee.data.name)
+    }else if(this.data.length == 0){
+        this.data.push(this.dragedEmployee)
+        if(this.dragedEmployee != null) this.employees = this.employees.filter(f => f.data.name != this.dragedEmployee.data.name)
+    }
     this.dragedEmployee = null;
   }
 
