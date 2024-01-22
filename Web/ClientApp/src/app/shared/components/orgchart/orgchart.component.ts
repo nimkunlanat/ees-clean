@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 
 @Component({
@@ -96,7 +96,7 @@ export class OrgchartComponent implements OnInit , OnChanges{
 //       ]
 //   }
   ]
-  employees = [
+  @Input() employees:TreeNode[] = [
     {
       expanded: true,
       type: 'person',
@@ -178,6 +178,9 @@ export class OrgchartComponent implements OnInit , OnChanges{
       children: [],
     },
   ]
+
+  @Output() getTeam:EventEmitter<TreeNode[]> = new EventEmitter();
+
 ngOnInit(): void {
     this.checkData(this.data)
 }
@@ -190,10 +193,6 @@ ngOnChanges(changes: SimpleChanges): void {
     this.dragedEmployee = event
   }
 
-  dragEnd(event){
-    
-  }
-
   drop(event:TreeNode = null){
     if(event){
         this.checkData(this.data)
@@ -202,6 +201,16 @@ ngOnChanges(changes: SimpleChanges): void {
     }else if(this.data.length == 0){
         this.data.push(this.dragedEmployee)
         if(this.dragedEmployee != null) this.employees = this.employees.filter(f => f.data.name != this.dragedEmployee.data.name)
+    }
+    this.getTeam.emit(this.data);
+    this.dragedEmployee = null;
+  }
+
+  dropEmployee(){
+    let check = this.employees.filter(f => f.data.name == this.dragedEmployee?.data?.name)
+    if(check.length == 0 && this.dragedEmployee){
+      this.checkEmployees(this.data)
+      this.employees.push(this.dragedEmployee);
     }
     this.dragedEmployee = null;
   }
@@ -213,6 +222,19 @@ ngOnChanges(changes: SimpleChanges): void {
                 element.children = element.children.filter(f => f.data.name !== this.dragedEmployee.data.name)
             }
             this.checkData(element.children)
+        }
+    })
+  }
+
+  checkEmployees(data){
+    data.forEach((element) => {
+        if(element?.children?.length > 0) {
+            if(element.children.filter(f=> f.data.name === this.dragedEmployee?.data?.name)){
+                element.children = element.children.filter(f => f.data.name !== this.dragedEmployee.data.name)
+            }
+            this.checkData(element.children)
+        }else{
+          this.data.pop();
         }
     })
   }
