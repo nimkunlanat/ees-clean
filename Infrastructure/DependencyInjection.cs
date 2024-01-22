@@ -30,6 +30,7 @@ public static class DependencyInjection
                 queueCapacity = 100;
             return new BackgroundTaskQueue(queueCapacity,ctx.GetRequiredService<IHubContext<JobHub>>());
         });
+        services.AddScoped<IActivityLogService, ActivityLogService>();
 
         return services;
     }

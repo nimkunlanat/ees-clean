@@ -12,10 +12,10 @@
             <datatable [rows]="programs">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th class="text-center">{{ 'label.SURT01.ProgramCode' | translate}} </th>
-                        <th class="text-center">{{ 'label.SURT01.ProgramName' | translate }} </th>
-                        <th class="text-center">{{ 'label.SURT01.ProgramPath' | translate }} </th>
-                        <th class="text-center">{{ 'label.SURT01.ModuleCode' | translate }} </th>
+                        <th prop="programCode" class="text-center">{{ 'label.SURT01.ProgramCode' | translate}} </th>
+                        <th prop="programName" class="text-center">{{ 'label.SURT01.ProgramName' | translate }} </th>
+                        <th prop="programPath" class="text-center">{{ 'label.SURT01.ProgramPath' | translate }} </th>
+                        <th prop="moduleCode" class="text-center">{{ 'label.SURT01.ModuleCode' | translate }} </th>
                         <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
                     </tr>
                 </ng-template>

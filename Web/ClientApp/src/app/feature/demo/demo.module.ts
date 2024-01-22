@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { DemoRoutingModule } from './demo-routing.module';
 import { FormlayoutComponent } from './formlayout/formlayout.component';
 import { SharedModule } from '@app/shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from './input/input.component';
 import { ButtonComponent } from './button/button.component';
 import { LazyTranslationService } from '@app/core/services/lazy-translation.service';

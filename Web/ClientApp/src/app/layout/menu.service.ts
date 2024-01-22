@@ -48,6 +48,8 @@ export class MenuService {
                     { label: 'Attachment', icon: 'pi pi-fw pi-upload', routerLink: ['/demo/attachment'] },
                     { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/demo/charts'] },
                     { label: 'Icons', icon: 'pi pi-fw pi-prime', routerLink: ['/demo/icons'] },
+                    { label: 'PrimeFlex', icon: 'pi pi-fw pi-desktop', url: ['https://primeflex.org/'], target: '_blank' },
+                    { label: 'PrimeNG', icon: 'pi pi-fw pi-prime', url: ['https://primeng.org/'], target: '_blank' },
                     {
                         label: "Pages",
                         icon: "pi pi-file",

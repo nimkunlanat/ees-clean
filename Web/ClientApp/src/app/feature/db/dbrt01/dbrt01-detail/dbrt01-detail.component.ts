@@ -7,7 +7,7 @@ import { ModalService } from '@app/shared/components/modal/modal.service';
 import { RowState } from '@app/shared/types/data.types';
 import { MenuItem } from 'primeng/api';
 import { Observable, of, switchMap } from 'rxjs';
-import { Dbrt01Service,  } from '../dbrt01.service';
+import { Dbrt01Service, } from '../dbrt01.service';
 
 @Component({
   selector: 'x-dbrt01-detail',
@@ -38,15 +38,15 @@ export class Dbrt01DetailComponent {
     this.form = this.fb.group({
       id: [null],
       code: [null, [Validators.required, Validators.maxLength(200)]],
-      descTh: [null,[Validators.pattern(/^[ก-๙ ]+$/)] ],
-      descEn: [null, [Validators.required, Validators.maxLength(200),Validators.pattern(/^[A-Z a-z]+$/)]],
+      descTh: [null, [Validators.pattern(/^[ก-๙ ]+$/)]],
+      descEn: [null, [Validators.required, Validators.maxLength(200), Validators.pattern(/^[A-Z a-z]+$/)]],
       tableName: [null, [Validators.required, Validators.maxLength(200)]],
       columnName: [null, [Validators.required, Validators.maxLength(200)]],
       active: [null],
       rowState: [null],
       rowVersion: [null],
-      backgroundColor : [null],
-      fontColor : [null],
+      backgroundColor: [null],
+      fontColor: [null],
     })
   }
 
@@ -55,7 +55,7 @@ export class Dbrt01DetailComponent {
       this.form.controls["code"].disable();
       this.form.controls["rowState"].setValue(RowState.Normal);
     }
-    else{
+    else {
       this.form.controls["rowState"].setValue(RowState.Add);
       this.form.controls["active"].setValue(true);
     }

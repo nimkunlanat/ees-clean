@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 
 
 export class MessageDTO extends Message {
-  messageCodeTh :string
-  messageCodeEn :string
+  messageCodeTh: string
+  messageCodeEn: string
 }
 
 

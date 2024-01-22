@@ -15,7 +15,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Persistense;
-using Serilog;
 using System;
 using System.Diagnostics;
 using System.Text.Json;
@@ -28,7 +27,6 @@ public class Startup
     public Startup(IConfiguration configuration)
     {
         Configuration = configuration;
-        Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(Configuration).CreateLogger();
     }
 
     public IConfiguration Configuration { get; }
@@ -77,7 +75,6 @@ public class Startup
             configuration.RootPath = "ClientApp/dist/rx";
         });
         services.AddSignalR();
-        services.AddSerilog();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

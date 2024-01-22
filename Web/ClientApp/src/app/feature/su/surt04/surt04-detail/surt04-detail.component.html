@@ -80,7 +80,7 @@
             <datatable [rows]="user.userProfiles">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th class="text-center">{{ 'label.SURT04.ProfileCode' | translate}} </th>
+                        <th prop="profileCode" class="text-center">{{ 'label.SURT04.ProfileCode' | translate}} </th>
                         <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
                     </tr>
                 </ng-template>

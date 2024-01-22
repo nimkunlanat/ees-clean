@@ -36,5 +36,5 @@ export class Surt05Component {
         this.search()
         this.ms.success('message.STD00016');
       })
-}
+  }
 }
