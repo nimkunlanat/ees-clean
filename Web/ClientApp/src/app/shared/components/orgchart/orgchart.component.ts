@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 
 @Component({
@@ -6,54 +6,127 @@ import { TreeNode } from 'primeng/api';
   templateUrl: './orgchart.component.html',
   styleUrl: './orgchart.component.scss'
 })
-export class OrgchartComponent {
+export class OrgchartComponent implements OnInit , OnChanges{
   selectedNodes!: TreeNode[];
-
-  data: TreeNode[] = [
+  dragedEmployee:TreeNode;
+  @Input() data: TreeNode[] = [
     {
       expanded: true,
       type: 'person',
       data: {
-          image: 'https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png',
-          name: 'Amy Elsner',
-          title: 'CEO'
+          image: '../../../../assets/layout/images/man_logo.png',
+          name: 'Anuwat',
+          title: 'Project Manager'
       },
       children: [
           {
               expanded: true,
               type: 'person',
               data: {
-                  image: 'https://primefaces.org/cdn/primeng/images/demo/avatar/annafali.png',
-                  name: 'Anna Fali',
-                  title: 'CMO'
+                  image: '../../../../assets/layout/images/man_logo.png',
+                  name: 'Phasit',
+                  title: 'System Analysis'
               },
               children: [
-                  {
-                      label: 'Sales'
-                  },
-                  {
-                      label: 'Marketing'
-                  }
+                {
+                    expanded: true,
+                    type: 'person',
+                    data: {
+                        image: '../../../../assets/layout/images/man_logo.png',
+                        name: 'Nattaphong',
+                        title: 'Software Developer'
+                    },
+                    children: []
+                },
+                {
+                    expanded: true,
+                    type: 'person',
+                    data: {
+                        image: '../../../../assets/layout/images/women_logo.png',
+                        name: 'Chayutra',
+                        title: 'Software Developer'
+                    },
+                    children: []
+                },
+                {
+                    expanded: true,
+                    type: 'person',
+                    data: {
+                        image: '../../../../assets/layout/images/man_logo.png',
+                        name: 'Nattanon',
+                        title: 'Software Developer'
+                    },
+                    children: []
+                },
+                {
+                    expanded: true,
+                    type: 'person',
+                    data: {
+                        image: '../../../../assets/layout/images/man_logo.png',
+                        name: 'Kitsakron',
+                        title: 'Software Developer'
+                    },
+                    children: []
+                },
               ]
           },
           {
               expanded: true,
               type: 'person',
               data: {
-                  image: 'https://primefaces.org/cdn/primeng/images/demo/avatar/stephenshaw.png',
-                  name: 'Stephen Shaw',
-                  title: 'CTO'
+                  image: '../../../../assets/layout/images/man_logo.png',
+                  name: 'Jakarin',
+                  title: 'System Analysis'
               },
               children: [
-                  {
-                      label: 'Development'
-                  },
-                  {
-                      label: 'UI/UX Design'
-                  }
+                {
+                    expanded: true,
+                    type: 'person',
+                    data: {
+                        image: '../../../../assets/layout/images/women_logo.png',
+                        name: 'Sangnapha',
+                        title: 'Software Developer'
+                    },
+                    children: [
+                        
+                    ]
+                },
               ]
           }
       ]
   }
   ]
+
+ngOnInit(): void {
+    this.checkData(this.data)
+}
+
+ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
+}
+
+  dragStart(event){
+    this.dragedEmployee = event
+  }
+
+  dragEnd(event){
+    this.dragedEmployee = null;
+  }
+
+  drop(event:TreeNode){
+    this.checkData(this.data)
+    event.children.unshift(this.dragedEmployee)
+    this.dragedEmployee = null;
+  }
+
+  checkData(data){
+    data.forEach((element) => {
+        if(element?.children?.length > 0) {
+            if(element.children.filter(f=> f.data.name === this.dragedEmployee?.data?.name)){
+                element.children = element.children.filter(f => f.data.name !== this.dragedEmployee.data.name)
+            }
+            this.checkData(element.children)
+        }
+    })
+  }
 }
