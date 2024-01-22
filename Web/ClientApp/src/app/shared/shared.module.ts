@@ -32,6 +32,7 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { AttachmentComponent } from './components/attachment/attachment.component';
+import { OrgchartComponent } from './components/orgchart/orgchart.component';
 
 const components = [
   TextboxComponent,
@@ -61,7 +62,8 @@ const components = [
   ModalComponent,
   ConfirmComponent,
   BreadcrumbComponent,
-  AttachmentComponent
+  AttachmentComponent,
+  OrgchartComponent
 ]
 
 @NgModule({
