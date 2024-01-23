@@ -210,7 +210,13 @@ ngOnChanges(changes: SimpleChanges): void {
     let check = this.employees.filter(f => f.data.name == this.dragedEmployee?.data?.name)
     if(check.length == 0 && this.dragedEmployee){
       this.checkEmployees(this.data)
-      this.employees.push(this.dragedEmployee);
+      let data = [this.dragedEmployee]
+      if(this.dragedEmployee.children.length > 0) {
+        this.dragedEmployee.children.map(m => {
+          data.push(m)
+        });
+      }
+      this.employees.push(...data);
     }
     this.dragedEmployee = null;
   }
@@ -227,6 +233,10 @@ ngOnChanges(changes: SimpleChanges): void {
   }
 
   checkEmployees(data){
+    if (this.data[0].data.name === this.dragedEmployee.data.name){
+      this.data = []
+      return ;
+    }
     data.forEach((element) => {
         if(element?.children?.length > 0) {
             if(element.children.filter(f=> f.data.name === this.dragedEmployee?.data?.name)){
