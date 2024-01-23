@@ -1,0 +1,28 @@
+<div class="grid">
+  <div class="col-12 flex flex-wrap gap-3 justify-content-between flex-column lg:flex-row lg:p-fluid">
+      <breadcrumb [items]="breadcrumbItems"></breadcrumb>
+      <button [label]="'label.ALL.Save' | translate" icon="pi pi-save" (click)="save()"></button>
+  </div>
+  <div class="col-12">
+      <p-fieldset [legend]="'label.DBRT04.Detail' | translate" [toggleable]="true">
+          <div class="grid p-fluid" [formGroup]="form">
+              <div class="col-12 lg:col-4">
+                  <textbox formControlName="code">{{ 'label.DBRT04.ProvinceCode' | translate}}</textbox>
+              </div>
+              <div class="col-12 lg:col-4">
+                  <textbox formControlName="descTh"> {{ 'label.DBRT04.ProvinceTh' | translate }}</textbox>
+              </div>
+              <div class="col-12 lg:col-4">
+                <textbox formControlName="descEn"> {{ 'label.DBRT04.ProvinceEn' | translate }}</textbox>
+            </div>
+            <div class="col-12 lg:col-8">
+              <textbox formControlName="columnName"> {{ 'label.DBRT04.Description' | translate }}</textbox>
+            </div>
+
+            <div class="col-12 lg:col-3 align-items-center flex flex-wrap">
+                  <checkbox formControlName="active" style="height: 20%;"[label]="'label.ALL.Active' | translate"></checkbox>
+              </div>
+            </div>
+      </p-fieldset>
+  </div>
+</div>
