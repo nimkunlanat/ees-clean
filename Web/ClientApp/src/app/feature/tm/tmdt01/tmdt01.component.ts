@@ -6,19 +6,6 @@ import { TreeNode } from 'primeng/api';
   templateUrl: './tmdt01.component.html',
   styleUrl: './tmdt01.component.scss',
 })
-export class Tmdt01Component implements OnInit {
-  data: TreeNode[] = [];
+export class Tmdt01Component {
 
-  isDrag;
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  dragStart(data) {
-    this.isDrag = data
-  }
-
-  drop(){
-    this.data.unshift(this.isDrag)
-  }
 }
