@@ -35,6 +35,6 @@ export class Dbrt01Component {
         this.search()
         this.ms.success('message.STD00016');
       })
-}
+  }
 
 }

@@ -37,8 +37,8 @@
                     <datatable [rows]="program[item.value]">
                         <ng-template pTemplate="header">
                             <tr>
-                                <th class="text-center">{{ 'label.SURT01.Field' | translate}} </th>
-                                <th class="text-center">{{ 'label.SURT01.Label' | translate }} </th>
+                                <th prop="fieldName" class="text-center">{{ 'label.SURT01.Field' | translate}} </th>
+                                <th prop="labelName" class="text-center">{{ 'label.SURT01.Label' | translate }} </th>
                                 <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
                             </tr>
                         </ng-template>

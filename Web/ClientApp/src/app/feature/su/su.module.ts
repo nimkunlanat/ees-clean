@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { SuRoutingModule } from './su-routing.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { LazyTranslationService } from '@app/core/services/lazy-translation.service';
@@ -12,8 +11,12 @@ import { Surt03Component } from './surt03/surt03.component';
 import { Surt03DetailComponent } from './surt03/surt03-detail/surt03-detail.component';
 import { Surt04Component } from './surt04/surt04.component';
 import { Surt04DetailComponent } from './surt04/surt04-detail/surt04-detail.component';
+import { Surt05Component } from './surt05/surt05.component';
 import { Surt06Component } from './surt06/surt06.component';
-
+import { Surt06DetailComponent } from './surt06/surt06-detail/surt06-detail.component';
+import { Surt05DetailComponent } from './surt05/surt05-detail/surt05-detail.component';
+import { Surt07Component } from './surt07/surt07.component';
+import { Surt08Component } from './surt08/surt08.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,12 @@ import { Surt06Component } from './surt06/surt06.component';
     Surt03DetailComponent,
     Surt04Component,
     Surt04DetailComponent,
+    Surt05Component,
+    Surt05DetailComponent,
     Surt06Component,
+    Surt06DetailComponent,
+    Surt07Component,
+    Surt08Component,
   ],
   imports: [
     CommonModule,

@@ -12,9 +12,9 @@
             <datatable [rows]="users">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th class="text-center">{{ 'label.SURT04.Name' | translate}} </th>
-                        <th class="text-center">{{ 'label.SURT04.NameTh' | translate}} </th>
-                        <th class="text-center">{{ 'label.ALL.Active' | translate }} </th>
+                        <th prop="firstname" class="text-center">{{ 'label.SURT04.Name' | translate}} </th>
+                        <th prop="firstnameTh" class="text-center">{{ 'label.SURT04.NameTh' | translate}} </th>
+                        <th prop="active" class="text-center">{{ 'label.ALL.Active' | translate }} </th>
                         <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
                     </tr>
                 </ng-template>

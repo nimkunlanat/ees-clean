@@ -28,7 +28,7 @@ export class Surt01Component {
 
   delete(programCode: string) {
     this.md.confirm('message.STD00015').pipe(
-      filter(confirm => confirm), 
+      filter(confirm => confirm),
       switchMap(() => this.sv.delete(programCode)))
       .subscribe((res: any) => {
         this.search()

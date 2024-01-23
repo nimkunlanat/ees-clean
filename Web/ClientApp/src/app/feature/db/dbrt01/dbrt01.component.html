@@ -1,47 +1,48 @@
 <div class="grid">
-  <div class="col-12">
-      <div class="card">
-          <h5>{{ 'label.DBRT01.ProgramName' | translate }}</h5>
-          <div class="flex flex-wrap py-4 justify-content-between gap-3 flex-column lg:flex-row lg:p-fluid">
-              <textbox [placeholder]="'label.ALL.Search' | translate" icon="pi pi-search" [hasLabel]="false"
-                  (onInput)="search($event)" class="w-full lg:w-6">
-              </textbox>
-              <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['detail']"></button>
-          </div>
+    <div class="col-12">
+        <div class="card">
+            <h5>{{ 'label.DBRT01.ProgramName' | translate }}</h5>
+            <div class="flex flex-wrap py-4 justify-content-between gap-3 flex-column lg:flex-row lg:p-fluid">
+                <textbox [placeholder]="'label.ALL.Search' | translate" icon="pi pi-search" [hasLabel]="false"
+                    (onInput)="search($event)" class="w-full lg:w-6">
+                </textbox>
+                <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['detail']"></button>
+            </div>
 
-          <datatable [rows]="statuses">
-              <ng-template pTemplate="header">
-                  <tr>
-                      <th class="text-center">{{ 'label.DBRT01.StatusCode' | translate}} </th>
-                      <th class="text-center">{{ 'label.DBRT01.StatusNameInThai' | translate }} </th>
-                      <th class="text-center">{{ 'label.DBRT01.StatusNameInEnglish' | translate }} </th>
-                      <th class="text-center">{{ 'label.DBRT01.TableName' | translate }} </th>
-                      <th class="text-center">{{ 'label.DBRT01.ColumnName' | translate }} </th>
-                      <th class="text-center">{{ 'label.DBRT01.Active' | translate }}</th>
-                      <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
-                  </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-row>
-                  <tr>
-                    <td class="text-center">
-                    <a [routerLink]="['detail']" [state]="{ id: row.id }">
-                      {{row.code}}
-                    </a>
-                    </td>
-                      <td>{{row.descTh}}</td>
-                      <td>{{row.descEn}}</td>
-                      <td>{{row.tableName}}</td>
-                      <td>{{row.columnName}}</td>
-                      <td class="text-center text-green-600 w-1">
-                          @if(row.active){
-                          <i class="pi pi-check"></i>
-                          }</td>
-                      <td class="text-center w-1">
+            <datatable [rows]="statuses">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th prop="code" class="text-center">{{ 'label.DBRT01.StatusCode' | translate}} </th>
+                        <th prop="descTh" class="text-center">{{ 'label.DBRT01.StatusNameInThai' | translate }} </th>
+                        <th prop="descEn" class="text-center">{{ 'label.DBRT01.StatusNameInEnglish' | translate }} </th>
+                        <th prop="tableName" class="text-center">{{ 'label.DBRT01.TableName' | translate }} </th>
+                        <th prop="columnName" class="text-center">{{ 'label.DBRT01.ColumnName' | translate }} </th>
+                        <th prop="active" class="text-center">{{ 'label.DBRT01.Active' | translate }}</th>
+                        <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                        <td class="text-center">
+                            <a [routerLink]="['detail']" [state]="{ id: row.id }">
+                                {{row.code}}
+                            </a>
+                        </td>
+                        <td>{{row.descTh}}</td>
+                        <td>{{row.descEn}}</td>
+                        <td>{{row.tableName}}</td>
+                        <td>{{row.columnName}}</td>
+                        <td class="text-center text-green-600 w-1">
+                            @if(row.active){
+                            <i class="pi pi-check"></i>
+                            }
+                        </td>
+                        <td class="text-center w-1">
                             <button icon="pi pi-trash" (click)="delete(row.id)"></button>
-                      </td>
-                  </tr>
-              </ng-template>
-          </datatable>
-      </div>
-  </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </datatable>
+        </div>
+    </div>
 </div>

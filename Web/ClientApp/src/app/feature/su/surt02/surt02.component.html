@@ -12,11 +12,11 @@
             <datatable [rows]="menus">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th class="text-center">{{ 'label.SURT02.MenuCode' | translate}} </th>
-                        <th class="text-center">{{ 'label.SURT02.MenuName' | translate }} </th>
-                        <th class="text-center">{{ 'label.SURT02.MainMenu' | translate }} </th>
-                        <th class="text-center">{{ 'label.SURT02.ProgramCode' | translate }} </th>
-                        <th class="text-center">{{ 'label.ALL.Active' | translate }} </th>
+                        <th prop="menuCode" class="text-center">{{ 'label.SURT02.MenuCode' | translate}} </th>
+                        <th prop="menuName" class="text-center">{{ 'label.SURT02.MenuName' | translate }} </th>
+                        <th prop="mainMenu" class="text-center">{{ 'label.SURT02.MainMenu' | translate }} </th>
+                        <th prop="programCode" class="text-center">{{ 'label.SURT02.ProgramCode' | translate }} </th>
+                        <th prop="active" class="text-center">{{ 'label.ALL.Active' | translate }} </th>
                         <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
                     </tr>
                 </ng-template>

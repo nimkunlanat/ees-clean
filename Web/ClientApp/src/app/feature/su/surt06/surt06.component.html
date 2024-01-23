@@ -6,32 +6,32 @@
                 <textbox [placeholder]="'label.ALL.Search' | translate" icon="pi pi-search" [hasLabel]="false"
                     (onInput)="search($event)" class="w-full lg:w-6">
                 </textbox>
-                <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['detail']"></button>
+                <!-- <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['detail']"></button> -->
             </div>
 
             <datatable [rows]="parameters">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th class="text-center">{{ 'label.SURT06.ParameterGroupCode' | translate}} </th>
-                        <th class="text-center">{{ 'label.SURT06.ParameterCode' | translate }} </th>
-                        <th class="text-center">{{ 'label.SURT06.ParameterValue' | translate }} </th>
-                        <th class="text-center">{{ 'label.SURT06.Remark' | translate }} </th>
-                        <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
+                        <th prop="parameterGroupCode" class="text-center">{{ 'label.SURT06.ParameterGroupCode' | translate}} </th>
+                        <th prop="parameterCode" class="text-center">{{ 'label.SURT06.ParameterCode' | translate }} </th>
+                        <th prop="parameterValue" class="text-center">{{ 'label.SURT06.ParameterValue' | translate }} </th>
+                        <th prop="remark" class="text-center">{{ 'label.SURT06.Remark' | translate }} </th>
+                        <!-- <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th> -->
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-row>
                     <tr>
                         <td class="text-center">
-                            <a [routerLink]="['detail']" [state]="{ parameterGroupCode: row.parameterGroupCode }">
+                            <a [routerLink]="['detail']" [state]="{ parameterGroupCode: row.parameterGroupCode , parameterCode : row.parameterCode}">
                                 {{row.parameterGroupCode}}
                             </a>
                         </td>
                         <td>{{row.parameterCode}}</td>
                         <td>{{row.parameterValue}}</td>
                         <td>{{row.remark}}</td>
-                        <td class="text-center w-1">
-                            <button icon="pi pi-trash" (click)="delete(row.parameterGroupCode)"></button>
-                        </td>
+                        <!-- <td class="text-center w-1">
+                            <button icon="pi pi-trash" (click)="delete(row.parameterGroupCode ,row.parameterCode)"></button>
+                        </td> -->
                     </tr>
                 </ng-template>
             </datatable>

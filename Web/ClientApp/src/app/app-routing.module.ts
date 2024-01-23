@@ -17,6 +17,7 @@ const routes: Routes = [
     { path: 'demo', loadChildren: () => import("./feature/demo/demo.module").then(m => m.DemoModule) },
     { path: 'su', loadChildren: () => import("./feature/su/su.module").then(m => m.SuModule) },
     { path: 'db', loadChildren: () => import("./feature/db/db.module").then(m => m.DbModule) },
+    { path: 'tm', loadChildren: () => import("./feature/tm/tm.module").then(m => m.TmModule) },
   ]),
   { path: '**', redirectTo: '/notfound', pathMatch: 'full' }
 ];
