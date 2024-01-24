@@ -13,6 +13,7 @@ import { Surt04Service } from './surt04.service';
 })
 export class Surt04Component {
   users: User[] = []
+  resetSerch:string = ''
 
   constructor(
     private sv: Surt04Service,
@@ -32,6 +33,7 @@ export class Surt04Component {
       switchMap(() => this.sv.delete(userId)))
       .subscribe((res: any) => {
         this.search()
+        this.resetSerch = ''
         this.ms.success('message.STD00016');
       })
   }
