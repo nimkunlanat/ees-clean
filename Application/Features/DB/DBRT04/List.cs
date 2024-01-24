@@ -18,12 +18,10 @@ namespace Application.Features.DB.DBRT04
         public class Handler : IRequestHandler<Query, List<Province>>
         {
             private readonly ICleanDbContext _context;
-            private readonly ICurrentUserAccessor _user;
 
-            public Handler(ICleanDbContext context, ICurrentUserAccessor user)
+            public Handler(ICleanDbContext context)
             {
                 _context = context;
-                _user = user;
             }
 
             public async Task<List<Province>> Handle(Query request, CancellationToken cancellationToken)
@@ -43,7 +41,7 @@ namespace Application.Features.DB.DBRT04
 
                 sql.AppendLine("order by p.province_th");
 
-                return await _context.QueryAsync<Province>(sql.ToString(), new { Lang = _user.Language, request.Keywords }, cancellationToken) as List<Province>;
+                return await _context.QueryAsync<Province>(sql.ToString(), new {request.Keywords }, cancellationToken) as List<Province>;
             }
         }
     }
