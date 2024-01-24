@@ -30,10 +30,9 @@ public class Save
         public async Task<Province> Handle(Command request, CancellationToken cancellationToken)
             {
             Validate(request);
-
             if (request.RowState == RowState.Add)
             {
-
+                
                 _context.Set<Province>().Add(request);
             }
             else if (request.RowState == RowState.Edit)
@@ -49,7 +48,7 @@ public class Save
 
         private void Validate(Province province)
         {
-            if (_context.Set<Province>().Any(a => province.RowState == RowState.Add && a.ProvinceCode == province.ProvinceCode)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00004", province.ProvinceTh);
+            if (_context.Set<Province>().Any(a => (province.RowState == RowState.Add && a.ProvinceCode == province.ProvinceCode )|| a.ProvinceTh == province.ProvinceTh || a.ProvinceEn == province.ProvinceEn)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00018");
         }
     }
 }

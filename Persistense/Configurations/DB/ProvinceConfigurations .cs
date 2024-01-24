@@ -10,7 +10,7 @@ namespace Persistense.Configurations.DB
         public override void Configure(EntityTypeBuilder<Province> builder)
         {
             base.Configure(builder);
-            builder.ToTable("Province", "db");
+            builder.ToTable("province", "db");
             builder.HasKey(e => e.ProvinceCode);
         }
     }

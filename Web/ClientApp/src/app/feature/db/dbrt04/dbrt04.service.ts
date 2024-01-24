@@ -10,12 +10,12 @@ import { Observable } from 'rxjs';
 export class Dbrt04Service {
   constructor(private http: HttpClient) { }
 
-  list = (keywords: string = ""): Observable<Province[]> => this.http.disableLoading().get<Province[]>("dbrt04/list", { params: { keywords } })
+  list = (keywords:string = ""): Observable<Province[]> => this.http.disableLoading().get<Province[]>("dbrt04/list", { params: { keywords } })
 
-  detail = (ProvinceCode: any) => this.http.get<Province>('dbrt04/detail', { params: { ProvinceCode } })
+  detail = (ProvinceCode:Guid) => this.http.get<Province>('dbrt04/detail', { params: { ProvinceCode : ProvinceCode.toString()} })
 
-  save = (data: Province) => this.http.post("dbrt04/update", data);
+  save = (data:Province) => this.http.post("dbrt04/update", data);
 
-  delete = (ProvinceCode: any) => this.http.delete("dbrt04/delete", { params: { ProvinceCode } })
+  delete = (ProvinceCode:Guid) => this.http.delete("dbrt04/delete", { params: { ProvinceCode :  ProvinceCode.toString()} })
 
 }

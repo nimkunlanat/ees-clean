@@ -12,9 +12,9 @@
           <datatable [rows]="Provinces">
               <ng-template pTemplate="header">
                   <tr>
-                      <th class="text-center">{{ 'label.DBRT04.ProvinceTh' | translate }} </th>
-                      <th class="text-center">{{ 'label.DBRT04.ProvinceEn' | translate }} </th>
-                      <th class="text-center">{{ 'label.DBRT04.Active' | translate }} </th>
+                      <th prop="provinceTh" class="text-center">{{ 'label.DBRT04.ProvinceNameInThai' | translate }} </th>
+                      <th prop="provinceEn" class="text-center">{{ 'label.DBRT04.ProvinceNameInEnglish' | translate }} </th>
+                      <th prop="active" class="text-center">{{ 'label.DBRT04.Active' | translate }} </th>
                       <th class="text-center">{{ 'label.DBRT04.List' | translate }} </th>
                       <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
                   </tr>
@@ -29,11 +29,11 @@
                       <td>{{row.provinceEn}}</td>
                       <td class="text-center text-green-600 w-1">
                         @if(row.active){
-                        <i class="pi pi-bars"></i>
+                        <i class="pi pi-check"></i>
                         }</td>
                       <td class="text-center text-green-600 w-1">
                           @if(row.active){
-                          <i class="pi pi-check"></i>
+                          <button icon="pi pi-folder" (click)="delete(row.provinceCode)"></button>
                           }</td>
                       <td class="text-center w-1">
                             <button icon="pi pi-trash" (click)="delete(row.provinceCode)"></button>

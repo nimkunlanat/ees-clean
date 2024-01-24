@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotifyService } from '@app/core/services/notify.service';
-import { Status } from '@app/models/db/status';
+import { Province } from '@app/models/db/province';
 import { ModalService } from '@app/shared/components/modal/modal.service';
 import { RowState } from '@app/shared/types/data.types';
 import { MenuItem } from 'primeng/api';
@@ -11,12 +11,11 @@ import { Dbrt04Service,  } from '../dbrt04.service';
 
 @Component({
   selector: 'x-dbrt04-detail',
-  templateUrl: './dbrt04-detail.component.html',
-  styleUrl: './dbrt04-detail.component.scss'
+  templateUrl: './dbrt04-detail.component.html'
 })
 export class Dbrt04DetailComponent {
   form: FormGroup;
-  data: Status;
+  data: Province;
   breadcrumbItems: MenuItem[] = [
     { label: 'label.DBRT04.ProgramName', routerLink: '/db/dbrt04' },
     { label: 'label.DBRT04.Detail', routerLink: '/db/dbrt04/detail' },
@@ -26,11 +25,12 @@ constructor(
   private route: ActivatedRoute,
   private ms: NotifyService,
   private sv: Dbrt04Service,
-  private md: ModalService) {
+  private md: ModalService,
+  private router: Router) {
   this.createForm()
-  this.route.data.subscribe(({ detail }) => {
-    this.data = detail
-    this.form.patchValue(detail)
+  this.route.data.subscribe(({ dbrt04Detail }) => {
+    this.data = dbrt04Detail
+    this.form.patchValue(dbrt04Detail)
     this.rebuildData()
   })
 }
@@ -38,22 +38,17 @@ constructor(
 createForm() {
   this.form = this.fb.group({
     provinceCode: [null],
-    code: [null, [Validators.required, Validators.maxLength(200)]],
-    descTh: [null,[Validators.pattern(/^[ก-๙ ]+$/)] ],
-    descEn: [null, [Validators.required, Validators.maxLength(200),Validators.pattern(/^[A-Z a-z]+$/)]],
-    tableName: [null, [Validators.required, Validators.maxLength(200)]],
-    columnName: [null, [Validators.required, Validators.maxLength(200)]],
+    provinceTh: [null,[Validators.required, Validators.pattern(/^[ก-๙]+$/)] ],
+    provinceEn: [null, [Validators.required, Validators.maxLength(200),Validators.pattern(/^[A-Z a-z]+$/)]],
     active: [null],
+    description: [null, [Validators.maxLength(200)]],
     rowState: [null],
     rowVersion: [null],
-    backgroundColor : [null],
-    fontColor : [null],
   })
 }
 
 rebuildData() {
   if (this.data) {
-    this.form.controls["code"].disable();
     this.form.controls["rowState"].setValue(RowState.Normal);
   }
   else{
@@ -78,13 +73,14 @@ save() {
   else {
     const data = this.form.getRawValue();
     this.sv.save(data).pipe(
-      switchMap((res: any) => this.sv.detail(res.id))
-    ).subscribe(res => {
-      //this.data = res
+      switchMap((res:Province) => this.sv.detail(res.provinceCode))
+    ).subscribe((res:Province) => {
+      this.data = res
       this.data.rowState = RowState.Normal;
       this.form.patchValue(res)
       this.rebuildData()
       this.ms.success("message.STD00014");
+      this.router.navigateByUrl('db/dbrt04');
     })
   }
 }

@@ -9,18 +9,16 @@ import { filter, switchMap } from 'rxjs';
 
 @Component({
   selector: 'x-dbrt04',
-  templateUrl: './dbrt04.component.html',
-  styleUrl: './dbrt04.component.scss'
+  templateUrl: './dbrt04.component.html'
 })
 export class Dbrt04Component {
   Provinces: Province[] = []
-
   constructor(
     private sv: Dbrt04Service,
     private activatedRoute: ActivatedRoute,
     private md: ModalService,
     private ms: NotifyService) {
-    this.activatedRoute.data.subscribe(({ provinces }) => this.Provinces = provinces)
+    this.activatedRoute.data.subscribe(({provinces}) => this.Provinces = provinces)
   }
 
   search(value?: string) {
@@ -30,12 +28,11 @@ export class Dbrt04Component {
     this.md.confirm('message.STD00015').pipe(
       filter(confirm => confirm),
       switchMap(() => this.sv.delete(provinceCode)))
-      .subscribe((res: any) => {
+      .subscribe(() => {
         this.search()
         this.ms.success('message.STD00016');
       })
-}
-
+  }
 }
 
 

@@ -12,7 +12,7 @@ public class Detail
 {
     public class Query : IRequest<Province>
     {
-        public Guid provinceCode { get; set; }
+        public Guid ProvinceCode { get; set; }
     }
 
     public class Handler : IRequestHandler<Query, Province>
@@ -23,15 +23,15 @@ public class Detail
         {
             StringBuilder sql = new StringBuilder();
             sql.AppendLine(@"select p.province_code ""provinceCode""
-                                , p.province_thai ""provinceTh""
-                                , p.province_eng ""provinceEn""
+                                , p.province_th ""provinceTh""
+                                , p.province_en ""provinceEn""
                                 , p.active ""active""
                                 , p.description ""description""
                                 , p.xmin ""rowVersion""
                                 from db.province p
-                                where provincecode=@provinceCode");
+                                where p.province_code = @provinceCode");
 
-            return await _context.QueryFirstOrDefaultAsync<Province>(sql.ToString(), new { provincecode = request.provinceCode }, cancellationToken);
+            return await _context.QueryFirstOrDefaultAsync<Province>(sql.ToString(), new { provinceCode = request.ProvinceCode }, cancellationToken);
         }
     }
 }

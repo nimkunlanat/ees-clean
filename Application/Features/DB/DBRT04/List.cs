@@ -31,17 +31,17 @@ namespace Application.Features.DB.DBRT04
                 StringBuilder sql = new StringBuilder();
 
                 sql.AppendLine(@"select p.province_code ""provinceCode""
-                                , p.province_thai ""provinceTh"" 
-                                , p.province_eng ""provinceEn""
+                                , p.province_th ""provinceTh"" 
+                                , p.province_en ""provinceEn""
                                 , p.active ""active""
                                 , p.xmin ""rowVersion""
                                 from db.province p
                                 where 1=1");
 
 
-                if (request.Keywords != null) sql.AppendLine(@"and concat(p.province_thai,p.province_eng) ilike concat('%',@Keywords,'%')");
+                if (request.Keywords != null) sql.AppendLine(@"and concat(p.province_th,p.province_en) ilike concat('%',@Keywords,'%')");
 
-                sql.AppendLine("order by p.province_thai");
+                sql.AppendLine("order by p.province_th");
 
                 return await _context.QueryAsync<Province>(sql.ToString(), new { Lang = _user.Language, request.Keywords }, cancellationToken) as List<Province>;
             }

@@ -7,12 +7,13 @@ import { Dbrt04DetailComponent } from './dbrt04/dbrt04-detail/dbrt04-detail.comp
 import { detail, statuses } from './dbrt01/dbrt01.resolver';
 import { Dbrt04Component} from './dbrt04/dbrt04.component';
 import { provinces } from './dbrt04/dbrt04.resolver';
+import {dbrt04Detail} from './dbrt04/dbrt04.resolver';
 
 const routes: Routes = [
   { path: 'dbrt01', component: Dbrt01Component, title: 'Status', resolve: { statuses }, data: { code: 'dbrt01' } },
   { path: 'dbrt01/detail', component: Dbrt01DetailComponent, title: 'Status', resolve: { detail }, canDeactivate: [CanDeactivate], data: { code: 'dbrt01' } },
   { path: 'dbrt04', component: Dbrt04Component, title: 'Province', resolve: { provinces }, data: { code: 'dbrt04' }},
-  { path: 'dbrt04/detail', component: Dbrt04DetailComponent, title: 'Province', resolve: { detail }, canDeactivate: [CanDeactivate], data: { code: 'dbrt04' } }
+  { path: 'dbrt04/detail', component: Dbrt04DetailComponent, title: 'Province', resolve: { dbrt04Detail }, canDeactivate: [CanDeactivate], data: { code: 'dbrt04' } }
 ];
 
 @NgModule({

@@ -6,17 +6,14 @@
   <div class="col-12">
       <p-fieldset [legend]="'label.DBRT04.Detail' | translate" [toggleable]="true">
           <div class="grid p-fluid" [formGroup]="form">
-              <div class="col-12 lg:col-4">
-                  <textbox formControlName="code">{{ 'label.DBRT04.ProvinceCode' | translate}}</textbox>
+              <div class="col-12 lg:col-6">
+                  <textbox formControlName="provinceTh"> {{ 'label.DBRT04.ProvinceNameInThai' | translate }}</textbox>
               </div>
-              <div class="col-12 lg:col-4">
-                  <textbox formControlName="descTh"> {{ 'label.DBRT04.ProvinceTh' | translate }}</textbox>
-              </div>
-              <div class="col-12 lg:col-4">
-                <textbox formControlName="descEn"> {{ 'label.DBRT04.ProvinceEn' | translate }}</textbox>
+              <div class="col-12 lg:col-6">
+                <textbox formControlName="provinceEn"> {{ 'label.DBRT04.ProvinceNameInEnglish' | translate }}</textbox>
             </div>
-            <div class="col-12 lg:col-8">
-              <textbox formControlName="columnName"> {{ 'label.DBRT04.Description' | translate }}</textbox>
+            <div class="col-12 lg:col-6">
+              <textbox formControlName="description"> {{ 'label.DBRT04.Description' | translate }}</textbox>
             </div>
 
             <div class="col-12 lg:col-3 align-items-center flex flex-wrap">
