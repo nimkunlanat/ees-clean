@@ -12,7 +12,7 @@ import { MenuDTO, Surt02Service } from './surt02.service';
 })
 export class Surt02Component {
   menus: MenuDTO[] = []
-
+  resetSerch:string = ''
   constructor(
     private sv: Surt02Service,
     private activatedRoute: ActivatedRoute,
@@ -31,6 +31,7 @@ export class Surt02Component {
       switchMap(() => this.sv.delete(menuCode)))
       .subscribe((res: any) => {
         this.search()
+        this.resetSerch = ''
         this.ms.success('message.STD00016');
       })
   }

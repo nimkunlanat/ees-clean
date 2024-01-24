@@ -11,9 +11,8 @@ import { filter, switchMap } from 'rxjs';
   templateUrl: './surt01.component.html'
 })
 export class Surt01Component {
-
   programs: Program[] = []
-
+  resetSerch = ''
   constructor(
     private sv: Surt01Service,
     private activatedRoute: ActivatedRoute,
@@ -32,6 +31,7 @@ export class Surt01Component {
       switchMap(() => this.sv.delete(programCode)))
       .subscribe((res: any) => {
         this.search()
+        this.resetSerch = ''
         this.ms.success('message.STD00016');
       })
   }

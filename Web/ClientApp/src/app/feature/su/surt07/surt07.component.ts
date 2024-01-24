@@ -9,7 +9,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class Surt07Component {
   contents: ContentDTO[] = []
-
   constructor(
     private sv: Surt07Service,
     private activatedRoute: ActivatedRoute) {

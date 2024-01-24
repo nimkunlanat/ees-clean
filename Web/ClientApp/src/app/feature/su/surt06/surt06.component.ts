@@ -11,7 +11,7 @@ import { filter, switchMap } from 'rxjs';
   templateUrl: './surt06.component.html'
 })
 export class Surt06Component {
-
+  resetSerch:string = ''
   parameters: Parameter[] = []
 
   constructor(
@@ -34,6 +34,7 @@ export class Surt06Component {
       switchMap(() => this.sv.delete(parameterGroupCode, parameterCode)))
       .subscribe((res: any) => {
         this.search()
+        this.resetSerch = ''
         this.ms.success('message.STD00016');
       })
   }
