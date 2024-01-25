@@ -6,9 +6,10 @@ import { TreeNode } from 'primeng/api';
   templateUrl: './orgchart.component.html',
   styleUrl: './orgchart.component.scss'
 })
-export class OrgchartComponent implements OnInit , OnChanges{
+export class OrgchartComponent implements OnInit{
   selectedNodes!: TreeNode[];
   dragedEmployee:TreeNode;
+  teamForSave = []
   @Input() data: TreeNode[] = [
 //     {
 //       expanded: true,
@@ -104,6 +105,7 @@ export class OrgchartComponent implements OnInit , OnChanges{
         image: '../../../../assets/layout/images/man_logo.png',
         name: 'Anuwat',
         title: 'Project Manager',
+        userId : 1,
       },
       children: [],
     },
@@ -114,6 +116,7 @@ export class OrgchartComponent implements OnInit , OnChanges{
         image: '../../../../assets/layout/images/women_logo.png',
         name: 'Sangnapha',
         title: 'Software Developer',
+        userId : 2,
       },
       children: [],
     },
@@ -124,6 +127,7 @@ export class OrgchartComponent implements OnInit , OnChanges{
         image: '../../../../assets/layout/images/man_logo.png',
         name: 'Jakarin',
         title: 'System Analysis',
+        userId : 3
       },
       children: [],
     },
@@ -134,6 +138,7 @@ export class OrgchartComponent implements OnInit , OnChanges{
         image: '../../../../assets/layout/images/man_logo.png',
         name: 'Nattaphong',
         title: 'Software Developer',
+        userId : 4
       },
       children: [],
     },
@@ -144,6 +149,7 @@ export class OrgchartComponent implements OnInit , OnChanges{
         image: '../../../../assets/layout/images/women_logo.png',
         name: 'Chayutra',
         title: 'Software Developer',
+        userId : 5
       },
       children: [],
     },
@@ -154,6 +160,7 @@ export class OrgchartComponent implements OnInit , OnChanges{
         image: '../../../../assets/layout/images/man_logo.png',
         name: 'Nattanon',
         title: 'Software Developer',
+        userId : 6
       },
       children: [],
     },
@@ -164,6 +171,7 @@ export class OrgchartComponent implements OnInit , OnChanges{
         image: '../../../../assets/layout/images/man_logo.png',
         name: 'Kitsakron',
         title: 'Software Developer',
+        userId : 6
       },
       children: [],
     },
@@ -174,6 +182,7 @@ export class OrgchartComponent implements OnInit , OnChanges{
         image: '../../../../assets/layout/images/man_logo.png',
         name: 'Phasit',
         title: 'System Analysis',
+        userId : 7
       },
       children: [],
     },
@@ -185,11 +194,7 @@ ngOnInit(): void {
     this.checkData(this.data)
 }
 
-ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
-}
-
-  dragStart(event){
+dragStart(event){
     this.dragedEmployee = event
   }
 
@@ -202,8 +207,24 @@ ngOnChanges(changes: SimpleChanges): void {
         this.data.push(this.dragedEmployee)
         if(this.dragedEmployee != null) this.employees = this.employees.filter(f => f.data.name != this.dragedEmployee.data.name)
     }
-    this.getTeam.emit(this.data);
+    this.changeDataForSave(this.data);
+    this.getTeam.emit(this.teamForSave);
     this.dragedEmployee = null;
+  }
+
+  changeDataForSave(event:TreeNode[]){
+    let data = [...event]
+    data.forEach((element) => {
+      if(element.children.length > 0){
+        element.children.map(m => m['headUser'] = element.data.userId)
+        this.changeDataForSave(element.children);
+        return;
+      }else {
+        let check = this.teamForSave.filter(f => f.data.name === element.data.name)
+        element.children = []
+        if(check.length === 0 || this.teamForSave.length === 0) this.teamForSave.unshift(element)
+      }
+    })
   }
 
   dropEmployee(){
