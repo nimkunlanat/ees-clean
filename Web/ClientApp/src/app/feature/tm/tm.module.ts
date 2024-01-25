@@ -5,11 +5,13 @@ import { TmRoutingModule } from './tm-routing.module';
 import { Tmdt01Component } from './tmdt01/tmdt01.component';
 import { LazyTranslationService } from '@app/core/services/lazy-translation.service';
 import { SharedModule } from '@app/shared/shared.module';
+import { Tmdt01DetailComponent } from './tmdt01/tmdt01-detail/tmdt01-detail.component';
 
 
 @NgModule({
   declarations: [
-    Tmdt01Component
+    Tmdt01Component,
+    Tmdt01DetailComponent,
   ],
   imports: [
     CommonModule,

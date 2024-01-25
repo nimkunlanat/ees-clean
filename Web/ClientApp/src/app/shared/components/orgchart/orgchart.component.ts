@@ -191,7 +191,7 @@ export class OrgchartComponent implements OnInit{
   @Output() getTeam:EventEmitter<TreeNode[]> = new EventEmitter();
 
 ngOnInit(): void {
-    this.checkData(this.data)
+  this.checkData(this.data)
 }
 
 dragStart(event){
@@ -241,15 +241,15 @@ dragStart(event){
     }
     this.dragedEmployee = null;
   }
-
+  
   checkData(data){
     data.forEach((element) => {
-        if(element?.children?.length > 0) {
-            if(element.children.filter(f=> f.data.name === this.dragedEmployee?.data?.name)){
-                element.children = element.children.filter(f => f.data.name !== this.dragedEmployee.data.name)
-            }
-            this.checkData(element.children)
+      if(element?.children?.length > 0) {
+        if(element.children.filter(f=> f.data.name === this.dragedEmployee?.data?.name)){
+          element.children = element.children.filter(f => f.data.name !== this.dragedEmployee.data.name)
         }
+        this.checkData(element.children)
+      }
     })
   }
 
