@@ -1,0 +1,52 @@
+<div class="grid">
+    <div class="col-12 flex flex-wrap gap-3 justify-content-between flex-column lg:flex-row lg:p-fluid">
+        <breadcrumb [items]="breadcrumbItems"></breadcrumb>
+        <button [label]="'label.ALL.Save' | translate" icon="pi pi-save" (click)="save()" ></button>
+    </div>
+    <div class="col-12">
+        <p-fieldset [legend]="'label.DBRT01.Detail' | translate" [toggleable]="true">
+            <div class="grid p-fluid" [formGroup]="form">
+                <div class="col-12 lg:col-3">
+                    <textbox formControlName="employeeCode">{{ 'label.DBRT02.EmployeeCode' | translate}}</textbox>
+                </div>
+                <div class="col-12 lg:col-3">
+                    <dropdown formControlName="positionCode" [items]="master.positionCode"> {{ 'label.DBRT02.PositionName' | translate }}</dropdown>
+                </div>
+                <div class="col-12 lg:col-3">
+                    <textbox formControlName="phoneNumber"> {{ 'label.DBRT02.PhoneNumber' | translate }}</textbox>
+                </div>
+                <div class="col-12 lg:col-3">
+                    <textbox formControlName="email"> {{ 'label.DBRT02.Email' | translate }}</textbox>
+                </div>
+                <div class="col-12 lg:col-3">
+                    <textbox formControlName="employeeFirstnameTh"> {{ 'label.DBRT02.EmployeeFirstnameTh' | translate }}</textbox>
+                </div>
+                <div class="col-12 lg:col-3">
+                    <textbox formControlName="employeeSurnameTh"> {{ 'label.DBRT02.EmployeeSurnameTh' | translate }}</textbox>
+                </div>
+                <div class="col-12 lg:col-3">
+                    <textbox formControlName="employeeFirstnameEn"> {{ 'label.DBRT02.EmployeeFirstnameEn' | translate }}</textbox>
+                </div>
+                <div class="col-12 lg:col-3">
+                    <textbox formControlName="employeeSurnameEn"> {{ 'label.DBRT02.EmployeeSurnameEn' | translate }}</textbox>
+                </div>
+                <div class="col-12 lg:col-3">
+                    <dropdown formControlName="gender" [items]="master.gender"> {{ 'label.DBRT02.Gender' | translate }}</dropdown>
+                </div>
+                <div class="col-12 lg:col-3">
+                    <calendar formControlName="dateOfBirth"> {{ 'label.DBRT02.DateOfBirth' | translate }}</calendar>
+                </div>
+                <div class="col-12 lg:col-3">
+                    <dropdown formControlName="nationality" [items]="master.nationality"> {{ 'label.DBRT02.Nationality' | translate }}</dropdown>
+                </div>
+                <div class="col-12 lg:col-3">
+                    <dropdown formControlName="religion" [items]="master.religion"> {{ 'label.DBRT02.Religion' | translate }}</dropdown>
+                </div>
+                <div class="col-12 lg:col-3 align-items-center flex flex-wrap">
+                    <checkbox formControlName="active" style="height: 20%;" [label]="'label.ALL.Active' | translate">
+                    </checkbox>
+                </div>
+            </div>
+        </p-fieldset>
+    </div>
+</div>
