@@ -1,38 +1,40 @@
 import { Component } from '@angular/core';
-import { Surt01Service } from './surt01.service';
 import { ActivatedRoute } from '@angular/router';
-import { Program } from '@app/models/su/program';
 import { ModalService } from '@app/shared/components/modal/modal.service';
 import { NotifyService } from '@app/core/services/notify.service';
+import { Dbrt04Service } from './dbrt04.service';
+import { Province } from '@app/models/db/province';
+import { Guid } from 'guid-typescript';
 import { filter, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'x-surt01',
-  templateUrl: './surt01.component.html'
+  selector: 'x-dbrt04',
+  templateUrl: './dbrt04.component.html'
 })
-export class Surt01Component {
-  programs: Program[] = []
+export class Dbrt04Component {
+  Provinces: Province[] = []
   resetSerch = ''
   constructor(
-    private sv: Surt01Service,
+    private sv: Dbrt04Service,
     private activatedRoute: ActivatedRoute,
     private md: ModalService,
     private ms: NotifyService) {
-    this.activatedRoute.data.subscribe(({ programs }) => this.programs = programs)
+    this.activatedRoute.data.subscribe(({provinces}) => this.Provinces = provinces)
   }
 
   search(value?: string) {
-    this.sv.list(value).subscribe((programs: Program[]) => this.programs = programs)
+    this.sv.list(value).subscribe((Provinces: Province[]) => this.Provinces = Provinces)
   }
-
-  delete(programCode: string) {
+  delete(provinceCode: Guid) {
     this.md.confirm('message.STD00015').pipe(
       filter(confirm => confirm),
-      switchMap(() => this.sv.delete(programCode)))
-      .subscribe((res: any) => {
+      switchMap(() => this.sv.delete(provinceCode)))
+      .subscribe(() => {
         this.search()
         this.resetSerch = ''
         this.ms.success('message.STD00016');
       })
   }
 }
+
+

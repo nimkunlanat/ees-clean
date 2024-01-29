@@ -13,6 +13,7 @@ import { Surt03Service } from './surt03.service';
 })
 export class Surt03Component {
   profiles: Profile[] = []
+  resetSerch:string = ''
 
   constructor(
     private sv: Surt03Service,
@@ -32,6 +33,7 @@ export class Surt03Component {
       switchMap(() => this.sv.delete(profileCode)))
       .subscribe((res: any) => {
         this.search()
+        this.resetSerch = ''
         this.ms.success('message.STD00016');
       })
   }

@@ -33,6 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { AttachmentComponent } from './components/attachment/attachment.component';
 import { Table } from 'primeng/table';
+import { OrgchartComponent } from './components/orgchart/orgchart.component';
 
 const components = [
   TextboxComponent,
@@ -62,7 +63,8 @@ const components = [
   ModalComponent,
   ConfirmComponent,
   BreadcrumbComponent,
-  AttachmentComponent
+  AttachmentComponent,
+  OrgchartComponent
 ]
 
 @NgModule({
