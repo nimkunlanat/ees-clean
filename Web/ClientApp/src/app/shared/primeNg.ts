@@ -89,8 +89,8 @@ import { AutoFocusModule } from 'primeng/autofocus';
 import { AnimateOnScrollModule } from 'primeng/animateonscroll';
 import { StyleClassModule } from 'primeng/styleclass';
 
-
 export const PrimeNgs = [
+    OrganizationChartModule,
     AutoCompleteModule,
     CalendarModule,
     CascadeSelectModule,

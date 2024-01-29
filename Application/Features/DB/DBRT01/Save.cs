@@ -49,7 +49,7 @@ public class Save
 
         private void Validate(Status status)
         {
-            if (_context.Set<Status>().Any(a => status.RowState == RowState.Add && a.Id == status.Id)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00004", status.Code);
+            if (_context.Set<Status>().Any(a => status.RowState == RowState.Add && a.Id == status.Id)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00004");
         }
     }
 }

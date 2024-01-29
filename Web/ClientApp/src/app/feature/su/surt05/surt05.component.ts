@@ -12,6 +12,7 @@ import { filter, switchMap } from 'rxjs';
 })
 export class Surt05Component {
   messages: Message[] = []
+  resetSerch:string = ''
 
   constructor(
     private sv: Surt05Service,
@@ -34,7 +35,8 @@ export class Surt05Component {
       switchMap(() => this.sv.delete(messageCode)))
       .subscribe((res: any) => {
         this.search()
+        this.resetSerch = ''
         this.ms.success('message.STD00016');
       })
-}
+  }
 }

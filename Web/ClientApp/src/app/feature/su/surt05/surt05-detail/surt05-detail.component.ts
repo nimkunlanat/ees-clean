@@ -30,8 +30,8 @@ export class Surt05DetailComponent {
     private sv: Surt05Service,
     private md: ModalService) {
     this.createForm()
-    this.route.data.subscribe(({ message}) => {
-      this.messages = message ?? new Message()      
+    this.route.data.subscribe(({ message }) => {
+      this.messages = message ?? new Message()
       this.form.patchValue(message)
       this.rebuildData()
     })

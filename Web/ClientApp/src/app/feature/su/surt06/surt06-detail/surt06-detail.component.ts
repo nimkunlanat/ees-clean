@@ -15,23 +15,23 @@ import { Observable, of, switchMap } from 'rxjs';
 })
 export class Surt06DetailComponent {
 
-  form : FormGroup;
-  data : Parameter;
+  form: FormGroup;
+  data: Parameter;
   breadcrumbItems: MenuItem[] = [
     { label: 'label.SURT06.ParameterManagement', routerLink: '/su/surt06' },
     { label: 'label.SURT06.Detail', routerLink: '/su/surt06/detail' },
   ]
 
   constructor(
-    private route : ActivatedRoute , 
-    private fb : FormBuilder,
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
     private ms: NotifyService,
     private md: ModalService,
-    private sv: Surt06Service){
-    
+    private sv: Surt06Service) {
+
     this.createForm();
-    this.route.data.subscribe(({detail}) => {
-      if(detail){
+    this.route.data.subscribe(({ detail }) => {
+      if (detail) {
         this.form.patchValue(detail)
         this.data = detail
       }
@@ -40,14 +40,14 @@ export class Surt06DetailComponent {
 
   }
 
-  createForm(){
+  createForm() {
     this.form = this.fb.group({
       parameterGroupCode: [null, Validators.required],
-      parameterCode : [null, Validators.required],
-      parameterValue : null,
-      remark : null ,
-      rowState : null,
-      rowVersion : null
+      parameterCode: [null, Validators.required],
+      parameterValue: null,
+      remark: null,
+      rowState: null,
+      rowVersion: null
     })
   }
 
@@ -71,7 +71,7 @@ export class Surt06DetailComponent {
     else {
       const data = this.form.getRawValue();
       this.sv.save(data).pipe(
-        switchMap((parameter: Parameter) => this.sv.detail(parameter.parameterGroupCode , parameter.parameterCode))
+        switchMap((parameter: Parameter) => this.sv.detail(parameter.parameterGroupCode, parameter.parameterCode))
       ).subscribe((res: Parameter) => {
         this.form.patchValue(res)
         this.rebuildForm()
@@ -79,9 +79,9 @@ export class Surt06DetailComponent {
       })
     }
   }
-  
+
   canDeactivate(): Observable<boolean> {
-    if (this.form.dirty ) return this.md.confirm("message.STD00010");
+    if (this.form.dirty) return this.md.confirm("message.STD00010");
     return of(true);
   }
 }

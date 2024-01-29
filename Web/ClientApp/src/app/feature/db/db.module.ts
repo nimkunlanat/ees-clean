@@ -7,6 +7,8 @@ import { SharedModule } from '@app/shared/shared.module';
 import { Dbrt01DetailComponent } from './dbrt01/dbrt01-detail/dbrt01-detail.component';
 import { Dbrt02Component } from './dbrt02/dbrt02.component';
 import { Dbrt02DetailComponent } from './dbrt02/dbrt02-detail/dbrt02-detail.component';
+import { Dbrt04Component } from './dbrt04/dbrt04.component';
+import { Dbrt04DetailComponent } from './dbrt04/dbrt04-detail/dbrt04-detail.component';
 
 
 @NgModule({
@@ -15,6 +17,8 @@ import { Dbrt02DetailComponent } from './dbrt02/dbrt02-detail/dbrt02-detail.comp
     Dbrt01DetailComponent,
     Dbrt02Component,
     Dbrt02DetailComponent
+    Dbrt04Component,
+    Dbrt04DetailComponent
   ],
   imports: [
     CommonModule,

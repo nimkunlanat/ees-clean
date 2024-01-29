@@ -11,8 +11,8 @@ import { filter, switchMap } from 'rxjs';
   templateUrl: './surt06.component.html'
 })
 export class Surt06Component {
-
-  parameters : Parameter[] = []
+  resetSerch:string = ''
+  parameters: Parameter[] = []
 
   constructor(
     private sv: Surt06Service,
@@ -28,12 +28,13 @@ export class Surt06Component {
     })
   }
 
-  delete(parameterGroupCode: string ,parameterCode : string) {
+  delete(parameterGroupCode: string, parameterCode: string) {
     this.md.confirm('message.STD00015').pipe(
-      filter(confirm => confirm), 
-      switchMap(() => this.sv.delete(parameterGroupCode ,parameterCode)))
+      filter(confirm => confirm),
+      switchMap(() => this.sv.delete(parameterGroupCode, parameterCode)))
       .subscribe((res: any) => {
         this.search()
+        this.resetSerch = ''
         this.ms.success('message.STD00016');
       })
   }

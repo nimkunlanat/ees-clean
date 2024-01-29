@@ -1,6 +1,5 @@
 ﻿using Application.Behaviors;
 using Application.Interfaces;
-using Domain.Entities.SU;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -13,38 +12,38 @@ using System.Net;
 namespace Application.Features.SU.SURT06;
 public class Save
 {
-    public class Command : Parameter, ICommand<Parameter> 
+    public class Command : Domain.Entities.SU.Parameter, ICommand<Domain.Entities.SU.Parameter> 
     { 
 
     }
 
-    public class Handler : IRequestHandler<Command, Parameter>
+    public class Handler : IRequestHandler<Command, Domain.Entities.SU.Parameter>
     {
         private readonly ICleanDbContext _context;
         public Handler(ICleanDbContext context, ICurrentUserAccessor user)
         {
             _context = context;
         }
-        public async Task<Parameter> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Domain.Entities.SU.Parameter> Handle(Command request, CancellationToken cancellationToken)
         {
             Validate(request);
             
             if (request.RowState == RowState.Add)
             {
-                _context.Set<Parameter>().Add(request);
+                _context.Set<Domain.Entities.SU.Parameter>().Add(request);
             }
             else if (request.RowState == RowState.Edit)
             {
-                _context.Set<Parameter>().Attach(request);
+                _context.Set<Domain.Entities.SU.Parameter>().Attach(request);
                 _context.Entry(request).State = EntityState.Modified;
             }
                 await _context.SaveChangesAsync(cancellationToken);
 
             return request;
         }
-        private void Validate(Parameter parameter)
+        private void Validate(Domain.Entities.SU.Parameter parameter)
         {
-            if (_context.Set<Parameter>().Any(a => parameter.RowState == RowState.Add && a.ParameterGroupCode == parameter.ParameterGroupCode && a.ParameterCode == parameter.ParameterCode)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00004", parameter.ParameterGroupCode);
+            if (_context.Set<Domain.Entities.SU.Parameter>().Any(a => parameter.RowState == RowState.Add && a.ParameterGroupCode == parameter.ParameterGroupCode && a.ParameterCode == parameter.ParameterCode)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00004", parameter.ParameterGroupCode);
         }
     }
 }

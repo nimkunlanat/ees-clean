@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { DemoRoutingModule } from './demo-routing.module';
 import { FormlayoutComponent } from './formlayout/formlayout.component';
 import { SharedModule } from '@app/shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from './input/input.component';
 import { ButtonComponent } from './button/button.component';
 import { LazyTranslationService } from '@app/core/services/lazy-translation.service';
@@ -17,6 +16,7 @@ import { MessageComponent } from './message/message.component';
 import { ChartComponent } from './chart/chart.component';
 import { IconsComponent } from './icons/icons.component';
 import { ModalComponent, ModalResolveComponent } from './overlay/modal/modal.component';
+import { AttachmentComponent } from './attachment/attachment.component';
 
 
 @NgModule({
@@ -33,7 +33,8 @@ import { ModalComponent, ModalResolveComponent } from './overlay/modal/modal.com
     ChartComponent,
     IconsComponent,
     ModalComponent,
-    ModalResolveComponent
+    ModalResolveComponent,
+    AttachmentComponent
   ],
   imports: [
     CommonModule,

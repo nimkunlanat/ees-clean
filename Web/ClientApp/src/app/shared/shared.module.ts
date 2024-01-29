@@ -31,6 +31,9 @@ import { ModalService } from './components/modal/modal.service';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { AttachmentComponent } from './components/attachment/attachment.component';
+import { Table } from 'primeng/table';
+import { OrgchartComponent } from './components/orgchart/orgchart.component';
 
 const components = [
   TextboxComponent,
@@ -59,7 +62,9 @@ const components = [
   TableComponent,
   ModalComponent,
   ConfirmComponent,
-  BreadcrumbComponent
+  BreadcrumbComponent,
+  AttachmentComponent,
+  OrgchartComponent
 ]
 
 @NgModule({
@@ -79,7 +84,8 @@ const components = [
   ],
   providers: [
     DialogService,
-    ModalService
+    ModalService,
+    Table
   ]
 })
 export class SharedModule { }
