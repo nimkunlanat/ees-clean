@@ -81,6 +81,7 @@ export class Dbrt03DetailComponent {
         switchMap((res: any) => this.sv.detail(res.employeeCode))
       ).subscribe(res => {
         this.positions = res
+        this.positions.rowState = RowState.Normal;
         this.form.patchValue(res)
         this.rebuildData()
         this.ms.success("message.STD00014");
