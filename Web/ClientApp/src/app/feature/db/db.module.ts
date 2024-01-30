@@ -18,7 +18,11 @@ import { Dbrt04DetailComponent } from './dbrt04/dbrt04-detail/dbrt04-detail.comp
     Dbrt01Component,
     Dbrt01DetailComponent,
     Dbrt02Component,
-    Dbrt02DetailComponent
+    Dbrt02DetailComponent,
+    Dbrt03Component,
+    Dbrt03DetailComponent,
+    Dbrt04Component,
+    Dbrt04DetailComponent
   ],
   imports: [
     CommonModule,

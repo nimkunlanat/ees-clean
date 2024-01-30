@@ -20,6 +20,10 @@ const routes: Routes = [
   { path: 'dbrt01/detail', component: Dbrt01DetailComponent, title: 'Status', resolve: { detail }, canDeactivate: [CanDeactivate], data: { code: 'dbrt01' } },
   { path: 'dbrt02', component: Dbrt02Component, title: 'Employee' , resolve: {employees} , data: { code: 'dbrt02' }},
   { path: 'dbrt02/detail', component: Dbrt02DetailComponent, title: 'Employee', resolve: { dbrt02Detail, master }, canDeactivate: [CanDeactivate], data: { code: 'dbrt02' } },
+  { path: 'dbrt03', component: Dbrt03Component, title: 'Position' , resolve: {positions} , data: { code: 'dbrt03' }},
+  { path: 'dbrt03/detail', component: Dbrt03DetailComponent, title: 'Position', resolve: { dbrt03Detail }, canDeactivate: [CanDeactivate], data: { code: 'dbrt03' } },
+  { path: 'dbrt04', component: Dbrt04Component, title: 'Province', resolve: { provinces }, data: { code: 'dbrt04' }},
+  { path: 'dbrt04/detail', component: Dbrt04DetailComponent, title: 'Province', resolve: { dbrt04Detail }, canDeactivate: [CanDeactivate], data: { code: 'dbrt04' } }
 ];
 
 @NgModule({
