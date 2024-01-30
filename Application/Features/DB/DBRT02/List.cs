@@ -54,7 +54,8 @@ public class List
                                 , e.active ""active""
                                 from db.employee e
                                 left join su.""user"" s on e.user_id = s.user_id
-                                inner  join db.""position"" p on e.position_code = p.position_code");
+                                inner  join db.""position"" p on e.position_code = p.position_code
+                                where 1 = 1");
 
             if (request.Keywords != null) sql.AppendLine(@"and concat(e.employee_code, s.user_name, p.position_name_th, p.position_name_en, e.employee_firstname_th, e.employee_firstname_en, e.employee_surname_th, e.employee_surname_en) ilike concat('%',@Keywords,'%')");
 

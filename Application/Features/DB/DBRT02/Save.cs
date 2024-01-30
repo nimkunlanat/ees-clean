@@ -4,7 +4,7 @@ using Application.Interfaces;
 using Domain.Entities;
 using Domain.Entities.DB;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore; 
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -33,7 +33,7 @@ public class Save
 
         public async Task<Employee> Handle(Command request, CancellationToken cancellationToken)
         {
-            //Validate(request);
+            Validate(request);
             Employee employee = new Employee();
 
             if (request.RowState == RowState.Add)
