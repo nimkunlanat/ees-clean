@@ -8,13 +8,16 @@ import { Dbrt02Component } from './dbrt02/dbrt02.component';
 import { Dbrt02DetailComponent } from './dbrt02/dbrt02-detail/dbrt02-detail.component';
 import { dbrt02Detail, employees, master } from './dbrt02/dbrt02.resolver';
 import { Dbrt03Component } from './dbrt03/dbrt03.component';
-import { positions } from './dbrt03/dbrt03.resolver';
+import { dbrt03Detail, positions } from './dbrt03/dbrt03.resolver';
+import { Dbrt03DetailComponent } from './dbrt03/dbrt03-detail/dbrt03-detail.component';
 
 const routes: Routes = [
   { path: 'dbrt01', component: Dbrt01Component, title: 'Status', resolve: { statuses }, data: { code: 'dbrt01' } },
   { path: 'dbrt01/detail', component: Dbrt01DetailComponent, title: 'Status', resolve: { detail }, canDeactivate: [CanDeactivate], data: { code: 'dbrt01' } },
   { path: 'dbrt02', component: Dbrt02Component, title: 'Employee' , resolve: {employees} , data: { code: 'dbrt02' }},
   { path: 'dbrt02/detail', component: Dbrt02DetailComponent, title: 'Employee', resolve: { dbrt02Detail, master }, canDeactivate: [CanDeactivate], data: { code: 'dbrt02' } },
+  { path: 'dbrt03', component: Dbrt03Component, title: 'Position' , resolve: {positions} , data: { code: 'dbrt03' }},
+  { path: 'dbrt03/detail', component: Dbrt03DetailComponent, title: 'Position', resolve: { dbrt03Detail }, canDeactivate: [CanDeactivate], data: { code: 'dbrt03' } },
 ];
 
 @NgModule({

@@ -8,5 +8,8 @@ namespace Persistense;
 public partial class CleanDbContext : DbContext, ICleanDbContext
 {
     public DbSet<Status> Status { get; set; }
-    public DbSet<Employee> Employees { get; set; }
+
+    public DbSet<Employee> Employee { get; set; }
+
+    public DbSet<Position> Position { get; set; }
 }
