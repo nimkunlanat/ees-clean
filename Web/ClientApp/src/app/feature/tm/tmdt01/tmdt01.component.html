@@ -2,7 +2,7 @@
     <button [label]="'label.ALL.Save' | translate" icon="pi pi-save" (click)="save()"></button>
 </div>
 <br>
-<orgchart [employees]="data" (getTeam)="getTeam($event)"></orgchart>
+<orgchart [data]="teamData" [employees]="data" (getTeam)="getTeam($event)"></orgchart>
 
  <!-- <div class="grid">
     <div class="col-12">

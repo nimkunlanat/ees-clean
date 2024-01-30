@@ -1,6 +1,4 @@
 ﻿using Application.Interfaces;
-using Domain.Entities.SU;
-using Domain.Entities.TM;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -11,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.TM.TMDT01
 {
-    public class List
+    public class SaveList
     {
         public class Query : IRequest<List<UserDTO>>
         {
@@ -23,6 +21,7 @@ namespace Application.Features.TM.TMDT01
             public int UserId { get; set; }
             public string FirstnameTh { get; set; }
             public string LastnameTh { get; set; }
+            public int? HeadUser {  get; set; }
 
         }
         public class Handler : IRequestHandler<Query, List<UserDTO>>
@@ -40,14 +39,12 @@ namespace Application.Features.TM.TMDT01
             {
                 StringBuilder sql = new StringBuilder();
                 sql.AppendLine(@"
-                                select u.user_id ""userId"" ,u.firstname_th ""firstnameTh"" ,u.lastname_th ""lastnameTh"" ,  p.position_name_en ""postitionNameEn""
-                                from db.employee e 
-                                left join su.""user"" u on e.user_id = u.user_id 
-                                left join db.""position"" p on p.position_code = e.position_code 
-                                where u.user_id not in (
-                                    select distinct u2.user_id from su.""user"" u2 
-	                                left join tm.""member_hierarchy"" mh2 on u2.user_id = mh2.user_id
-	                                where u2.user_id in (mh2.user_id)
+                              select      tm.user_id ""userId"", u.firstname_th ""firstnameTh"", u.lastname_th ""lastnameTh"" , p.position_name_en ""positionNameEn"", tm.head_user ""headUser"" 
+                            from tm.""member_hierarchy"" tm 
+                                left join su.""user"" u on tm.user_id = u.user_id 
+                                left join db.""position"" p on p.position_code = (
+	                                select e.position_code from db.employee e
+	                                where e.user_id = tm.user_id 
                                 )");
                 return await _context.QueryAsync<UserDTO>(sql.ToString(), new { Lang = _user.Language, request.Keywords }, cancellationToken) as List<UserDTO>;
             }

@@ -10,6 +10,7 @@ export class OrgchartComponent implements OnInit{
   selectedNodes!: TreeNode[];
   dragedEmployee:TreeNode;
   teamForSave = []
+  teamForDelete = []
   @Input() data: TreeNode[] = [
 //     {
 //       expanded: true,
@@ -192,6 +193,8 @@ export class OrgchartComponent implements OnInit{
 
 ngOnInit(): void {
   this.checkData(this.data)
+  // if (this.data.length > 0) this.checkData(this.data)
+  // else if (this.employees.length > 0) this.checkData(this.employees)
 }
 
 dragStart(event){
@@ -227,6 +230,19 @@ dragStart(event){
     })
   }
 
+  changeDataForDelete(event:TreeNode[]){
+    let data = [...event]
+    data.forEach((element) => {
+      if(element.children.length > 0){
+        element.children.map(m => m['headUser'] = element.data.userId)
+        this.teamForDelete.unshift(element)
+        this.changeDataForDelete(element.children);
+      }else{
+        this.teamForDelete.unshift(element)
+      }
+    })
+  }
+  
   dropEmployee(){
     let check = this.employees.filter(f => f.data.name == this.dragedEmployee?.data?.name)
     if(check.length == 0 && this.dragedEmployee){
@@ -238,6 +254,8 @@ dragStart(event){
         });
       }
       this.employees.push(...data);
+      this.changeDataForDelete(this.data);
+      this.getTeam.emit(this.teamForDelete);
     }
     this.dragedEmployee = null;
   }
