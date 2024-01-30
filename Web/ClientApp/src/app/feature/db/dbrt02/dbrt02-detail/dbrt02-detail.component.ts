@@ -52,6 +52,7 @@ export class Dbrt02DetailComponent {
       employeeSurnameEn: [null, [Validators.required, Validators.maxLength(100), Validators.minLength(1)]],
       active: true,
       rowState: [null],
+      rowVersion: null,
       gender: [null],
       dateOfBirth:[null],
       nationality: [null],
@@ -86,13 +87,11 @@ export class Dbrt02DetailComponent {
     }
     else {
       const data = this.form.getRawValue();
-      console.log(data);
       
       this.sv.save(data).pipe(
         switchMap((res: any) => this.sv.detail(res.employeeCode))
       ).subscribe(res => {
         this.data = res
-        this.data.rowState = RowState.Normal;
         this.form.patchValue(res)
         this.rebuildData()
         this.ms.success("message.STD00014");
