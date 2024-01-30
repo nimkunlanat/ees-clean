@@ -1,5 +1,4 @@
 ﻿using Application.Interfaces;
-using Domain.Entities.SU;
 using MediatR;
 using System.Text;
 using System.Threading;
@@ -9,13 +8,13 @@ namespace Application.Features.SU.SURT06;
 
 public class Detail
 {
-    public class Query : IRequest<Parameter>
+    public class Query : IRequest<Domain.Entities.SU.Parameter>
     {
         public string ParameterGroupCode { get; set; }
         public string ParameterCode { get; set; }
     }
 
-    public class Handler : IRequestHandler<Query, Parameter>
+    public class Handler : IRequestHandler<Query, Domain.Entities.SU.Parameter>
     {
         private readonly ICleanDbContext _context;
         public Handler(ICleanDbContext context)
@@ -23,7 +22,7 @@ public class Detail
             _context = context;
         }
 
-        public async Task<Parameter> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<Domain.Entities.SU.Parameter> Handle(Query request, CancellationToken cancellationToken)
         {
             StringBuilder sql = new StringBuilder();
 
@@ -35,7 +34,7 @@ public class Detail
                                 from su.""parameter"" p 
                                 where p.parameter_group_code = @ParameterGroupCode and p.parameter_code = @ParameterCode");
 
-            return await _context.QueryFirstOrDefaultAsync<Parameter>(sql.ToString(), new { ParameterGroupCode = request.ParameterGroupCode  , ParameterCode  = request.ParameterCode }, cancellationToken);
+            return await _context.QueryFirstOrDefaultAsync<Domain.Entities.SU.Parameter>(sql.ToString(), new { ParameterGroupCode = request.ParameterGroupCode  , ParameterCode  = request.ParameterCode }, cancellationToken);
         }
     }
 }

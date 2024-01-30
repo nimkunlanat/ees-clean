@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http;
 using Microsoft.Extensions.Primitives;
+using Persistense;
 
 namespace Web.Controllers;
 
+[RequestLogging]
 [ApiController]
 [Route("api/[controller]")]
 public class BaseController : ControllerBase

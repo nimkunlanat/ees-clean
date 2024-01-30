@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'x-accessdenied',
-  template: `
-    <div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden m-0 p-0">
+    selector: 'x-accessdenied',
+    template: `
+    <div class="bg flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden m-0 p-0">
         <div class="flex flex-column align-items-center justify-content-center">
             <div
                 style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, rgba(247, 149, 48, 0.4) 10%, rgba(247, 149, 48, 0) 30%);">
@@ -24,7 +24,12 @@ import { Component } from '@angular/core';
             </div>
         </div>
     </div>
-  `
+  `,
+    styles: [`
+    .bg {
+      background: var(--main-bg) no-repeat center center fixed
+    }
+  `]
 })
 export class AccessdeniedComponent {
 

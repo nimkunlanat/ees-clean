@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { ActivatedRouteSnapshot, ResolveFn,  Router,  RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, ResolveFn, Router, RouterStateSnapshot } from '@angular/router';
 import { Status } from '@app/models/db/status';
 import { Guid } from 'guid-typescript';
 import { Dbrt01Service } from './dbrt01.service';
