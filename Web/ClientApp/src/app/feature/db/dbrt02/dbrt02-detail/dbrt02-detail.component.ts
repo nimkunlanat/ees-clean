@@ -42,14 +42,14 @@ export class Dbrt02DetailComponent {
 
   createForm() {
     this.form = this.fb.group({
-      employeeCode: [null, [Validators.required, Validators.maxLength(100), Validators.minLength(1)]],
+      employeeCode: [null, [Validators.required, Validators.pattern(/^[a-zA-Z]+$/), Validators.maxLength(10)]],
       positionCode: [null, Validators.required],
       phoneNumber: [null, [Validators.pattern(/^[0-9]+$/), Validators.maxLength(10)]],
       email: [null, [Validators.email, Validators.maxLength(200)]],
-      employeeFirstnameTh: [null, [Validators.required, Validators.maxLength(100), Validators.minLength(1)]],
-      employeeSurnameTh: [null, [Validators.required, Validators.maxLength(100), Validators.minLength(1)]],
-      employeeFirstnameEn: [null, [Validators.required, Validators.maxLength(100), Validators.minLength(1)]],
-      employeeSurnameEn: [null, [Validators.required, Validators.maxLength(100), Validators.minLength(1)]],
+      employeeFirstnameTh: [null, [Validators.required, Validators.pattern(/^[ก-๙0-9#$^+=!*(){}\[\]@%& ]+$/), Validators.maxLength(100), Validators.minLength(1)]],
+      employeeSurnameTh: [null, [Validators.required, Validators.pattern(/^[ก-๙0-9#$^+=!*(){}\[\]@%& ]+$/), Validators.maxLength(100), Validators.minLength(1)]],
+      employeeFirstnameEn: [null, [Validators.required, Validators.pattern(/^[a-zA-Z]+$/),, Validators.maxLength(100), Validators.minLength(1)]],
+      employeeSurnameEn: [null, [Validators.required,, Validators.pattern(/^[a-zA-Z]+$/),, Validators.maxLength(100), Validators.minLength(1)]],
       active: true,
       rowState: [null],
       rowVersion: null,
