@@ -62,7 +62,7 @@ export const dbrt04SubdistrictDetail : ResolveFn<any> = (route: ActivatedRouteSn
   return inject(Dbrt04Service).detailSubdistrict(districtCode ,subdistrictCode)
 }
 
-export const master: ResolveFn<Master> = ()  => {
+export const dbrt04master: ResolveFn<Master> = ()  => {
   const { provinceCode } = inject(Router).getCurrentNavigation()?.extras.state as { provinceCode: Guid } || { provinceCode: null }
   const { districtCode } = inject(Router).getCurrentNavigation()?.extras.state as { districtCode: Guid } || { districtCode: null }
   return inject(Dbrt04Service).master(provinceCode, districtCode);

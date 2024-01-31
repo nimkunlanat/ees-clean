@@ -37,8 +37,8 @@ export class Dbrt04DistrictComponent {
     private ms: NotifyService
   ) {
     this.createForm();
-    this.activatedRoute.data.subscribe(({ master, districts }) => {
-      this.master = master;
+    this.activatedRoute.data.subscribe(({ dbrt04master, districts }) => {
+      this.master = dbrt04master;
       if (districts) {
         this.Districts = districts.listDistrict;
         this.provinceCode = districts.provinceCode;

@@ -34,8 +34,8 @@ constructor(
   private md: ModalService,
   private router: Router) {
   this.createForm()
-  this.route.data.subscribe(({ master , dbrt04SubdistrictDetail }) => {
-    this.master = master;
+  this.route.data.subscribe(({ dbrt04master , dbrt04SubdistrictDetail }) => {
+    this.master = dbrt04master;
     console.log('sub',dbrt04SubdistrictDetail);
 
     this.provinceCode = dbrt04SubdistrictDetail.provinceCode
