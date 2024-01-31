@@ -1,0 +1,46 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>{{ 'label.DBRT02.ProgramName' | translate }}</h5>
+            <div class="flex flex-wrap py-4 justify-content-between gap-3 flex-column lg:flex-row lg:p-fluid">
+                <textbox [placeholder]="'label.ALL.Search' | translate" icon="pi pi-search" [hasLabel]="false"
+                    (onInput)="search($event)" class="w-full lg:w-6">
+                </textbox>
+                <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['detail']"></button>
+            </div>
+
+            <datatable [rows]="employees">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="text-center">{{ 'label.DBRT02.EmployeeCode' | translate}} </th>
+                        <th class="text-center">{{ 'label.DBRT02.UserName' | translate }} </th>
+                        <th class="text-center">{{ 'label.DBRT02.EmployeeName' | translate }} </th>
+                        <th class="text-center">{{ 'label.DBRT02.Position' | translate }} </th>
+                        <th class="text-center">{{ 'label.DBRT02.Active' | translate }}</th>
+                        <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                      <td class="text-center">
+                      <a [routerLink]="['detail']" [state]="{ employeeCode: row.employeeCode }">
+                        {{row.employeeCode}}
+                      </a>
+                      </td>
+                        <td class="text-center">{{row.userName}}</td>
+                        <td class="text-center">{{row.employeeName}}</td>
+                        <td class="text-center">{{row.positionName}}</td>
+                        <td class="text-center text-green-600 w-1">
+                            @if(row.active){
+                            <i class="pi pi-check" ></i>
+                            }</td>
+                        <td class="text-center w-1">
+                              <button icon="pi pi-trash" (click)="delete(row.employeeCode)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </datatable>
+        </div>
+    </div> 
+</div>
+  
