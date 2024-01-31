@@ -11,6 +11,7 @@ namespace Persistense.Configurations.DB
             base.Configure(builder);
             builder.ToTable("province", "db");
             builder.HasKey(e => e.ProvinceCode);
+            builder.HasMany(p => p.Districts).WithOne().HasForeignKey(f => f.ProvinceCode).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -36,10 +36,9 @@ public class DetailDistrict
             StringBuilder sql = new StringBuilder();
             sql.AppendLine(@"select d.district_code ""districtCode""
                                 ,p.province_code ""provinceCode""
-		                        ,p.province_th ""provinceTh""
-		                        ,p.province_en ""provinceEn""
 		                        ,d.district_th ""districtTh""
 		                        ,d.district_en ""districtEn"" 
+                                ,d.description ""description""
 		                        ,d.active ""active""
 		                        ,d.xmin ""rowVersion""
                                 ,case when @Lang = 'th' then p.province_th else p.province_en end as province

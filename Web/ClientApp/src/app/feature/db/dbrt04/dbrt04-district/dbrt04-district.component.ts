@@ -19,6 +19,7 @@ export class Dbrt04DistrictComponent {
   master: Master;
   Districts: District[] = [];
   provinceCode: Guid;
+  districtCode: Guid;
   data: District;
   resetSearch = '';
   breadcrumbItems: MenuItem[] = [
@@ -41,6 +42,7 @@ export class Dbrt04DistrictComponent {
       if (districts) {
         this.Districts = districts.listDistrict;
         this.provinceCode = districts.provinceCode;
+        this.districtCode = districts.districtCode;
         this.provinceForm.get('province').setValue(this.provinceCode);
       }
     });

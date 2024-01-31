@@ -22,7 +22,7 @@ public class DeleteDistrict
 
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            Domain.Entities.DB.District dbDistrict = await _context.Set<Domain.Entities.DB.District>().Where(w => w.DistrictCode == request.DistrictCode).FirstOrDefaultAsync();
+            Domain.Entities.DB.District dbDistrict = await _context.Set<Domain.Entities.DB.District>().Where(w => w.DistrictCode == request.DistrictCode).Include(i => i.Subdistrict).FirstOrDefaultAsync(); ;
             _context.Set<Domain.Entities.DB.District>().RemoveRange(dbDistrict);
             await _context.SaveChangesAsync(cancellationToken);
 

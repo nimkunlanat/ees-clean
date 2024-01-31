@@ -12,4 +12,6 @@ public partial class CleanDbContext : DbContext, ICleanDbContext
     public DbSet<Province> Province { get; set; }
 
     public DbSet<District> District { get; set; }
+
+    public DbSet<Subdistrict> Subdistrict { get; set; }
 }

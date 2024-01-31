@@ -49,8 +49,7 @@ public class SaveDistrict
         private void Validate(District district)
         {
             if (_context.Set<District>().Any(a => (district.RowState == RowState.Add && a.DistrictCode == district.DistrictCode)
-            || a.DistrictTh == district.DistrictTh 
-            || a.DistrictEn == district.DistrictEn))
+                ))
                 throw new RestException(HttpStatusCode.BadRequest, "message.STD00018");
         }
     }

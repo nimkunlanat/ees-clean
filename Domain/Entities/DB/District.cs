@@ -14,5 +14,6 @@ namespace Domain.Entities.DB
         public string DistrictEn { get; set;}
         public bool? Active { get; set; }
         public string Description { get; set; }
+        public ICollection<Subdistrict> Subdistrict { get; set;}
     }
 }

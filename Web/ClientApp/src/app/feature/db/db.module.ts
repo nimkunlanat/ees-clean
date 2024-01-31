@@ -10,6 +10,8 @@ import { Dbrt04Component } from './dbrt04/dbrt04.component';
 import { Dbrt04DetailComponent } from './dbrt04/dbrt04-detail/dbrt04-detail.component';
 import { Dbrt04DistrictComponent } from './dbrt04/dbrt04-district/dbrt04-district.component';
 import { Dbrt04DistrictDetailComponent } from './dbrt04/dbrt04-district/dbrt04-district-detail/dbrt04-district-detail.component';
+import { Dbrt04SubdistrictsComponent } from './dbrt04/dbrt04-subdistricts/dbrt04-subdistricts.component';
+import { Dbrt04SubdistrictsDetailComponent } from './dbrt04/dbrt04-subdistricts/dbrt04-subdistricts-detail/dbrt04-subdistricts-detail.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { Dbrt04DistrictDetailComponent } from './dbrt04/dbrt04-district/dbrt04-d
     Dbrt04Component,
     Dbrt04DetailComponent,
     Dbrt04DistrictComponent,
-    Dbrt04DistrictDetailComponent
+    Dbrt04DistrictDetailComponent,
+    Dbrt04SubdistrictsComponent,
+    Dbrt04SubdistrictsDetailComponent
   ],
   imports: [
     CommonModule,

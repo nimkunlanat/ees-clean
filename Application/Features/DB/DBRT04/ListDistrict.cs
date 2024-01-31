@@ -32,12 +32,11 @@ namespace Application.Features.DB.DBRT04
             {
                 StringBuilder sql = new StringBuilder();
                 sql.AppendLine(@"select d.district_code ""districtCode""
-		                        ,p.province_th ""provinceTh""
-		                        ,p.province_en ""provinceEn""
 		                        ,d.district_th ""districtTh""
 		                        ,d.district_en ""districtEn"" 
 		                        ,d.active ""active""
 		                        ,d.xmin ""rowVersion""
+                                ,p.province_code ""provinceCode""
 		                        ,case when @Lang = 'th' then p.province_th else p.province_en end as province
 		                        from db.district d 
 		                        inner join db.province p on p.province_code = d.province_code
