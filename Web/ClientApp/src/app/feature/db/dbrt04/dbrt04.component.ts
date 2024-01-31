@@ -13,7 +13,7 @@ import { filter, switchMap } from 'rxjs';
 })
 export class Dbrt04Component {
   Provinces: Province[] = []
-  resetSerch = ''
+  resetSearch = ''
   constructor(
     private sv: Dbrt04Service,
     private activatedRoute: ActivatedRoute,
@@ -31,7 +31,7 @@ export class Dbrt04Component {
       switchMap(() => this.sv.delete(provinceCode)))
       .subscribe(() => {
         this.search()
-        this.resetSerch = ''
+        this.resetSearch = ''
         this.ms.success('message.STD00016');
       })
   }
