@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NotifyService } from '@app/core/services/notify.service';
 import { Position } from '@app/models/db/position';
@@ -14,6 +14,7 @@ import { Dbrt03Service } from '../dbrt03.service';
   templateUrl: './dbrt03-detail.component.html',
   styleUrl: './dbrt03-detail.component.scss'
 })
+
 export class Dbrt03DetailComponent {
   form: FormGroup;
   positions: Position;
@@ -57,9 +58,9 @@ export class Dbrt03DetailComponent {
 
   createForm() {
     this.form = this.fb.group({
-      positionCode: [null, [Validators.required, Validators.maxLength(20)]],
-      positionNameTh: [null, [Validators.required, Validators.maxLength(100)]],
-      positionNameEn: [null, [Validators.required, Validators.maxLength(100)]],
+      positionCode: [null, [Validators.required, Validators.pattern(/^[a-zA-Z]+$/), Validators.maxLength(200)]],
+      positionNameTh: [null, [Validators.required, Validators.pattern(/^[ก-๙0-9#$^+=!*(){}\[\]@%& ]+$/), Validators.maxLength(200)]],
+      positionNameEn: [null, [Validators.required, Validators.pattern(/^[a-zA-Z]+$/), Validators.maxLength(200)]],
       description: null,
       rowState: null,
       rowVersion: null,
@@ -78,13 +79,13 @@ export class Dbrt03DetailComponent {
       const data = this.form.getRawValue();
       
       this.sv.save(data).pipe(
-        switchMap((res: any) => this.sv.detail(res.employeeCode))
+        switchMap((res: any) => this.sv.detail(res.positionCode))
       ).subscribe(res => {
+        this.ms.success("message.STD00014");
         this.positions = res
         this.positions.rowState = RowState.Normal;
         this.form.patchValue(res)
         this.rebuildData()
-        this.ms.success("message.STD00014");
       })
     }
   }

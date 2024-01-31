@@ -17,4 +17,6 @@ public class Dbrt03Controller : BaseController
     [HttpPost("update")]
     public async Task<ActionResult> Post([FromBody] Save.Command command) => Ok(await Mediator.Send(command));
 
+    [HttpDelete("delete")]
+    public async Task<ActionResult> Delete([FromQuery] Delete.Command command) => Ok(await Mediator.Send(command));
 }
