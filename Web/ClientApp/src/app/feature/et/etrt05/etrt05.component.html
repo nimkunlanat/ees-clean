@@ -1,0 +1,48 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>{{ 'label.ETRT05.ProgramName' | translate }}</h5>
+            <div class="flex flex-wrap py-4 justify-content-between gap-3 flex-column lg:flex-row lg:p-fluid">
+                <textbox [placeholder]="'label.ALL.Search' | translate" icon="pi pi-search" [hasLabel]="false"
+                    (onInput)="search($event)" class="w-full lg:w-6">
+                </textbox>
+                <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['detail']"></button>
+            </div>
+
+            <datatable [rows]="evaluations">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="text-center">{{ 'label.ETRT05.EvaluationGroupCode' | translate}} </th>
+                        <th class="text-center">{{ 'label.ETRT05.EvaluationCode' | translate }} </th>
+                        <th class="text-center">{{ 'label.ETRT05.EvaluationDescTh' | translate }} </th>
+                        <th class="text-center">{{ 'label.ETRT05.EvaluationDescEn' | translate }} </th>
+                        <th class="text-center">{{ 'label.ETRT05.Point' | translate }} </th>
+                        <th class="text-center">{{ 'label.ALL.Active' | translate }}</th>
+                        <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                      <td class="text-center">
+                      <a [routerLink]="['detail']" [state]="{ evaluateGroupCode: row.evaluateGroupCode }">
+                        {{row.evaluateGroupCode}}
+                      </a>
+                      </td>
+                        <td class="text-center">{{row.evaluateCode}}</td>
+                        <td class="text-center">{{row.evaluateDetailNameTh}}</td>
+                        <td class="text-center">{{row.evaluateDetailNameEn}}</td>
+                        <td class="text-center">{{row.point}}</td>
+                        <td class="text-center text-green-600 w-1">
+                            @if(row.active){
+                            <i class="pi pi-check" ></i>
+                            }</td>
+                        <td class="text-center w-1">
+                              <button icon="pi pi-trash"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </datatable>
+        </div>
+    </div> 
+</div>
+  

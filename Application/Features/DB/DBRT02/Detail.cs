@@ -12,11 +12,6 @@ public class Detail
     {
         public string EmployeeCode {  get; set; }
     }
-
-    public class EmployeesDTO : Employee
-    {
-        public string UserName { get; set; }
-    }
     public class Handler : IRequestHandler<Query, Employee>
     {
         private readonly ICleanDbContext _context;

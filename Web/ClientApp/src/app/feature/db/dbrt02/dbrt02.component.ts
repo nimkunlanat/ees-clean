@@ -22,7 +22,6 @@ export class Dbrt02Component {
     private ms: NotifyService,
     private activatedRoute: ActivatedRoute,)
   {this.activatedRoute.data.subscribe(({ employees }) =>{
-    console.log(employees)
     this.employees = employees
   })
 

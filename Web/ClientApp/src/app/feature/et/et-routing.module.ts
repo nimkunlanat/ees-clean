@@ -4,7 +4,7 @@ import { Etrt05Component } from './etrt05/etrt05.component';
 import { etrt05Resolver } from './etrt05/etrt05.resolver';
 
 const routes: Routes = [
-  { path: 'dbrt01', component: Etrt05Component, title: 'Status', resolve: { etrt05Resolver }, data: { code: 'etert05' } },
+  { path: 'etrt05', component: Etrt05Component, title: 'Evaluation Form Management', resolve: { etrt05Resolver }, data: { code: 'etrt05' } },
 ];
 
 @NgModule({

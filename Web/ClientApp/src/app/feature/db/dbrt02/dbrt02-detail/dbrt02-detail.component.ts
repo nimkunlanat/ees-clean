@@ -59,6 +59,7 @@ export class Dbrt02DetailComponent {
       religion: [null]
     })
   }
+  
 
   rebuildData() {
     this.form.patchValue(this.data)
