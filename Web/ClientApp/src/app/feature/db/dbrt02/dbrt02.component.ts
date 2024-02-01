@@ -14,22 +14,22 @@ import { NotifyService } from '@app/core/services/notify.service';
 
 export class Dbrt02Component {
 
-  employees : Employee[] = []
+  employees: Employee[] = []
 
   constructor(
     private sv: Dbrt02Service,
     private md: ModalService,
     private ms: NotifyService,
-    private activatedRoute: ActivatedRoute,)
-  {this.activatedRoute.data.subscribe(({ employees }) =>{
-    this.employees = employees
-  })
+    private activatedRoute: ActivatedRoute,) {
+    this.activatedRoute.data.subscribe(({ employees }) => {
+      this.employees = employees
+    })
 
-}
+  }
 
-search(value?: string) {
-  this.sv.list(value).subscribe((employees: Employee[]) => this.employees = employees)
-}
+  search(value?: string) {
+    this.sv.list(value).subscribe((employees: Employee[]) => this.employees = employees)
+  }
 
   delete(employeeCode: string) {
     this.md.confirm('message.STD00015').pipe(
@@ -39,6 +39,6 @@ search(value?: string) {
         this.search()
         this.ms.success('message.STD00016');
       })
-}
+  }
 
 }

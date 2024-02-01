@@ -23,26 +23,26 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-row>
                     <tr>
-                      <td class="text-center">
-                      <a [routerLink]="['detail']" [state]="{ evaluateGroupCode: row.evaluateGroupCode }">
-                        {{row.evaluateGroupCode}}
-                      </a>
-                      </td>
+                        <td class="text-center">
+                            <a [routerLink]="['detail']" [state]="{ evaluateGroupCode: row.evaluateGroupCode }">
+                                {{row.evaluateGroupCode}}
+                            </a>
+                        </td>
                         <td class="text-center">{{row.evaluateCode}}</td>
                         <td class="text-center">{{row.evaluateDetailNameTh}}</td>
                         <td class="text-center">{{row.evaluateDetailNameEn}}</td>
                         <td class="text-center">{{row.point}}</td>
                         <td class="text-center text-green-600 w-1">
                             @if(row.active){
-                            <i class="pi pi-check" ></i>
-                            }</td>
+                            <i class="pi pi-check"></i>
+                            }
+                        </td>
                         <td class="text-center w-1">
-                              <button icon="pi pi-trash"></button>
+                            <button icon="pi pi-trash"></button>
                         </td>
                     </tr>
                 </ng-template>
             </datatable>
         </div>
-    </div> 
+    </div>
 </div>
-  

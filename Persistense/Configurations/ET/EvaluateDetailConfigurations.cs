@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistense.Configurations.ET;
-public class EvaluationFormManagementConfigurations : BaseConfiguration<EvaluationFormManagement>
+public class EvaluationFormManagementConfigurations : BaseConfiguration<EvaluateDetail>
 {
-    public override void Configure(EntityTypeBuilder<EvaluationFormManagement> builder)
+    public override void Configure(EntityTypeBuilder<EvaluateDetail> builder)
     {
         base.Configure(builder);
         builder.ToTable("evaluate_detail", "et");

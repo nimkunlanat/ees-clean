@@ -36,6 +36,6 @@ export class Etrt05Component {
         this.search()
         this.ms.success('message.STD00016');
       })
-}
+  }
 
 }
