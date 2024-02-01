@@ -3,17 +3,26 @@ import { CommonModule } from '@angular/common';
 
 import { EtRoutingModule } from './et-routing.module';
 import { Etrt05Component } from './etrt05/etrt05.component';
-import { Etrt01Component } from './etrt01/etrt01.component';
+import { LazyTranslationService } from '@app/core/services/lazy-translation.service';
+import { SharedModule } from '@app/shared/shared.module';
+import { Etdt01Component } from './etdt01/etdt01.component';
+import { Etdt01SkillComponent } from './etdt01/etdt01-skill/etdt01-skill.component';
+
 
 
 @NgModule({
   declarations: [
     Etrt05Component,
-    Etrt01Component
+    Etdt01Component,
+    Etdt01SkillComponent
   ],
   imports: [
     CommonModule,
-    EtRoutingModule
+    EtRoutingModule,
+    SharedModule
   ]
 })
-export class EtModule { }
+export class EtModule {
+  constructor(private lazy: LazyTranslationService) {
+  lazy.add('et');
+}}
