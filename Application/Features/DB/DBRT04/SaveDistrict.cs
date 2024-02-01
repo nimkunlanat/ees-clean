@@ -12,14 +12,14 @@ using Domain.Entities.DB;
 
 namespace Application.Features.DB.DBRT04;
 
-public class Save
+public class SaveDistrict
 {
-    public class Command : Province, ICommand<Province>
+    public class Command : District, ICommand<District>
     {
 
     }
 
-    public class Handler : IRequestHandler<Command, Province>
+    public class Handler : IRequestHandler<Command, District>
     {
         private readonly ICleanDbContext _context;
         public Handler(ICleanDbContext context, ICurrentUserAccessor user)
@@ -27,17 +27,17 @@ public class Save
             _context = context;
         }
 
-        public async Task<Province> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<District> Handle(Command request, CancellationToken cancellationToken)
             {
             Validate(request);
             if (request.RowState == RowState.Add)
             {
                 
-                _context.Set<Province>().Add(request);
+                _context.Set<District>().Add(request);
             }
             else if (request.RowState == RowState.Edit)
             {
-                _context.Set<Province>().Attach(request);
+                _context.Set<District>().Attach(request);
                 _context.Entry(request).State = EntityState.Modified;
             }
 
@@ -46,10 +46,10 @@ public class Save
             return request;
         }
 
-        private void Validate(Province province)
+        private void Validate(District district)
         {
-            if (_context.Set<Province>().Any(a => (province.RowState == RowState.Add && a.ProvinceCode == province.ProvinceCode )
-            )) 
+            if (_context.Set<District>().Any(a => (district.RowState == RowState.Add && a.DistrictCode == district.DistrictCode)
+                ))
                 throw new RestException(HttpStatusCode.BadRequest, "message.STD00018");
         }
     }

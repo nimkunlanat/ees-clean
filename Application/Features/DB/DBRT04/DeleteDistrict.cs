@@ -6,16 +6,14 @@ using Application.Behaviors;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System;
-using Domain.Entities.DB;
-using System.Collections.Generic;
 
 namespace Application.Features.DB.DBRT04;
 
-public class Delete
+public class DeleteDistrict
 {
     public class Command : ICommand
     {
-        public Guid ProvinceCode { get; set; }
+        public Guid DistrictCode { get; set; }
     }
     public class Handler : IRequestHandler<Command, Unit>
     {
@@ -24,10 +22,8 @@ public class Delete
 
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            Province dbProvince = await _context.Set<Province>().Where(w => w.ProvinceCode == request.ProvinceCode).Include(i => i.Districts).FirstOrDefaultAsync();
-            List<District> dbDistict = await _context.Set<District>().Where(w => w.ProvinceCode == request.ProvinceCode).Include(i => i.Subdistrict).ToListAsync();
-            _context.Set<Province>().Remove(dbProvince);
-            _context.Set<District>().RemoveRange(dbDistict);
+            Domain.Entities.DB.District dbDistrict = await _context.Set<Domain.Entities.DB.District>().Where(w => w.DistrictCode == request.DistrictCode).Include(i => i.Subdistrict).FirstOrDefaultAsync(); ;
+            _context.Set<Domain.Entities.DB.District>().RemoveRange(dbDistrict);
             await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Domain.Entities.DB
 {
@@ -9,5 +10,7 @@ namespace Domain.Entities.DB
         public string ProvinceEn { get; set; }
         public bool? Active { get; set; }
         public string Description { get; set; }
+        public ICollection<District> Districts { get; set; }
+
     }
 }
