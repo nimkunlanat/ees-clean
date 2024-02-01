@@ -29,8 +29,7 @@ constructor(
   private route: ActivatedRoute,
   private ms: NotifyService,
   private sv: Dbrt04Service,
-  private md: ModalService,
-  private router: Router) {
+  private md: ModalService,) {
   this.createForm()
   this.route.data.subscribe(({ dbrt04master , dbrt04DistrictDetail }) => {
     this.master = dbrt04master;

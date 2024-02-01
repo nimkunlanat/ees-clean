@@ -21,7 +21,7 @@ export class Dbrt04DistrictComponent {
   provinceCode: Guid;
   districtCode: Guid;
   data: District;
-  resetSearch = '';
+  resetSearch: string  = '';
   breadcrumbItems: MenuItem[] = [
     { label: 'label.DBRT04.ProgramName', routerLink: '/db/dbrt04' },
     {
