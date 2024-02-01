@@ -48,7 +48,9 @@ public class Save
 
         private void Validate(Province province)
         {
-            if (_context.Set<Province>().Any(a => (province.RowState == RowState.Add && a.ProvinceCode == province.ProvinceCode )|| a.ProvinceTh == province.ProvinceTh || a.ProvinceEn == province.ProvinceEn)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00018");
+            if (_context.Set<Province>().Any(a => (province.RowState == RowState.Add && a.ProvinceCode == province.ProvinceCode )
+            )) 
+                throw new RestException(HttpStatusCode.BadRequest, "message.STD00018");
         }
     }
 }

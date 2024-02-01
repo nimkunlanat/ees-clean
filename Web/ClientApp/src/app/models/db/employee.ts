@@ -11,7 +11,7 @@ export class Employee extends EntityBase {
     employeeSurnameEn: string;
     positionName : string;
     teamCode: Guid;
-    gender: boolean;
+    gender: string;
     dateOfBirth: Date;
     nationality: string;
     religion: string;

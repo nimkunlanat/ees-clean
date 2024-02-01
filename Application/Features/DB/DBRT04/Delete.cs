@@ -6,6 +6,8 @@ using Application.Behaviors;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System;
+using Domain.Entities.DB;
+using System.Collections.Generic;
 
 namespace Application.Features.DB.DBRT04;
 
@@ -22,8 +24,10 @@ public class Delete
 
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            Domain.Entities.DB.Province dbProvince = await _context.Set<Domain.Entities.DB.Province>().Where(w => w.ProvinceCode == request.ProvinceCode).FirstOrDefaultAsync();
-            _context.Set<Domain.Entities.DB.Province>().RemoveRange(dbProvince);
+            Province dbProvince = await _context.Set<Province>().Where(w => w.ProvinceCode == request.ProvinceCode).Include(i => i.Districts).FirstOrDefaultAsync();
+            List<District> dbDistict = await _context.Set<District>().Where(w => w.ProvinceCode == request.ProvinceCode).Include(i => i.Subdistrict).ToListAsync();
+            _context.Set<Province>().Remove(dbProvince);
+            _context.Set<District>().RemoveRange(dbDistict);
             await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
