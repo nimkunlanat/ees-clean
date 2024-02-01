@@ -35,10 +35,10 @@ public class List
         {
             StringBuilder sql = new StringBuilder();
 
-            sql.AppendLine(@"select employee_code ""employeeCode""
+            sql.AppendLine(@"select e.employee_code ""employeeCode""
                                 , s.user_name ""userName""
                                 , case when @Lang = 'th' then p.position_name_th else p.position_name_en end as ""positionName""
-                                , team_code ""teamCode""
+                                , e.team_code ""teamCode""
                                 , e.phone_number ""phoneNumber""
                                 , e.email ""email""
                                 , CONCAT(
