@@ -15,7 +15,7 @@
               </textbox>
             </div>
             <div class="col-3 flex justify-content-end align-items-end ">
-              <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['dbrt04-subdistricts-detail']" [state]="{districtCode : districtCode , provinceCode: provinceCode}"></button>
+              <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['subdistricts-detail']" [state]="{districtCode : districtCode , provinceCode: provinceCode}"></button>
             </div>
           </div>
 
@@ -32,7 +32,7 @@
               <ng-template pTemplate="body" let-row>
                   <tr>
                     <td class="text-center">
-                    <a [routerLink]="['dbrt04-subdistricts-detail']" [state]="{ districtCode: row.districtCode , provinceCode: row.provinceCode, subdistrictCode: row.subdistrictCode}">
+                    <a [routerLink]="['subdistricts-detail']" [state]="{ districtCode: row.districtCode , provinceCode: row.provinceCode, subdistrictCode: row.subdistrictCode}">
                       {{row.subdistrictTh}}
                     </a>
                     </td>

@@ -12,7 +12,7 @@
               </textbox>
             </div>
             <div class="col-4 flex justify-content-end align-items-end ">
-              <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['dbrt04-district-detail']" [state]="{ districtCode: null ,provinceCode : provinceCode }"></button>
+              <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['district-detail']" [state]="{ districtCode: null ,provinceCode : provinceCode }"></button>
             </div>
           </div>
 
@@ -29,7 +29,7 @@
               <ng-template pTemplate="body" let-row>
                   <tr>
                     <td class="text-center">
-                    <a [routerLink]="['dbrt04-district-detail']" [state]="{ districtCode: row.districtCode ,provinceCode : provinceCode }">
+                    <a [routerLink]="['district-detail']" [state]="{ districtCode: row.districtCode ,provinceCode : provinceCode }">
                       {{row.districtTh}}
                     </a>
                     </td>
@@ -39,7 +39,7 @@
                         <i class="pi pi-check"></i>
                         }</td>
                       <td class="text-center text-green-600 w-1">
-                          <button icon="pi pi-folder" [routerLink]="['dbrt04-subdistricts']" [state]="{districtCode : row.districtCode , provinceCode : provinceCode}"></button>
+                          <button icon="pi pi-folder" [routerLink]="['subdistricts']" [state]="{districtCode : row.districtCode , provinceCode : provinceCode}"></button>
                       </td>
                       <td class="text-center w-1">
                             <button icon="pi pi-trash" (click)="deleteDistrict(row.districtCode)"></button>
