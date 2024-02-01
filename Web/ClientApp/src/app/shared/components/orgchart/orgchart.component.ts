@@ -10,6 +10,7 @@ export class OrgchartComponent implements OnInit{
   selectedNodes!: TreeNode[];
   dragedEmployee:TreeNode;
   teamForSave = []
+  teamForDelete = []
   @Input() data: TreeNode[] = [
 //     {
 //       expanded: true,
@@ -191,7 +192,9 @@ export class OrgchartComponent implements OnInit{
   @Output() getTeam:EventEmitter<TreeNode[]> = new EventEmitter();
 
 ngOnInit(): void {
-    this.checkData(this.data)
+  this.checkData(this.data)
+  // if (this.data.length > 0) this.checkData(this.data)
+  // else if (this.employees.length > 0) this.checkData(this.employees)
 }
 
 dragStart(event){
@@ -227,7 +230,21 @@ dragStart(event){
     })
   }
 
+  changeDataForDelete(event:TreeNode[]){
+    let data = [...event]
+    data.forEach((element) => {
+      if(element.children.length > 0){
+        element.children.map(m => m['headUser'] = element.data.userId)
+        this.teamForDelete.unshift(element)
+        this.changeDataForDelete(element.children);
+      }else{
+        this.teamForDelete.unshift(element)
+      }
+    })
+  }
+  
   dropEmployee(){
+    this.teamForDelete = []
     let check = this.employees.filter(f => f.data.name == this.dragedEmployee?.data?.name)
     if(check.length == 0 && this.dragedEmployee){
       this.checkEmployees(this.data)
@@ -238,18 +255,20 @@ dragStart(event){
         });
       }
       this.employees.push(...data);
+      this.changeDataForDelete(this.data);
+      this.getTeam.emit(this.teamForDelete);
     }
     this.dragedEmployee = null;
   }
-
+  
   checkData(data){
     data.forEach((element) => {
-        if(element?.children?.length > 0) {
-            if(element.children.filter(f=> f.data.name === this.dragedEmployee?.data?.name)){
-                element.children = element.children.filter(f => f.data.name !== this.dragedEmployee.data.name)
-            }
-            this.checkData(element.children)
+      if(element?.children?.length > 0) {
+        if(element.children.filter(f=> f.data.name === this.dragedEmployee?.data?.name)){
+          element.children = element.children.filter(f => f.data.name !== this.dragedEmployee.data.name)
         }
+        this.checkData(element.children)
+      }
     })
   }
 

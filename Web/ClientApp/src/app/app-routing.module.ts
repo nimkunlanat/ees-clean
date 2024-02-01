@@ -18,7 +18,7 @@ const routes: Routes = [
     { path: 'su', loadChildren: () => import("./feature/su/su.module").then(m => m.SuModule) },
     { path: 'db', loadChildren: () => import("./feature/db/db.module").then(m => m.DbModule) },
     { path: 'tm', loadChildren: () => import("./feature/tm/tm.module").then(m => m.TmModule) },
-    { path: 'et', loadChildren: () => import("./feature/et/et.module").then(m => m.EtModule) }
+    { path: 'et', loadChildren: () => import("./feature/et/et.module").then(m => m.EtModule) },
   ]),
   { path: '**', redirectTo: '/notfound', pathMatch: 'full' }
 ];
