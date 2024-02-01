@@ -28,10 +28,10 @@ const routes: Routes = [
   { path: 'dbrt03/detail', component: Dbrt03DetailComponent, title: 'Position', resolve: { dbrt03Detail }, canDeactivate: [CanDeactivate], data: { code: 'dbrt03' } },
   { path: 'dbrt04', component: Dbrt04Component, title: 'Province', resolve: { provinces }, data: { code: 'dbrt04' }},
   { path: 'dbrt04/detail', component: Dbrt04DetailComponent, title: 'Province', resolve: { dbrt04Detail }, canDeactivate: [CanDeactivate], data: { code: 'dbrt04' } },
-  { path: 'dbrt04/dbrt04-district', component: Dbrt04DistrictComponent, title: 'District', resolve: { districts , dbrt04master}, data: { code: 'dbrt04' }},
-  { path: 'dbrt04/dbrt04-district/dbrt04-district-detail', component: Dbrt04DistrictDetailComponent, title: 'District', resolve: { dbrt04DistrictDetail  , dbrt04master}, canDeactivate: [CanDeactivate], data: { code: 'dbrt04' } },
-  { path: 'dbrt04/dbrt04-district/dbrt04-subdistricts', component: Dbrt04SubdistrictsComponent, title: 'Subdistrict', resolve: { subdistricts ,dbrt04master }, data: { code: 'dbrt04' }},
-  { path: 'dbrt04/dbrt04-district/dbrt04-subdistricts/dbrt04-subdistricts-detail', component: Dbrt04SubdistrictsDetailComponent, title: 'Subdistrict', resolve: { dbrt04SubdistrictDetail  , dbrt04master}, canDeactivate: [CanDeactivate], data: { code: 'dbrt04' } },
+  { path: 'dbrt04/district', component: Dbrt04DistrictComponent, title: 'District', resolve: { districts , dbrt04master}, data: { code: 'dbrt04' }},
+  { path: 'dbrt04/district/district-detail', component: Dbrt04DistrictDetailComponent, title: 'District', resolve: { dbrt04DistrictDetail  , dbrt04master}, canDeactivate: [CanDeactivate], data: { code: 'dbrt04' } },
+  { path: 'dbrt04/district/subdistricts', component: Dbrt04SubdistrictsComponent, title: 'Subdistrict', resolve: { subdistricts ,dbrt04master }, data: { code: 'dbrt04' }},
+  { path: 'dbrt04/district/subdistricts/subdistricts-detail', component: Dbrt04SubdistrictsDetailComponent, title: 'Subdistrict', resolve: { dbrt04SubdistrictDetail  , dbrt04master}, canDeactivate: [CanDeactivate], data: { code: 'dbrt04' } },
 ];
 
 @NgModule({
