@@ -29,11 +29,10 @@ constructor(
   private route: ActivatedRoute,
   private ms: NotifyService,
   private sv: Dbrt04Service,
-  private md: ModalService,
-  private router: Router) {
+  private md: ModalService,) {
   this.createForm()
-  this.route.data.subscribe(({ master , dbrt04DistrictDetail }) => {
-    this.master = master;
+  this.route.data.subscribe(({ dbrt04master , dbrt04DistrictDetail }) => {
+    this.master = dbrt04master;
     this.provinceCode = dbrt04DistrictDetail.provinceCode
     this.breadcrumbItems.map(m => {
       if(m.routerLink === '/db/dbrt04/dbrt04-district') m.state = {provinceCode : this.provinceCode}

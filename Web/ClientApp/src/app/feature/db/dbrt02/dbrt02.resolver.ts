@@ -12,4 +12,4 @@ export const dbrt02Detail: ResolveFn<Employee> = (route: ActivatedRouteSnapshot,
   }
   return inject(Dbrt02Service).detail(employeeCode)
 }
-export const master: ResolveFn<Master> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => inject(Dbrt02Service).master()
+export const dbrt02master: ResolveFn<Master> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => inject(Dbrt02Service).master()
