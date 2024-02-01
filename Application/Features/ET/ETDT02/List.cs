@@ -1,5 +1,4 @@
 ﻿using Application.Interfaces;
-using Domain.Entities.ET;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Features.ET
+namespace Application.Features.ET.ETDT02
 {
     public class List
     {
@@ -40,12 +39,12 @@ namespace Application.Features.ET
                 StringBuilder sql = new StringBuilder();
 
                 //sql.AppendLine(@"SELECT 
-	               //                 user_id ""userId"", 
-	               //                 firstname, 
-	               //                 lastname,
+                //                 user_id ""userId"", 
+                //                 firstname, 
+                //                 lastname,
                 //                    firstname_th ""firstnameTh"",
                 //                    lastname_th ""lastnameTh"",
-	               //                 active
+                //                 active
                 //                FROM su.user
                 //                where lower(concat(user_id,firstname,lastname, firstname_th, lastname_th)) ilike lower(concat('%',@Keywords,'%'))
                 //                order by firstname, lastname");
