@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistense.Configurations.ET;
-public class EvaluationFormManagementConfigurations : BaseConfiguration<EvaluateDetail>
+public class EvaluateDetailConfigurations : BaseConfiguration<EvaluateDetail>
 {
     public override void Configure(EntityTypeBuilder<EvaluateDetail> builder)
     {

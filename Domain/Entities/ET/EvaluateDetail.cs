@@ -2,7 +2,7 @@
 
 namespace Domain.Entities.ET;
 
-public class EvaluationDetail : EntityBase
+public class EvaluateDetail : EntityBase
 {
     public string EvaluateGroupCode { get; set; }
     public string EvaluateDetailNameTh { get; set;}
