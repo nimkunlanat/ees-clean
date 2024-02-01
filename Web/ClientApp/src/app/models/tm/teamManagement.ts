@@ -6,5 +6,5 @@ export class teamManagement extends EntityBase {
     firstnameTh: string;
     lastnameTh: string;
     positionNameEn: string;
-    headUser:number;
+    headUser: number;
 }

@@ -40,7 +40,7 @@ namespace Application.Features.TM.TMDT01
             {
                 StringBuilder sql = new StringBuilder();
                 sql.AppendLine(@"
-                                select u.user_id ""userId"" ,u.firstname_th ""firstnameTh"" ,u.lastname_th ""lastnameTh"" ,  p.position_name_en ""postitionNameEn""
+                                select u.user_id ""userId"" ,u.firstname_th ""firstnameTh"" ,u.lastname_th ""lastnameTh"" ,  p.position_name_en ""positionNameEn""
                                 from db.employee e 
                                 left join su.""user"" u on e.user_id = u.user_id 
                                 left join db.""position"" p on p.position_code = e.position_code 

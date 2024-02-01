@@ -4,7 +4,7 @@ import { Tmdt01Component } from './tmdt01/tmdt01.component';
 import { list, saveList } from './tmdt01/tmdt01.resolver';
 
 const routes: Routes = [
-  {path: 'tmdt01' , title: 'Team Management' , component: Tmdt01Component , resolve : {list , saveList} , data: { code: 'tmdt01' }}
+  { path: 'tmdt01', title: 'Team Management', component: Tmdt01Component, resolve: { list, saveList }, data: { code: 'tmdt01' } }
 ];
 
 @NgModule({
