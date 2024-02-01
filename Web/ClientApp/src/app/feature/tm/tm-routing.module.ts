@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Tmdt01Component } from './tmdt01/tmdt01.component';
-import { list } from './tmdt01/tmdt01.resolver';
+import { list, saveList } from './tmdt01/tmdt01.resolver';
 
 const routes: Routes = [
-  {path: 'tmdt01' , title: 'Team Management' , component: Tmdt01Component , resolve : {list} , data: { code: 'tmdt01' }}
+  { path: 'tmdt01', title: 'Team Management', component: Tmdt01Component, resolve: { list, saveList }, data: { code: 'tmdt01' } }
 ];
 
 @NgModule({

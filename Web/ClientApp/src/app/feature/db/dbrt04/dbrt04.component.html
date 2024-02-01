@@ -3,7 +3,7 @@
       <div class="card">
           <h5>{{ 'label.DBRT04.ProgramName' | translate }}</h5>
           <div class="flex flex-wrap py-4 justify-content-between gap-3 flex-column lg:flex-row lg:p-fluid">
-              <textbox [placeholder]="'label.ALL.Search' | translate" icon="pi pi-search" [hasLabel]="false" [(ngModel)]="resetSerch"
+              <textbox [placeholder]="'label.ALL.Search' | translate" icon="pi pi-search" [hasLabel]="false" [(ngModel)]="resetSearch"
                   (onInput)="search($event)" class="w-full lg:w-6">
               </textbox>
               <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['detail']"></button>
@@ -15,7 +15,7 @@
                       <th prop="provinceTh" class="text-center">{{ 'label.DBRT04.ProvinceNameInThai' | translate }} </th>
                       <th prop="provinceEn" class="text-center">{{ 'label.DBRT04.ProvinceNameInEnglish' | translate }} </th>
                       <th prop="active" class="text-center">{{ 'label.DBRT04.Active' | translate }} </th>
-                      <th class="text-center">{{ 'label.DBRT04.List' | translate }} </th>
+                      <th class="text-center">{{ 'label.DBRT04.ListDistrict' | translate }} </th>
                       <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
                   </tr>
               </ng-template>
@@ -32,9 +32,8 @@
                         <i class="pi pi-check"></i>
                         }</td>
                       <td class="text-center text-green-600 w-1">
-                          @if(row.active){
-                          <button icon="pi pi-folder" (click)="delete(row.provinceCode)"></button>
-                          }</td>
+                          <button icon="pi pi-folder" [routerLink]="['district']" [state]="{ provinceCode : row.provinceCode, districtCode : row.districtCode }"></button>
+                      </td>
                       <td class="text-center w-1">
                             <button icon="pi pi-trash" (click)="delete(row.provinceCode)"></button>
                       </td>

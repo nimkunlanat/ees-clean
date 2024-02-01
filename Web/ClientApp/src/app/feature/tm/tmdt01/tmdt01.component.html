@@ -1,1 +1,32 @@
-<p>tmdt01 works!</p>
+<div class="col-12 flex flex-wrap gap-3 justify-content-end flex-column lg:flex-row lg:p-fluid">
+    <button [label]="'label.ALL.Save' | translate" icon="pi pi-save" (click)="save()"></button>
+</div>
+<br>
+<orgchart [data]="teamData" [employees]="data" (getTeam)="getTeam($event)"></orgchart>
+
+ <!-- <div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>{{ 'label.Tmdt01.ProgramManagement' | translate }}</h5>
+            <div class="flex flex-wrap py-4 justify-content-between gap-3 flex-column lg:flex-row lg:p-fluid">
+                <textbox [placeholder]="'label.ALL.Search' | translate" icon="pi pi-search" [hasLabel]="false"
+                    (onInput)="search($event)" class="w-full lg:w-6">
+                </textbox>
+                <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['detail']"></button>
+            </div>
+
+            <datatable [rows]="teamManagements">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th prop="programCode" class="text-center">{{ 'label.Tmdt01.ProgramCode' | translate}} </th>
+                        <th prop="programName" class="text-center">{{ 'label.Tmdt01.ProgramName' | translate }} </th>
+                        <th prop="programPath" class="text-center">{{ 'label.Tmdt01.ProgramPath' | translate }} </th>
+                        <th prop="moduleCode" class="text-center">{{ 'label.Tmdt01.ModuleCode' | translate }} </th>
+                        <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
+                    </tr>
+                </ng-template>
+
+            </datatable>
+        </div>
+    </div>
+</div> -->

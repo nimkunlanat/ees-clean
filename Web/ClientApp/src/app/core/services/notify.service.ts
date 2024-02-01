@@ -66,7 +66,6 @@ export class NotifyService {
                     summary: title,
                     detail: message,
                     key: position,
-                    life: 10000
                 })
             });
     }
@@ -81,7 +80,6 @@ export class NotifyService {
                     summary: title,
                     detail: message,
                     key: position,
-                    life: 10000
                 })
             });
     }

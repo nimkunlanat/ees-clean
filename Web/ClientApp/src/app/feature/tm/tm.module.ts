@@ -9,7 +9,7 @@ import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
   declarations: [
-    Tmdt01Component
+    Tmdt01Component,
   ],
   imports: [
     CommonModule,

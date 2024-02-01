@@ -1,0 +1,52 @@
+<div class="grid">
+  <div class="col-12">
+      <div class="card">
+          <breadcrumb [items]="breadcrumbItems"></breadcrumb>
+          <div class="grid"[formGroup]="provinceForm">
+            <div class="col-4">
+              <dropdown class="w-full" formControlName="province" [items]="master.province" [disabled]="true"></dropdown>
+            </div>
+            <div class="col-4 flex align-items-end ">
+              <textbox  class="w-full" [placeholder]="'label.ALL.Search' | translate" icon="pi pi-search" [hasLabel]="false" [(ngModel)]="resetSearch"
+                  (onInput)="search($event)">
+              </textbox>
+            </div>
+            <div class="col-4 flex justify-content-end align-items-end ">
+              <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['district-detail']" [state]="{ districtCode: null ,provinceCode : provinceCode }"></button>
+            </div>
+          </div>
+
+          <datatable [rows]="Districts">
+              <ng-template pTemplate="header">
+                  <tr>
+                      <th prop="districtTh" class="text-center">{{ 'label.DBRT04.DistrictNameInThai' | translate }} </th>
+                      <th prop="districtEn" class="text-center">{{ 'label.DBRT04.DistrictNameInEnglish' | translate }} </th>
+                      <th prop="active" class="text-center">{{ 'label.DBRT04.Active' | translate }} </th>
+                      <th class="text-center">{{ 'label.DBRT04.ListSubdistrict' | translate }} </th>
+                      <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-row>
+                  <tr>
+                    <td class="text-center">
+                    <a [routerLink]="['district-detail']" [state]="{ districtCode: row.districtCode ,provinceCode : provinceCode }">
+                      {{row.districtTh}}
+                    </a>
+                    </td>
+                      <td>{{row.districtEn}}</td>
+                      <td class="text-center text-green-600 w-1">
+                        @if(row.active){
+                        <i class="pi pi-check"></i>
+                        }</td>
+                      <td class="text-center text-green-600 w-1">
+                          <button icon="pi pi-folder" [routerLink]="['subdistricts']" [state]="{districtCode : row.districtCode , provinceCode : provinceCode}"></button>
+                      </td>
+                      <td class="text-center w-1">
+                            <button icon="pi pi-trash" (click)="deleteDistrict(row.districtCode)"></button>
+                      </td>
+                  </tr>
+              </ng-template>
+          </datatable>
+      </div>
+  </div>
+</div>

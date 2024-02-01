@@ -2,5 +2,5 @@
 
 public interface ICleanDbContext : IDbContext
 {
-    
+ 
 }
