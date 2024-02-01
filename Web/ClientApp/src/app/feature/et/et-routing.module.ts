@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { Etdt01Component } from './etdt01/etdt01.component';
 import { Etdt01SkillComponent } from './etdt01/etdt01-skill/etdt01-skill.component';
 import { etdt01Resolver, etdt01SkillResolver} from './etdt01/etdt01.resolver';
+import { Etrt05Component } from './etrt05/etrt05.component';
+import { etrt05Resolver } from './etrt05/etrt05.resolver';
 
 const routes: Routes = [
   { path: 'etrt05', component: Etrt05Component, title: 'Evaluation Form Management', resolve: { etrt05Resolver }, data: { code: 'etrt05' } },
