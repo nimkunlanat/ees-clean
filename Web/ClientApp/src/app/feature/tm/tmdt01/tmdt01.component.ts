@@ -105,10 +105,11 @@ export class Tmdt01Component {
       let dataObject = { userId: null, headUser: null, rowState: RowState.Add }
       dataObject.userId = m.data.userId
       dataObject.headUser = m.headUser || null
-      if (data.some(s => s.data.userId != dataObject.userId))
-        data.push(dataObject)
+      data.push(dataObject)
     })
-    this.sv.save(data).subscribe()
+    this.sv.save(data).subscribe(() => {
+      this.ms.success("message.STD00014")
+   })
 
     // else if (this.setDataTosave.length == 1) {
     //   this.setDataTosave.map(m => {

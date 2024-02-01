@@ -244,6 +244,7 @@ dragStart(event){
   }
   
   dropEmployee(){
+    this.teamForDelete = []
     let check = this.employees.filter(f => f.data.name == this.dragedEmployee?.data?.name)
     if(check.length == 0 && this.dragedEmployee){
       this.checkEmployees(this.data)
