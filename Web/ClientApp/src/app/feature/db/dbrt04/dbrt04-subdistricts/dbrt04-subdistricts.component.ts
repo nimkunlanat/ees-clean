@@ -21,7 +21,7 @@ export class Dbrt04SubdistrictsComponent {
   provinceCode: Guid;
   districtCode: Guid;
   data: Subdistrict;
-  resetSearch = '';
+  resetSearch:string = '';
   breadcrumbItems: MenuItem[] = [
     { label: 'label.DBRT04.ProgramName', routerLink: '/db/dbrt04' },
     { label: 'label.DBRT04.District',routerLink: '/db/dbrt04/dbrt04-district'},
@@ -35,8 +35,8 @@ export class Dbrt04SubdistrictsComponent {
     private ms: NotifyService
   ) {
     this.createForm();
-    this.activatedRoute.data.subscribe(({ master, subdistricts }) => {
-      this.master = master;
+    this.activatedRoute.data.subscribe(({ dbrt04master, subdistricts }) => {
+      this.master = dbrt04master;
       this.provinceCode = subdistricts.provinceCode
       this.districtCode = subdistricts.districtCode
 

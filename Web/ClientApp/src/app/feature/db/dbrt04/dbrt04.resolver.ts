@@ -14,8 +14,7 @@ export const dbrt04Detail: ResolveFn<Province> = () => {
 }
 
 export const districts : ResolveFn<any> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  const { provinceCode } = inject(Router).getCurrentNavigation()?.extras.state as { provinceCode: Guid } || { provinceCode: null }
-  const { districtCode } = inject(Router).getCurrentNavigation()?.extras.state as { districtCode: Guid } || { districtCode: null }
+  const { provinceCode, districtCode } = inject(Router).getCurrentNavigation()?.extras.state as { provinceCode: Guid, districtCode: Guid } || { provinceCode: null, districtCode: null }
   if(!provinceCode) return null;
   return forkJoin(of(provinceCode), of(districtCode) , inject(Dbrt04Service).listDistrict('' , provinceCode) ).pipe(map((res:any) => {
     let provinceCode = res[0];
@@ -26,8 +25,7 @@ export const districts : ResolveFn<any> = (route: ActivatedRouteSnapshot, state:
 }
 
 export const dbrt04DistrictDetail: ResolveFn<any> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  const { districtCode } = inject(Router).getCurrentNavigation()?.extras.state as { districtCode: Guid } || { districtCode: null }
-  const { provinceCode } = inject(Router).getCurrentNavigation()?.extras.state as { provinceCode: Guid } || { provinceCode: null }
+  const { districtCode , provinceCode } = inject(Router).getCurrentNavigation()?.extras.state as { districtCode: Guid ,provinceCode: Guid} || { districtCode: null , provinceCode: null}
   if (!districtCode && provinceCode)
   return forkJoin(of(provinceCode), inject(Dbrt04Service).master(provinceCode)).pipe(map((res:any) => {
     let provinceCode = res[0];
@@ -38,8 +36,7 @@ export const dbrt04DistrictDetail: ResolveFn<any> = (route: ActivatedRouteSnapsh
 }
 
 export const subdistricts : ResolveFn<any> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  const { districtCode } = inject(Router).getCurrentNavigation()?.extras.state as { districtCode: Guid } || { districtCode: null }
-  const { provinceCode } = inject(Router).getCurrentNavigation()?.extras.state as { provinceCode: Guid } || { provinceCode: null }
+  const { districtCode , provinceCode } = inject(Router).getCurrentNavigation()?.extras.state as { districtCode: Guid ,provinceCode: Guid} || { districtCode: null , provinceCode: null}
   if(!districtCode) return null;
   return forkJoin(of(districtCode),of(provinceCode) , inject(Dbrt04Service).listSubdistrict('' , districtCode,provinceCode)).pipe(map((res:any) => {
     let districtCode = res[0];
@@ -50,9 +47,7 @@ export const subdistricts : ResolveFn<any> = (route: ActivatedRouteSnapshot, sta
 }
 
 export const dbrt04SubdistrictDetail : ResolveFn<any> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  const { districtCode } = inject(Router).getCurrentNavigation()?.extras.state as { districtCode: Guid } || { districtCode: null }
-  const { provinceCode } = inject(Router).getCurrentNavigation()?.extras.state as { provinceCode: Guid } || { provinceCode: null }
-  const { subdistrictCode } = inject(Router).getCurrentNavigation()?.extras.state as { subdistrictCode: Guid } || { subdistrictCode: null }
+  const { districtCode , provinceCode , subdistrictCode } = inject(Router).getCurrentNavigation()?.extras.state as { districtCode: Guid ,provinceCode: Guid ,subdistrictCode: Guid} || { districtCode: null , provinceCode: null, subdistrictCode: null}
   if (!subdistrictCode && districtCode && provinceCode )
   return forkJoin(of(provinceCode),of(districtCode), inject(Dbrt04Service).master(provinceCode ,districtCode)).pipe(map((res:any) => {
     let provinceCode = res[0];
@@ -62,8 +57,7 @@ export const dbrt04SubdistrictDetail : ResolveFn<any> = (route: ActivatedRouteSn
   return inject(Dbrt04Service).detailSubdistrict(districtCode ,subdistrictCode)
 }
 
-export const master: ResolveFn<Master> = ()  => {
-  const { provinceCode } = inject(Router).getCurrentNavigation()?.extras.state as { provinceCode: Guid } || { provinceCode: null }
-  const { districtCode } = inject(Router).getCurrentNavigation()?.extras.state as { districtCode: Guid } || { districtCode: null }
+export const dbrt04master: ResolveFn<Master> = ()  => {
+  const { provinceCode, districtCode } = inject(Router).getCurrentNavigation()?.extras.state as { provinceCode: Guid, districtCode: Guid } || { provinceCode: null, districtCode: null }
   return inject(Dbrt04Service).master(provinceCode, districtCode);
 }

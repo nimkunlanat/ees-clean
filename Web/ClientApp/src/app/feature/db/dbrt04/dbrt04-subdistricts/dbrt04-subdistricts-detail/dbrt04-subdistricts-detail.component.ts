@@ -31,13 +31,10 @@ constructor(
   private route: ActivatedRoute,
   private ms: NotifyService,
   private sv: Dbrt04Service,
-  private md: ModalService,
-  private router: Router) {
+  private md: ModalService,) {
   this.createForm()
-  this.route.data.subscribe(({ master , dbrt04SubdistrictDetail }) => {
-    this.master = master;
-    console.log('sub',dbrt04SubdistrictDetail);
-
+  this.route.data.subscribe(({ dbrt04master , dbrt04SubdistrictDetail }) => {
+    this.master = dbrt04master;
     this.provinceCode = dbrt04SubdistrictDetail.provinceCode
     this.districtCode = dbrt04SubdistrictDetail.districtCode
     this.breadcrumbItems.map(m => {

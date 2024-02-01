@@ -11,7 +11,7 @@ public class Employee : EntityBase
     public string EmployeeSurnameEn { get; set; }
     public string PositionCode { get; set; }
     public Guid? TeamCode { get; set; }
-    public bool? Gender { get; set; }
+    public string Gender { get; set; }
     public DateTime? DateOfBirth { get; set; }
     public string Nationality { get; set; }
     public string Religion  { get; set; }

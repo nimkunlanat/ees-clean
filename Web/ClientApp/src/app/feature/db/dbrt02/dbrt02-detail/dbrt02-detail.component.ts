@@ -32,10 +32,10 @@ export class Dbrt02DetailComponent {
     private route: ActivatedRoute,
     private sv: Dbrt02Service) {
     this.createForm()
-    this.route.data.subscribe(({ dbrt02Detail, master }) => {
+    this.route.data.subscribe(({ dbrt02Detail, dbrt02master }) => {
       this.data = dbrt02Detail
       this.form.patchValue(dbrt02Detail)
-      this.master = master
+      this.master = dbrt02master
       this.rebuildData()
     })
   }
@@ -87,7 +87,7 @@ export class Dbrt02DetailComponent {
     }
     else {
       const data = this.form.getRawValue();
-      
+
       this.sv.save(data).pipe(
         switchMap((res: any) => this.sv.detail(res.employeeCode))
       ).subscribe(res => {

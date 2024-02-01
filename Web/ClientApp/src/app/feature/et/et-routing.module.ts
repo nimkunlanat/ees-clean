@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Etrt05Component } from './etrt05/etrt05.component';
-import { etrt05Resolver } from './etrt05/etrt05.resolver';
+import { Etdt01Component } from './etdt01/etdt01.component';
+import { Etdt01SkillComponent } from './etdt01/etdt01-skill/etdt01-skill.component';
+import { etdt01Resolver, etdt01SkillResolver} from './etdt01/etdt01.resolver';
 
 const routes: Routes = [
-  { path: 'dbrt01', component: Etrt05Component, title: 'Status', resolve: { etrt05Resolver }, data: { code: 'etert05' } },
+  { path: 'etdt01', component: Etdt01Component, title: 'AssessmentForm', resolve : {etdt01Resolver} , data : { code : 'etdt01'}},
+  { path: 'etdt01/etdt01-skill', component: Etdt01SkillComponent, title: 'SkillForm', resolve : {etdt01SkillResolver} , data : { code : 'etdt01'}}
 ];
 
 @NgModule({
