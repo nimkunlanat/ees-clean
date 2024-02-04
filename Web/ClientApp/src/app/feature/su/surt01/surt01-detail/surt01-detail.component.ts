@@ -14,9 +14,6 @@ import { ModalService } from '@app/shared/components/modal/modal.service';
   selector: 'x-surt01-detail',
   templateUrl: './surt01-detail.component.html',
   styles: `
-  ::ng-deep .p-tabview-panels {
-    padding: 0 !important;
-  }
   ::ng-deep .p-fieldset-content {
     max-width: 80vw
   }

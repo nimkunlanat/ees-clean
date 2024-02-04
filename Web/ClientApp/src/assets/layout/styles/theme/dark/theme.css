@@ -3396,7 +3396,7 @@
   .p-datatable .p-datatable-thead>tr>th:first-child {
     border-top-left-radius: 6px;
   }
-  
+
   .p-datatable .p-datatable-thead>tr>th:last-child {
     border-top-right-radius: 6px;
   }
@@ -4682,7 +4682,7 @@
 
   .p-accordion .p-accordion-header .p-accordion-header-link {
     padding: 1.25rem;
-    border: 1px solid #424b57;
+    border: 1px dashed #424b57;
     color: rgba(255, 255, 255, 0.87);
     background: #202329;
     font-weight: 700;
@@ -4722,7 +4722,7 @@
 
   .p-accordion .p-accordion-content {
     padding: 1.25rem;
-    border: 1px solid #424b57;
+    border: 1px dashed #424b57;
     background: #202329;
     color: rgba(255, 255, 255, 0.87);
     border-top: 0;
@@ -4734,6 +4734,14 @@
 
   .p-accordion p-accordiontab .p-accordion-tab {
     margin-bottom: 4px;
+  }
+
+  .p-accordion .p-accordion-tab-active {
+
+    .p-accordion-header .p-accordion-header-link,
+    .p-accordion-content {
+      animation: rerender 1s ease-in-out 1;
+    }
   }
 
   .p-card {
@@ -4798,7 +4806,7 @@
   }
 
   .p-fieldset {
-    border: 1px solid #424b57;
+    border: 1px dashed #424b57;
     background: #202329;
     color: rgba(255, 255, 255, 0.87);
     border-radius: 6px;
@@ -4806,7 +4814,7 @@
 
   .p-fieldset .p-fieldset-legend {
     padding: 1.25rem;
-    border: 1px solid #424b57;
+    border: 1px dashed #424b57;
     color: rgba(255, 255, 255, 0.87);
     background: #202329;
     font-weight: 700;
@@ -4845,8 +4853,17 @@
     padding: 1.25rem;
   }
 
+  .p-fieldset.p-fieldset-toggleable.p-fieldset-expanded,
+  .p-fieldset:not(.p-fieldset-toggleable) {
+    animation: rerender 1s ease-in-out 1;
+
+    .p-fieldset-legend {
+      animation: rerender 1s ease-in-out 1;
+    }
+  }
+
   .p-panel .p-panel-header {
-    border: 1px solid #424b57;
+    border: 1px dashed #424b57;
     padding: 1.25rem;
     background: #202329;
     color: rgba(255, 255, 255, 0.87);
@@ -4886,7 +4903,7 @@
 
   .p-panel .p-panel-content {
     padding: 1.25rem;
-    border: 1px solid #424b57;
+    border: 1px dashed #424b57;
     background: #202329;
     color: rgba(255, 255, 255, 0.87);
     border-top: 0 none;
@@ -4899,7 +4916,7 @@
 
   .p-panel .p-panel-footer {
     padding: 0.75rem 1.25rem;
-    border: 1px solid #424b57;
+    border: 1px dashed #424b57;
     background: #202329;
     color: rgba(255, 255, 255, 0.87);
     border-bottom-right-radius: 6px;
@@ -4921,6 +4938,15 @@
     order: 2;
     width: 100%;
     text-align: center;
+  }
+
+  .p-panel.p-panel-toggleable.p-panel-expanded,
+  .p-panel:not(.p-panel-toggleable) {
+
+    .p-panel-header,
+    .p-panel-content {
+      animation: rerender 1s ease-in-out 1;
+    }
   }
 
   .p-scrollpanel .p-scrollpanel-bar {
@@ -4946,6 +4972,11 @@
 
   .p-splitter .p-splitter-gutter-resizing {
     background: #424b57;
+  }
+
+  .p-tabview {
+    border: 1px dashed #424b57;
+    border-radius: 6px;
   }
 
   .p-tabview .p-tabview-nav-content {
@@ -5027,6 +5058,10 @@
     color: rgba(255, 255, 255, 0.87);
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
+  }
+
+  .p-tabview-active {
+    animation: rerender 1s ease-in-out 1;
   }
 
   .p-toolbar {
@@ -7486,5 +7521,15 @@
     padding: 1rem;
     line-height: 1.5;
     display: block;
+  }
+}
+
+@keyframes rerender {
+  0% {
+    border-color: var(--primary-color)
+  }
+
+  40% {
+    border-color: var(--primary-color)
   }
 }

@@ -25,9 +25,8 @@
     </div>
     <div class="col-12">
         <p-fieldset [legend]="'label.SURT01.ProgramDetail' | translate" [toggleable]="true">
-            <p-tabView>
-                @for (item of master.lang; track $index) {
-                <p-tabPanel [header]="item.label">
+            <tab [items]="master.lang">
+                <ng-template pTemplate="content" let-item="item">
                     <div class="py-4 flex flex-wrap justify-content-end gap-3 flex-column md:flex-row md:p-fluid">
                         <button icon="pi pi-copy" [class.hidden]="!program.programCode"
                             [label]="'label.ALL.Copy' | translate" (click)="copy(item.value)"></button>
@@ -56,9 +55,8 @@
                             </tr>
                         </ng-template>
                     </datatable>
-                </p-tabPanel>
-                }
-            </p-tabView>
+                </ng-template>
+            </tab>
         </p-fieldset>
     </div>
 </div>
