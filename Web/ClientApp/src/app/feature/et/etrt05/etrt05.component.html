@@ -9,14 +9,13 @@
                 <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['detail']"></button>
             </div>
 
-            <datatable [rows]="evaluations">
+            <datatable [rows]="evaluationGroups">
                 <ng-template pTemplate="header">
                     <tr>
                         <th class="text-center">{{ 'label.ETRT05.EvaluationGroupCode' | translate}} </th>
-                        <th class="text-center">{{ 'label.ETRT05.EvaluationCode' | translate }} </th>
                         <th class="text-center">{{ 'label.ETRT05.EvaluationDescTh' | translate }} </th>
                         <th class="text-center">{{ 'label.ETRT05.EvaluationDescEn' | translate }} </th>
-                        <th class="text-center">{{ 'label.ETRT05.Point' | translate }} </th>
+                        <th class="text-center">{{ 'label.ETRT05.TotalPoint' | translate }} </th>
                         <th class="text-center">{{ 'label.ALL.Active' | translate }}</th>
                         <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
                     </tr>
@@ -28,17 +27,16 @@
                                 {{row.evaluateGroupCode}}
                             </a>
                         </td>
-                        <td class="text-center">{{row.evaluateCode}}</td>
-                        <td class="text-center">{{row.evaluateDetailNameTh}}</td>
-                        <td class="text-center">{{row.evaluateDetailNameEn}}</td>
-                        <td class="text-center">{{row.point}}</td>
+                        <td class="text-center">{{row.evaluateGroupNameTh}}</td>
+                        <td class="text-center">{{row.evaluateGroupNameEn}}</td>
+                        <td class="text-center">{{row.totalPoint}}</td>
                         <td class="text-center text-green-600 w-1">
                             @if(row.active){
                             <i class="pi pi-check"></i>
                             }
                         </td>
                         <td class="text-center w-1">
-                            <button icon="pi pi-trash"></button>
+                            <button icon="pi pi-trash" (click)="delete(row.evaluateGroupCode)"></button>
                         </td>
                     </tr>
                 </ng-template>

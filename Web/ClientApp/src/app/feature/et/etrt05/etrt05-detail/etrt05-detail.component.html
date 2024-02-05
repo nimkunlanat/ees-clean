@@ -1,0 +1,28 @@
+<div class="grid">
+    <div class="col-12 flex flex-wrap gap-3 justify-content-between flex-column lg:flex-row lg:p-fluid">
+        <breadcrumb [items]="breadcrumbItems"></breadcrumb>
+        <button [label]="'label.ALL.Save' | translate" icon="pi pi-save" (click)="save()"></button>
+    </div>
+    <div class="col-12">
+        <p-fieldset [legend]="'label.ETRT05.Detail' | translate" [toggleable]="true">
+            <div class="grid p-fluid" [formGroup]="form">
+                <div class="col-12 lg:col-3">
+                    <textbox formControlName="evaluateGroupCode">{{ 'label.ETRT05.EvaluationGroupCode' | translate}}</textbox>
+                </div>
+                <div class="col-12 lg:col-3">
+                    <textbox formControlName="evaluateGroupNameTh">{{ 'label.ETRT05.EvaluationDescTh' | translate }}</textbox>
+                </div>
+                <div class="col-12 lg:col-3">
+                    <textbox formControlName="evaluateGroupNameEn">{{ 'label.ETRT05.EvaluationDescEn' | translate }}</textbox>
+                </div>
+                <div class="col-12 lg:col-3">
+                    <textbox formControlName="totalPoint">{{ 'label.ETRT05.TotalPoint' | translate }}</textbox>
+                </div>
+                <div class="col-12 lg:col-3 align-items-center flex flex-wrap">
+                    <checkbox formControlName="active" style="height: 20%;" [label]="'label.ALL.Active' | translate">
+                    </checkbox>
+                </div>
+            </div>
+        </p-fieldset>
+    </div>
+</div>
