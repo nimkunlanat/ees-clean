@@ -6,6 +6,6 @@ namespace Persistense;
 
 public partial class CleanDbContext : DbContext, ICleanDbContext
 {
-    public DbSet<EvaluateGroup> EvaluationGroup { get; set; }
+    public DbSet<EvaluateGroup> EvaluationGroups { get; set; }
     public DbSet<EvaluateDetail> EvaluateDetails { get; set; }
 }

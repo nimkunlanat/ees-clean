@@ -6,23 +6,78 @@
     <div class="col-12">
         <p-fieldset [legend]="'label.ETRT05.Detail' | translate" [toggleable]="true">
             <div class="grid p-fluid" [formGroup]="form">
-                <div class="col-12 lg:col-3">
-                    <textbox formControlName="evaluateGroupCode">{{ 'label.ETRT05.EvaluationGroupCode' | translate}}</textbox>
+                <div class="col-12 lg:col-1">
+                    <textbox formControlName="sequeneId">{{ 'label.ETRT05.SequeneId' | translate }}
+                    </textbox>
                 </div>
                 <div class="col-12 lg:col-3">
-                    <textbox formControlName="evaluateGroupNameTh">{{ 'label.ETRT05.EvaluationDescTh' | translate }}</textbox>
+                    <textbox formControlName="evaluateGroupCode">{{ 'label.ETRT05.EvaluationGroupCode' | translate}}
+                    </textbox>
                 </div>
                 <div class="col-12 lg:col-3">
-                    <textbox formControlName="evaluateGroupNameEn">{{ 'label.ETRT05.EvaluationDescEn' | translate }}</textbox>
+                    <textbox formControlName="evaluateGroupNameTh">{{ 'label.ETRT05.EvaluationDescTh' | translate }}
+                    </textbox>
                 </div>
                 <div class="col-12 lg:col-3">
-                    <textbox formControlName="totalPoint">{{ 'label.ETRT05.TotalPoint' | translate }}</textbox>
+                    <textbox formControlName="evaluateGroupNameEn">{{ 'label.ETRT05.EvaluationDescEn' | translate }}
+                    </textbox>
+                </div>
+                <div class="col-12 lg:col-2">
+                    <number [min]="0" [max]="100" formControlName="totalPoint">{{ 'label.ETRT05.TotalPoint' | translate }}</number>
                 </div>
                 <div class="col-12 lg:col-3 align-items-center flex flex-wrap">
                     <checkbox formControlName="active" style="height: 20%;" [label]="'label.ALL.Active' | translate">
                     </checkbox>
                 </div>
             </div>
+        </p-fieldset>
+    </div>
+
+    <div class="col-12">
+        <p-fieldset [legend]="'label.ETRT05.EvaluationDetail' | translate" [toggleable]="true">
+            <div class="py-4 flex flex-wrap justify-content-end gap-3 flex-column md:flex-row md:p-fluid">
+                <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" (click)="add()"></button>
+            </div>
+            <datatable [rows]="evaluationGroup.evaluateDetails">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th prop="sequeneId" class="text-center">{{ 'label.ETRT05.SequeneId' | translate }} </th>
+                        <th prop="evaluateDetailCode" class="text-center">{{ 'label.ETRT05.EvaluateDetailCode' | translate }} </th>
+                        <th prop="evaluateDetailNameTh" class="text-center">{{ 'label.ETRT05.EvaluateDescTh' | translate }} </th>
+                        <th prop="evaluateDetailNameEn" class="text-center">{{ 'label.ETRT05.EvaluateDescEn' | translate}} </th>
+                        <th prop="point" class="text-center">{{ 'label.ETRT05.Point' | translate }} </th>
+                        <th class="text-center">{{ 'label.ETRT05.Active' | translate }} </th>
+                        <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                        <td [formGroup]="row.form">
+                            <textbox formControlName="sequeneId" [hasLabel]="false"></textbox>
+                        </td>
+                        <td [formGroup]="row.form">
+                            <textbox formControlName="evaluateDetailCode" [hasLabel]="false"></textbox>
+                        </td>
+                        <td [formGroup]="row.form">
+                            <textbox formControlName="evaluateDetailNameTh" [hasLabel]="false"></textbox>
+                        </td>
+                        <td [formGroup]="row.form">
+                            <textbox formControlName="evaluateDetailNameEn" [hasLabel]="false"></textbox>
+                        </td>
+                        <td [formGroup]="row.form">
+                            <number [min]="0" [max]="100" formControlName="point" [hasLabel]="false"></number>
+                        </td>
+                        <td [formGroup]="row.form">
+                            <div class="flex justify-content-center">
+                                <checkbox  formControlName="active" [hasLabel]="false" ></checkbox>
+                            </div>
+                        </td>
+                        <td class="text-center w-10rem">
+                            <button icon="pi pi-trash" (click)="remove(row)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </datatable>
         </p-fieldset>
     </div>
 </div>

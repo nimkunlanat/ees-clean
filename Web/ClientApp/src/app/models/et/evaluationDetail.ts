@@ -1,6 +1,6 @@
 import { EntityBase } from "../entityBase";
 
-export class EvaluationDetail extends EntityBase{
+export class EvaluateDetail extends EntityBase{
     evaluateGroupCode: string
     evaluateDetailCode: string
     evaluateDetailNameTh: string

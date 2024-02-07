@@ -35,12 +35,13 @@ public class List
                                     , eg.evaluate_group_name_en ""evaluateGroupNameEn""
                                     , eg.total_point ""totalPoint""
                                     , eg.active ""active""
+                                    , eg.sequene_id ""sequeneId""
                                     , eg.xmin ""rowVersion""
                                     from et.evaluate_group eg");
 
             
             
-           if (request.Keywords != null) sql.AppendLine(@"where concat(eg.evaluate_group_code, eg.evaluate_group_name_th, eg.evaluate_group_name_en, eg.total_point) ilike concat('%',@Keywords,'%')");
+            if (request.Keywords != null) sql.AppendLine(@"where concat(eg.evaluate_group_code, eg.evaluate_group_name_th, eg.evaluate_group_name_en, eg.total_point) ilike concat('%',@Keywords,'%')");
 
             sql.AppendLine("order by eg.sequene_id");
 
