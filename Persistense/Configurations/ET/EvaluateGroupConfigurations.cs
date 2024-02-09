@@ -10,6 +10,6 @@ public class EvaluateGroupConfigurations : BaseConfiguration<EvaluateGroup>
         base.Configure(builder);
         builder.ToTable("evaluate_group", "et");
         builder.HasKey(e => e.EvaluateGroupCode);
-        builder.HasMany(e => e.EvaluationDetails).WithOne().HasForeignKey(o => o.EvaluateDetailCode);
+        builder.HasMany(e => e.EvaluateDetails).WithOne().HasForeignKey(o => o.EvaluateGroupCode).OnDelete(DeleteBehavior.Cascade);
     }
 }

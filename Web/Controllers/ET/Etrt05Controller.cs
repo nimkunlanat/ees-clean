@@ -15,5 +15,9 @@ public class Etrt05Controller : BaseController
 
     [HttpGet("detail")]
     public async Task<ActionResult> Detail([FromQuery] Detail.Query query) => Ok(await Mediator.Send(query));
+
+    [HttpPost("update")]
+    public async Task<ActionResult> Post([FromBody] Save.Command command) => Ok(await Mediator.Send(command));
+
 }
 

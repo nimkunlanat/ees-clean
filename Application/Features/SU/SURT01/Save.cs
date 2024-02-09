@@ -63,7 +63,7 @@ public class Save
         {
             List<ProgramLabel> suProgramLabels = program.ProgramLabels.Where(w => w.RowState == RowState.Add).ToList();
 
-            if (_context.Set<Program>().Any(a => program.RowState == RowState.Add && a.ProgramCode == program.ProgramCode)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00004", program.ProgramCode);
+            if (_context.Set<Program>().Any(a => program.RowState == RowState.Add && a.ProgramCode == program.ProgramCode)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00018", program.ProgramCode);
             else if (_context.Set<ProgramLabel>().Any(a => suProgramLabels.Select(s => s.FieldName).Contains(a.FieldName) && a.ProgramCode == program.ProgramCode && suProgramLabels.Select(s => s.LanguageCode).Contains(a.LanguageCode))) throw new RestException(HttpStatusCode.BadRequest, "message.STD00045");
         }
     }

@@ -1,18 +1,18 @@
 import { EntityBase } from "../entityBase";
-import { EvaluationDetail } from "./evaluationDetail";
+import { EvaluateDetail } from "./evaluationDetail";
 
 export class EvaluationGroup extends EntityBase {
     evaluateGroupCode: string;
     evaluateGroupNameTh: string;
     evaluateGroupNameEn: string;
-    squeneId: number;
+    sequeneId: number;
     totalPoint: number;
     lanuageCode: string;
     active: boolean;
-    evaluateDetailCodes:  EvaluationDetail[]
+    evaluateDetails:  EvaluateDetail[]
 
     constructor() {
         super();
-        this.evaluateDetailCodes = []
+        this.evaluateDetails = []
     }
 }

@@ -12,6 +12,7 @@
             <datatable [rows]="evaluationGroups">
                 <ng-template pTemplate="header">
                     <tr>
+                        <th class="text-center">{{ 'label.ETRT05.SequeneId' | translate }} </th>
                         <th class="text-center">{{ 'label.ETRT05.EvaluationGroupCode' | translate}} </th>
                         <th class="text-center">{{ 'label.ETRT05.EvaluationDescTh' | translate }} </th>
                         <th class="text-center">{{ 'label.ETRT05.EvaluationDescEn' | translate }} </th>
@@ -22,6 +23,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-row>
                     <tr>
+                        <td class="text-center">{{row.sequeneId}}</td>
                         <td class="text-center">
                             <a [routerLink]="['detail']" [state]="{ evaluateGroupCode: row.evaluateGroupCode }">
                                 {{row.evaluateGroupCode}}

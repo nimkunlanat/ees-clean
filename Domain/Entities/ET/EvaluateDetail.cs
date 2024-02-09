@@ -8,6 +8,5 @@ public class EvaluateDetail : EntityBase
     public string EvaluateDetailNameEn { get; set; }
     public int SequeneId { get; set; }
     public int Point { get; set; }
-    public bool  Active { get; set; }
-    public string LanuageCode { get; set; }
+    public bool? Active { get; set; }
 }

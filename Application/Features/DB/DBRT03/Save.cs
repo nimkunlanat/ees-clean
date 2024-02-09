@@ -57,7 +57,7 @@ public class Save
         }
         private void Validate(Position position)
         {
-            if (_context.Set<Position>().Any(a => position.RowState == RowState.Add && a.PositionCode == position.PositionCode)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00004", position.PositionCode);
+            if (_context.Set<Position>().Any(a => position.RowState == RowState.Add && a.PositionCode.ToUpper() == position.PositionCode.ToUpper())) throw new RestException(HttpStatusCode.BadRequest, "message.STD00018", position.PositionCode);
         }
     }
 }

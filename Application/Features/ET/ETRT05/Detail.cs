@@ -22,11 +22,12 @@ public class Detail
             StringBuilder sql = new StringBuilder();
             EvaluateGroup evaluationGroup = new();
 
-            sql.AppendLine(@"select eg.evaluate_group_code ""evaluateGroupCode""
+             sql.AppendLine(@"select eg.evaluate_group_code ""evaluateGroupCode""
                                     , eg.evaluate_group_name_th ""evaluateGroupNameTh""
                                     , eg.evaluate_group_name_en ""evaluateGroupNameEn""
                                     , eg.total_point ""totalPoint""
                                     , eg.active ""active""
+                                    , eg.sequene_id ""sequeneId""
                                     , eg.xmin ""rowVersion""
                                     from et.evaluate_group eg
                                     where eg.evaluate_group_code = @evaluateGroupCode");
@@ -40,12 +41,15 @@ public class Detail
                                         , ed.evaluate_detail_code ""evaluateDetailCode""
                                         , ed.evaluate_detail_name_th ""evaluateDetailNameTh""
                                         , ed.evaluate_detail_name_en ""evaluateDetailNameEn""
+                                        , ed.point ""Point""
+                                        , ed.sequene_id ""sequeneId""
                                         , ed.active ""active""
-                                        from evaluate_detail ed 
-                                        order by evaluate_detail_code asc
-                                        where ed.evaluate_group_code = @evaluateGroupCode ");
+                                        , ed.xmin ""rowVersion""
+                                        from et.evaluate_detail ed 
+                                        where ed.evaluate_group_code = @evaluateGroupCode
+                                        order by evaluate_detail_code asc");
 
-                evaluationGroup.EvaluationDetails = await _context.QueryAsync<EvaluateDetail>(sql.ToString(), new { evaluateGroupCode = request.EvaluateGroupCode }, cancellationToken) as List<EvaluateDetail>;
+                evaluationGroup.EvaluateDetails = await _context.QueryAsync<EvaluateDetail>(sql.ToString(), new { evaluateGroupCode = request.EvaluateGroupCode }, cancellationToken) as List<EvaluateDetail>;
             }
 
             return evaluationGroup;
