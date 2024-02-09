@@ -1,37 +1,36 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotifyService } from '@app/core/services/notify.service';
-import { Evaluation } from '@app/models/et/evaluation';
 import { ModalService } from '@app/shared/components/modal/modal.service';
 import { Etrt05Service } from './etrt05.service';
 import { filter, switchMap } from 'rxjs';
+import { EvaluationGroup } from '@app/models/et/evaluationGroup';
 
 @Component({
   selector: 'x-etrt05',
-  templateUrl: './etrt05.component.html',
-  styleUrl: './etrt05.component.scss'
+  templateUrl: './etrt05.component.html'
 })
 
 export class Etrt05Component {
 
-  evaluations: Evaluation[] = []
+  evaluationGroups: EvaluationGroup[] = []
 
   constructor(
     private sv: Etrt05Service,
     private md: ModalService,
     private ms: NotifyService,
     private activatedRoute: ActivatedRoute,) {
-    this.activatedRoute.data.subscribe(({ evaluations }) => {
-      this.evaluations = evaluations
+    this.activatedRoute.data.subscribe(({ etrt05Resolver }) => {
+      this.evaluationGroups = etrt05Resolver
     })
   }
   search(value?: string) {
-    this.sv.list(value).subscribe((evaluations: Evaluation[]) => this.evaluations = evaluations)
+    this.sv.list(value).subscribe((etrt05Resolver: EvaluationGroup[]) => {this.evaluationGroups = etrt05Resolver})
   }
-  delete(employeeCode: string) {
+  delete(evaluateGroupCode: string) {
     this.md.confirm('message.STD00015').pipe(
       filter(confirm => confirm),
-      switchMap(() => this.sv.delete(employeeCode)))
+      switchMap(() => this.sv.delete(evaluateGroupCode)))
       .subscribe((res: any) => {
         this.search()
         this.ms.success('message.STD00016');
