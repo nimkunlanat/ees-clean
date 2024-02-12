@@ -45,8 +45,6 @@ export class LayoutService {
 
     overlayOpen$ = this.overlayOpen.asObservable();
 
-    isDarkColor: boolean = false
-
     constructor(private http: HttpClient) {
         effect(() => {
             const config = this.config();
@@ -203,7 +201,6 @@ export class LayoutService {
 
         const color = getNewColors(this.config().color);
         const root = document.documentElement;
-        this.isDarkColor = color["primaryColorText"] == "#FFFFFF"
 
         root.style.setProperty('--primary-color', color["primaryColor"]);
         root.style.setProperty('--primary-500', color["primaryColor"])
