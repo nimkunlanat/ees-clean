@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Persistense;
 
-    public partial class CleanDbContext : DbContext, ICleanDbContext
-    {
-        public DbSet<DocumentApproved> DocumentApproveds { get; set; }
-    }
-
+public partial class CleanDbContext : DbContext, ICleanDbContext
+{
+    public DbSet<EvaluateGroup> EvaluationGroups { get; set; }
+    public DbSet<EvaluateDetail> EvaluateDetails { get; set; }
+}

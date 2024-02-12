@@ -59,8 +59,8 @@ export class Dbrt03DetailComponent {
   createForm() {
     this.form = this.fb.group({
       positionCode: [null, [Validators.required, Validators.pattern(/^[a-zA-Z]+$/), Validators.maxLength(200)]],
-      positionNameTh: [null, [Validators.required, Validators.pattern(/^[ก-๙0-9#$^+=!*(){}\[\]@%& ]+$/), Validators.maxLength(200)]],
-      positionNameEn: [null, [Validators.required, Validators.pattern(/^[a-zA-Z]+$/), Validators.maxLength(200)]],
+      positionNameTh: [null, [Validators.required, Validators.pattern(/^[ก-๙0-9#$^+=!*(){}\[\]@%&]/), Validators.maxLength(200)]],
+      positionNameEn: [null, [Validators.required, Validators.pattern(/^[a-zA-Z]/), Validators.maxLength(200)]],
       description: null,
       rowState: null,
       rowVersion: null,

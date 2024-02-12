@@ -8,6 +8,9 @@ import { SharedModule } from '@app/shared/shared.module';
 import { Etdt01Component } from './etdt01/etdt01.component';
 import { Etdt01SkillComponent } from './etdt01/etdt01-skill/etdt01-skill.component';
 import { Etdt02DocumentComponent } from './etdt02/etdt02-document/etdt02-document.component';
+import { Etrt05DetailComponent } from './etrt05/etrt05-detail/etrt05-detail.component';
+import { Etrt06Component } from './etrt06/etrt06.component';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +19,8 @@ import { Etdt02DocumentComponent } from './etdt02/etdt02-document/etdt02-documen
     Etdt02Component,
     Etdt01SkillComponent,
     Etdt02DocumentComponent,
-    
+    Etrt05DetailComponent,
+    Etrt06Component
   ],
   imports: [
     CommonModule,

@@ -29,6 +29,7 @@ public class Detail
                                 from db.""position"" p 
                                 where p.position_code = @PositionCode");
 
+            
             return await _context.QueryFirstOrDefaultAsync<Position>(sql.ToString(), new { PositionCode = request.PositionCode }, cancellationToken);
         }
     }
