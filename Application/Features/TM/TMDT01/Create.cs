@@ -32,17 +32,32 @@ namespace Application.Features.TM.TMDT01
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
                 List<MemberHierarchy> users = _context.Set<MemberHierarchy>().ToList();
+                List<MemberHierarchy> addHeadUsers = new List<MemberHierarchy>();
+
+                foreach (var findHeadUser in request)
+                {
+                    if(users.Find(f => f.UserId == findHeadUser.HeadUser) != null) {
+                        addHeadUsers.AddRange(users.Where(w => w.UserId == findHeadUser.HeadUser));
+                    }
+                }
+
                 _context.Set<MemberHierarchy>().RemoveRange(users);
                 await _context.SaveChangesAsync(cancellationToken);
 
                 List<MemberHierarchy> addUsers = new List<MemberHierarchy>();
 
+                if (addHeadUsers.Count > 0) {
+                    var addHeadUsersDistinct = addHeadUsers.Distinct();
+                    request.AddRange(addHeadUsersDistinct);
+                }
                 foreach (MemberHierarchy user in request)
                 {
                     user.RowState = RowState.Add;
                     addUsers.Add(user);
                 }
 
+                var removeDup = addUsers.GroupBy(x => x.UserId).Select(x => x.First()).ToList();
+                addUsers = removeDup;
                 _context.Set<MemberHierarchy>().AddRange(addUsers);
 
                 await _context.SaveChangesAsync(cancellationToken);
