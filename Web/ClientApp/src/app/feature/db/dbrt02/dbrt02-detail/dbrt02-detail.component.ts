@@ -42,7 +42,7 @@ export class Dbrt02DetailComponent {
 
   createForm() {
     this.form = this.fb.group({
-      employeeCode: [null, [Validators.required, Validators.pattern(/^[a-zA-Z]+$/), Validators.maxLength(10)]],
+      employeeCode: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/), Validators.maxLength(10)]],
       positionCode: [null, Validators.required],
       phoneNumber: [null, [Validators.pattern(/^[0-9]+$/), Validators.maxLength(10)]],
       email: [null, [Validators.email, Validators.maxLength(200)]],

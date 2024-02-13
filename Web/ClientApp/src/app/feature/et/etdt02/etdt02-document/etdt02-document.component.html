@@ -1,0 +1,37 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>{{ 'label.ETDT02.ProgramName' | translate }}</h5>
+            <div class="flex flex-wrap py-4 justify-content-between gap-3 flex-column lg:flex-row lg:p-fluid">
+                <textbox [placeholder]="'label.ALL.Search' | translate" icon="pi pi-search" [hasLabel]="false"
+                    (onInput)="search($event)" class="w-full lg:w-6">
+                </textbox>
+            </div>
+            <datatable [rows]="Approves">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="text-center">{{ 'label.ETDT02.DocumentDate' | translate }}</th>
+                        <th class="text-center">{{ 'label.ETDT02.EmployeeCode' | translate }} </th>
+                        <th class="text-center">{{ 'label.ETDT02.EmployeeName' | translate }} </th>
+                        <th class="text-center">{{ 'label.ETDT02.EvaloationStatus' | translate }} </th>
+                        <th class="text-center">{{ 'label.ETDT02.CreatedBy' | translate }}</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row>
+                    <tr>
+                      <td class="text-center">
+                      <a [routerLink]="['detail']" [state]="{ documentDate: row.DocumentDate }">
+                        {{row.createdDate}}
+                      </a>
+                      </td>
+                        <td class="text-center">{{row.employeeCode}}</td>
+                        <td class="text-center">{{row.name}}</td>
+                        <td class="text-center">{{row.evaluationStatus}}</td>
+                        <td class="text-center">{{row.approveBy}}</td>
+                    </tr>
+                </ng-template>
+            </datatable>
+        </div>
+    </div> 
+</div>
+  

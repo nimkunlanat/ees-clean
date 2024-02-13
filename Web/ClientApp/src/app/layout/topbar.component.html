@@ -1,7 +1,7 @@
-<div class="layout-topbar" [class.layout-topbar-after-scroll]="scroll > 20">
+<div class="layout-topbar" [class.layout-topbar-after-scroll]="scroll > 20"
+    [class.layout-topbar-light]="layoutService.config().colorScheme == 'light'">
     <a class="layout-topbar-logo" routerLink="">
-        <img src="assets/layout/images/logo-{{layoutService.config().colorScheme}}.png" alt="logo">
-        <span>X-SYSTEM</span>
+        <img src="assets/layout/images/logo.png" alt="logo">
     </a>
 
     <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">

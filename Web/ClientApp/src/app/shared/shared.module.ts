@@ -34,6 +34,8 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { AttachmentComponent } from './components/attachment/attachment.component';
 import { Table } from 'primeng/table';
 import { OrgchartComponent } from './components/orgchart/orgchart.component';
+import { TabComponent } from './components/tab/tab.component';
+import { TabView } from 'primeng/tabview';
 
 const components = [
   TextboxComponent,
@@ -64,7 +66,8 @@ const components = [
   ConfirmComponent,
   BreadcrumbComponent,
   AttachmentComponent,
-  OrgchartComponent
+  OrgchartComponent,
+  TabComponent
 ]
 
 @NgModule({
@@ -85,7 +88,8 @@ const components = [
   providers: [
     DialogService,
     ModalService,
-    Table
+    Table,
+    TabView 
   ]
 })
 export class SharedModule { }

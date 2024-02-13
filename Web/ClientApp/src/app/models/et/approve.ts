@@ -1,7 +1,11 @@
+import { Guid } from "guid-typescript";
 import { EntityBase } from "../entityBase";
 
 export class Approve extends EntityBase {
-    db_number: string;
-    employee_code: string;
-    active: boolean; 
+    employeeCode: string;
+    evaluationStatus: string;
+    documentNo: Guid; 
+    approveBy: string
+    evaluated?: number;
+    notEvaluated?: number;
 }
