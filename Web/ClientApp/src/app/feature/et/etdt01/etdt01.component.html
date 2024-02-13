@@ -1,49 +1,41 @@
 <div class="grid">
   <div class="col-12">
-    <div class="card">
-      <breadcrumb [items]="breadcrumbItems"></breadcrumb>
-      <div class="grid">
-        <div class="col-10"></div>
-        <div class="col-2 flex justify-content-end align-items-end">
-          <button class="mx-1 border-0" style="background-color: rgb(63, 164, 132);" [label]="'label.ALL.Save' | translate"icon="pi pi-save"></button>
-          <button class="border-0" style="background-color: rgb(220, 100, 80);" [label]="'label.ALL.Edit' | translate"icon="pi pi-pencil"></button>
+      <div class="card">
+        <div class="flex flex-wrap py-4 justify-content-between flex-column lg:flex-row lg:p-fluid">
+          <h1>{{'label.ETDT01.ProgramName' | translate }}</h1>
+          <button icon="pi pi-file" [label]="'label.ETDT01.createform' | translate" (click)="createform()"></button>
         </div>
+          <datatable [rows]="">
+              <ng-template pTemplate="header">
+                  <tr>
+                      <th class="text-center">{{ 'label.ETDT01.DbNumber' | translate}} </th>
+                      <th class="text-center">{{ 'label.ETDT01.CreatedDate' | translate }} </th>
+                      <th class="text-center">{{ 'label.ETDT01.EmployeeCode' | translate }} </th>
+                      <th class="text-center">{{ 'label.ETDT01.EmployeeName' | translate }} </th>
+                      <th class="text-center">{{ 'label.ETDT01.Status' | translate }}</th>
+                      <th class="text-center">{{ 'label.ETDT01.ApproveBy' | translate }}</th>
+                      <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-row>
+                  <tr>
+                    <td class="text-center">
+                    <a [routerLink]="['detail']" [state]="{ DbNumber: row.DbNumber }">
+                      {{row.DbNumber}}
+                    </a>
+                    </td>
+                      <td class="text-center">{{row.DbNumber}}</td>
+                      <td class="text-center">{{row.CreatedDate}}</td>
+                      <td class="text-center">{{row.EmployeeCode}}</td>
+                      <td class="text-center">{{row.EmployeeName}}</td>
+                      <td class="text-center">{{row.Status}}</td>
+                      <td class="text-center">{{row.ApproveBy}}</td>
+                      <!-- <td class="text-center w-1">
+                            <button icon="pi pi-trash" (click)="delete(row.employeeCode)"></button>
+                      </td> -->
+                  </tr>
+              </ng-template>
+          </datatable>
       </div>
-      <br>
-                  <div class="flex">
-                  <div class="card col-8 mr-2" style="background-color: rgb(47, 48, 48)">
-                      <div class = "flex">
-                      <img src="../../../../assets/layout/images/usur.png" width="200" height="200">
-                      <div class = "">
-                        <p>นาย เชาวรินทร์ อนุสรณ์ประเสริฐ</p>
-                        <p>ตำแหน่ง Software Developer Trainee</p>
-                        <p>สังกัด Application-DotNet III</p>
-                        <p>อายุงาน 0 ปี 1 เดือน 16 วัน</p>
-                        </div>
-                      </div>
-                    </div>
-
-                  <div class="card col-4 mb-0" style="background-color: rgb(47, 48, 48)">
-                        <h1>SUMMARY</h1>
-                        <h1>90</h1>
-                        <div class="card" style="background-color: green;">
-                        <h1>A</h1>
-                      </div>
-                  </div>
-                </div>
-
-              <br>
-              <div class="card" style="background-color: rgb(47, 48, 48)">
-                <h1>1.งาน</h1>
-                <hr>
-                <p>1.1 Code</p>
-                <p>1.2 คุณภาพงาน</p>
-              </div>
-              <div class="card" style="background-color: rgb(47, 48, 48)">
-                <h1>2.ความรับผิดชอบ</h1>
-                <hr>
-                <p>2.1 ไว้วางใจได้ว่าสามารถทำงานจนสำเร็จ</p>
-                <p>2.2 ตั้งใจมุ่งมั่นและทันตามกำหนด</p>
-              </div>
   </div>
 </div>

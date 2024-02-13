@@ -7,6 +7,7 @@ import { Etdt02Component } from './etdt02/etdt02.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { Etdt01Component } from './etdt01/etdt01.component';
 import { Etdt01SkillComponent } from './etdt01/etdt01-skill/etdt01-skill.component';
+import { Etdt01AssessmentComponent } from './etdt01/etdt01-assessment/etdt01-assessment.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { Etdt01SkillComponent } from './etdt01/etdt01-skill/etdt01-skill.compone
     Etrt05Component,
     Etdt01Component,
     Etdt02Component,
-    Etdt01SkillComponent
+    Etdt01SkillComponent,
+    Etdt01AssessmentComponent,
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,7 @@ import { Etdt01SkillComponent } from './etdt01/etdt01-skill/etdt01-skill.compone
   ]
 })
 
-export class EtModule { 
+export class EtModule {
   constructor(private lazy: LazyTranslationService) {
     lazy.add('et');
   }
