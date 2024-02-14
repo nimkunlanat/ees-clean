@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotifyService } from '@app/core/services/notify.service';
 import { District } from '@app/models/db/district';
 import { ModalService } from '@app/shared/components/modal/modal.service';
@@ -21,12 +21,12 @@ export class Dbrt04DistrictComponent {
   provinceCode: Guid;
   districtCode: Guid;
   data: District;
-  resetSearch: string  = '';
+  resetSearch: any = '';
   breadcrumbItems: MenuItem[] = [
     { label: 'label.DBRT04.ProgramName', routerLink: '/db/dbrt04' },
     {
       label: 'label.DBRT04.District',
-      routerLink: '/db/dbrt04/dbrt04-district',
+      routerLink: '/db/dbrt04/district',
     },
   ];
   constructor(
@@ -34,7 +34,8 @@ export class Dbrt04DistrictComponent {
     private sv: Dbrt04Service,
     private activatedRoute: ActivatedRoute,
     private md: ModalService,
-    private ms: NotifyService
+    private ms: NotifyService,
+    private router: Router,
   ) {
     this.createForm();
     this.activatedRoute.data.subscribe(({ dbrt04master, districts }) => {
@@ -56,8 +57,8 @@ export class Dbrt04DistrictComponent {
 
   search(value?: string) {
     this.sv
-      .listDistrict(value, this.provinceCode)
-      .subscribe((Districts: District[]) => (this.Districts = Districts));
+    .listDistrict(value, this.provinceCode)
+    .subscribe((Districts: District[]) => (this.Districts = Districts));
   }
 
   deleteDistrict(districtCode: Guid) {
@@ -65,11 +66,10 @@ export class Dbrt04DistrictComponent {
       .confirm('message.STD00015')
       .pipe(
         filter((confirm) => confirm),
-        switchMap(() => this.sv.deleteDistrict(districtCode))
-      )
+        switchMap(() => this.sv.deleteDistrict(districtCode)))
       .subscribe(() => {
-        this.search();
         this.resetSearch = '';
+        this.search();
         this.ms.success('message.STD00016');
       });
   }
