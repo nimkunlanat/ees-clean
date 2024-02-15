@@ -6,12 +6,12 @@ import { Etdt01Component } from './etdt01/etdt01.component';
 import { Etdt01SkillComponent } from './etdt01/etdt01-skill/etdt01-skill.component';
 import { Assessment, etdt01, etdt01SkillResolver} from './etdt01/etdt01.resolver';
 import { Etrt05Component } from './etrt05/etrt05.component';
-import { Etdt01AssessmentComponent } from './etdt01/etdt01-assessment/etdt01-assessment.component';
 import { Etdt02DocumentComponent } from './etdt02/etdt02-document/etdt02-document.component';
 import { etrt05Resolver, evaluationGroup } from './etrt05/etrt05.resolver';
 import { Etrt05DetailComponent } from './etrt05/etrt05-detail/etrt05-detail.component';
 import { Etrt06Component } from './etrt06/etrt06.component';
 import { etrt06Resolver } from './etrt06/etrt06.resolver';
+import { Etdt01AssessmentComponent } from './etdt01/etdt01-assessment/etdt01-assessment.component';
 
 
 const routes: Routes = [

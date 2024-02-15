@@ -1,8 +1,9 @@
+import { style } from "@angular/animations";
 import { Component } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { NotifyService } from "@app/core/services/notify.service";
 import { ModalService } from "@app/shared/components/modal/modal.service";
-import { MenuItem, SelectItem } from "primeng/api";
 import { Etdt01Service } from "../etdt01.service";
 
 @Component({
@@ -16,10 +17,10 @@ export class Etdt01AssessmentComponent {
   detailForm!: FormGroup;
   data: any = [];
   list: any = [];
-  items: SelectItem[] = []
 
   constructor(
     private fb: FormBuilder,
+    private ms: NotifyService,
     private route: ActivatedRoute,
     private sv: Etdt01Service,
     private md: ModalService,
@@ -47,23 +48,22 @@ export class Etdt01AssessmentComponent {
       position: [null],
       email: [null],
     })
-
-    // let data;
-    // data.form = this.form
   }
 
   createDetailForm(detailForm:any , index){
     let fg:FormGroup = this.fb.group({
-        documentNo:null,
-        evaluateGroupCode : null,
-        evaluateDetailCode:null,
-        rowVersion:null,
-        rowState:null
+      documentNo: [null],
+      evaluateGroupCode: [null],
+      evaluateDetailCode: [null],
+      rowVersion: [null],
+      rowState: [null],
     })
-    fg.addControl('point'+index , new FormControl(null));
+    fg.addControl('point'+index , new FormControl(null, [Validators.required,Validators.pattern(/^[0-9]+$/), Validators.max(detailForm.point), Validators.maxLength(2)]));
     fg.patchValue(detailForm);
     return fg;
   }
+
+
 
   rebuildData(headerData) {
     headerData.map((m , index) => {
@@ -73,20 +73,56 @@ export class Etdt01AssessmentComponent {
     })
   }
 
-  getTotalWork(headerType){
+  getTotalWork(headerType , index){
     this.list.filter(f => f.evaluateGroupCode === headerType).map(m => {
-      console.log(m.listDetail)
-      m.listDetail.map(lm => {
-        m['totalPoints'] = Number(0);
-        for(let i = 0 ; i <= 10; i++){
-          if(lm.form.get('point'+ i)?.value) m['totalPoints'] += Number(lm.form.get('point'+ i)?.value);
-          else {
-            break;
-          };
-        }
+      if(m['totalMemory']?.length === undefined) {
+        m['totalMemory'] = [] as any[]
+      }
+      m.listDetail.map((lm,i) => {
+        if(index === i){
+          if(lm.form.get('point'+ index)?.value) {
+              if(m['totalMemory'][index]) {
+                m['totalMemory'][index] = Number(lm.form.get('point'+ index)?.value)
+                m['totalPoints'] = m['totalMemory'].reduce((a , b) => a + b , 0) ?? m['totalMemory'][0]
+              }else {
+                m['totalMemory'][index] = Number(lm.form.get('point'+ index)?.value)
+                m['totalPoints'] = m['totalMemory'].reduce((a , b) => a + b , 0) ?? m['totalMemory'][0]
+              }
+          }else {
+              m['totalMemory'][index] = null
+              m['totalPoints'] = m['totalMemory'].reduce((a , b) => a + b , 0) ?? m['totalMemory'][0]
+            }
         return m
+        }
       })
     });
+  }
+
+  validate = () => this.form.invalid;
+
+  save() {
+    if (this.validate()) {
+      this.ms.warning("message.STD00013");
+      this.form.markAllAsTouched();
+    }
+    else {
+      let data = [];
+      this.list.map(m => {
+        m.listDetail.map(lm => {
+          data.push(lm.form.getRawValue());
+        })
+      })
+      console.log(data)
+      // this.sv.save(data).pipe(
+      //   switchMap((res: any) => this.sv.detail(res.DocumentNo))
+      // ).subscribe(res => {
+      //   this.data = res
+      //   this.data.rowState = RowState.Normal;
+      //   this.form.patchValue(res)
+      //   // this.rebuildData()
+      //   this.ms.success("message.STD00014");
+      // })
+    }
   }
 
   next(){
@@ -96,5 +132,45 @@ export class Etdt01AssessmentComponent {
   cancel(){
     this.router.navigateByUrl('et/etdt01');
   }
+
+  get totalPoint(){
+    let data = 0
+    this.list.map((m:any)=> {
+      if(m['totalPoints'] != undefined){
+         data += Number(m['totalPoints'])
+      }
+    })
+    return data
+  }
+
+  get grade(){
+    let grade = "";
+    let color = "";
+    if(this.totalPoint >= 90){
+      grade = "A";
+      color = "#25BF6C";
+    }
+    else if(this.totalPoint >= 80){
+      grade = "B";
+      color = "#95B2EA";
+    }
+    else if(this.totalPoint >= 70){
+      grade = "C";
+      color = "#E3DB34";
+    }
+    else if(this.totalPoint >= 50){
+      grade = "D";
+      color = "#FFAF14";
+    }
+    else if(this.totalPoint  >= 1){
+      grade = "F";
+      color = "#FF5050";
+    }
+    else{
+      grade = "N";
+      color = "#D9D9D9";
+    }
+    return { grade, color };
 }
 
+}

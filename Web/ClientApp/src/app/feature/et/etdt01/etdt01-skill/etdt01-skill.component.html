@@ -1,49 +1,62 @@
 <div class="grid">
   <div class="col-12">
     <div class="card" style="background-color: rgba(201, 208, 211, 0.16)" >
-      <div class="grid">
-        <div class="col-4 flex justify-content-start align-items-end">
-        <span class="p-buttonset">
+      <div class="col-12">
+      <div class="grid flex justify-content-between flex-column lg:flex-row lg:p-fluid">
+        <div class="flex justify-content-start ">
+          <span class="p-buttonset">
           <button class="border-0"  style="background-color: rgb(224,100,78)"  [label]="'label.ETDT01.AssessmentForm' | translate" (click)="next()"></button>
           <button class="border-0" [disabled]="true" style="background-color: rgba(234,198,191)" [label]="'label.ETDT01.SkillForm' | translate" ></button>
-        </span></div>
-        <div class="col-8 flex justify-content-end align-items-end">
-          <dropdown class="mx-1"
-          formControlName="status"
-          [items]=""
-          [disabled]="true"></dropdown>
-          <button
-            class="mx-0 border-0"
-            style="background-color: rgb(15, 177, 246)"
-            [label]="'label.ETDT01.SaveAndSend' | translate"
-            icon="pi pi-send"
-          ></button>
-          <button
-            class="mx-1 border-0"
-            style="background-color: rgb(63, 164, 132)"
-            [label]="'label.ALL.Save' | translate"
-            icon="pi pi-save"
-          ></button>
-          <button
-            class="border-0"
-            style="background-color: rgb(220, 100, 80)"
-            [label]="'label.ALL.Cancel' | translate"
-            icon="pi pi-times"
-            (click)="cancel()"
-          ></button>
+        </span>
+      </div>
+        <div class="flex justify-content-end ">
+            <dropdown class="mx-1 "
+            [disabled]="true"
+            ></dropdown>
+            <button
+              class="border-0"
+              style="background-color: rgb(15, 177, 246)"
+              [label]="'label.ETDT01.SaveAndSend' | translate"
+              icon="pi pi-send"
+            ></button>
+            <button
+              class="mx-1 border-0"
+              style="background-color: rgb(63, 164, 132)"
+              [label]="'label.ALL.Save' | translate"
+              icon="pi pi-save"
+            ></button>
+            <button
+              class="border-0"
+              style="background-color: rgb(220, 100, 80)"
+              [label]="'label.ALL.Cancel' | translate"
+              icon="pi pi-times"
+              (click)="cancel()"
+            ></button>
+          </div>
         </div>
       </div>
       <br>
-              <div class="card">
+            <div class="flex justify-content-between flex-column lg:flex-row lg:p-fluid">
+              <div class="card mt-5" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div class="card" style="background-color: #25BF6C; text-align: center; width: 150px; height: 150px; display: flex; justify-content: center; align-items: center;">
+                  <h1 style="font-size: 80px;">A</h1>
+                </div>
+                <div class="card" style="background-color: rgba(201, 208, 211, 0.16); width: 160px; height: 50px; display: flex; justify-content: center; align-items: center;">
+                  <p style="text-align: center;">Expected Grade</p>
+                </div>
+              </div>
+              <div class="card w-full ml-1 mr-1">
                 <p>Flowchart</p>
                 <hr>
                 <h1>1.Flowchart</h1>
-                <div class="">
-                <!-- <p-radioButton [label]="'Grade A. Can design flow chart of the programs that they are responsible.' | translate"></p-radioButton><br><br>
-                <p-radioButton [label]="'Grade B. Can explain How to use flowchart in real life and Can give an example.' | translate"></p-radioButton><br><br>
-                <p-radioButton [label]="'Grade C. Understand flowchart symbol concept' | translate"></p-radioButton><br><br>
-                <p-radioButton [label]="'Grade D. Can design flow chart of the programs that they are responsible.' | translate"></p-radioButton> -->
+                  <div class="card" style="background-color: rgba(201, 208, 211, 0.16);">
+                  <p-radioButton [label]="'Grade A. Can design flow chart of the programs that they are responsible.' | translate"></p-radioButton><br><br>
+                  <p-radioButton [label]="'Grade B. Can explain How to use flowchart in real life and Can give an example.' | translate"></p-radioButton><br><br>
+                  <p-radioButton [label]="'Grade C. Understand flowchart symbol concept' | translate"></p-radioButton><br><br>
+                  <p-radioButton [label]="'Grade D. Can design flow chart of the programs that they are responsible.' | translate"></p-radioButton>
+                  </div>
               </div>
-      </div>
+            </div>
+
   </div>
 </div>

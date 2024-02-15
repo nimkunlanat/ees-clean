@@ -4,7 +4,7 @@
       <div class="col-12">
       <div class="grid flex justify-content-between flex-column lg:flex-row lg:p-fluid">
         <div class="flex justify-content-start ">
-          <span class="p-buttonset ">
+          <span class="p-buttonset">
             <button class="border-0" [disabled]="true" style="background-color: rgba(234,198,191)" [label]="'label.ETDT01.AssessmentForm' | translate" ></button>
             <button class="border-0" style="background-color: rgb(224,100,78)" [label]="'label.ETDT01.SkillForm' | translate" (click)="next()"></button>
           </span>
@@ -26,6 +26,7 @@
               style="background-color: rgb(63, 164, 132)"
               [label]="'label.ALL.Save' | translate"
               icon="pi pi-save"
+              (click)="save()"
             ></button>
             <button
               class="border-0"
@@ -39,7 +40,7 @@
       </div>
       <br>
 
-      <div class="flex justify-content-between flex flex-column lg:flex-row lg:p-fluid" [formGroup]="form">
+      <div class="flex justify-content-between flex-column lg:flex-row lg:p-fluid" [formGroup]="form">
         <div class="card w-full">
           <div class="flex col-12">
             <img
@@ -47,68 +48,78 @@
               width="200"
               height="200"
             >
-            <div class="col-6">
-              <h5>
+            <div class="ml-5 mt-4" style="font-size: 18px; ">
+              <p>
                 {{ "label.ETDT01.employeeCode" | translate }} :
                 {{ this.data.employeeCode }}
-              </h5>
-              <h5>
+              </p>
+              <p>
                 {{ "label.ETDT01.name" | translate }} :
                 {{ this.data.firstname }}
                 {{ this.data.surname }}
-              </h5>
-              <h5>
+              </p>
+              <p>
                 {{ "label.ETDT01.position" | translate }} :
                 {{ this.data.position }}
-              </h5>
-              <h5>
+              </p>
+              <p>
                 {{ "label.ETDT01.email" | translate }} :
                 {{ this.data.email }}
-              </h5>
+              </p>
             </div>
           </div>
         </div>
 
         <table class="card mb-5 ml-2" style="text-align: center;">
-          <tr>
-            <td class="col-6" style="vertical-align: center;">
+          <tr class="col-6">
+            <td style="vertical-align: center;">
               <div style="text-align: center;">
                 <h1>SUMMARY</h1>
-                <h1 style="font-size: 100px;">90</h1>
+                <h1 style="font-size: 100px;">{{totalPoint}}</h1>
               </div>
             </td>
             <td class="col-6">
-              <div class="card" style="background-color: green; text-align: center;">
-                <h1 style="font-size: 80px;">A</h1>
+              <div class="card" [ngStyle]="{ 'background-color': grade.color, 'text-align': 'center',
+               'padding-top': '1px', 'padding-bottom': '1px', 'padding-right': '50px', 'padding-left': '50px'}">
+                <h1 style="font-size: 100px;">{{ grade.grade }}</h1>
               </div>
             </td>
+            <!-- <td class="col-6">
+              <div class="card" style="background-color: {{grade.color}}; text-align: center;
+              padding-top: 1px; padding-bottom: 1px; padding-right: 50px; padding-left: 50px;">
+                <h1 style="font-size: 100px;">{{grade.grade}}</h1>
+              </div>
+            </td> -->
             <i class="pi pi-question-circle flex justify-content-end"
             pTooltip="Grade
             90 - 100  = A
             80 - 89   = B
-            61 - 80   = C
-            51 - 60   = D
-             0  - 50  = F
-            " tooltipPosition="top"></i>
+            60 - 79   = C
+            50 - 59   = D
+             0  - 49  = F
+            "tooltipPosition="top"></i>
           </tr>
         </table>
       </div>
 
       <div class="card" *ngFor="let item of list ">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%;">
-        <h3 style="margin: 0;">{{item.evaluateGroupName}}</h3>
-          <textbox  style="width: 10%;" [disabled]="true" [value]="item.totalPoints">Full score : {{item.totalPoint}}</textbox>
+        <h1 style="margin: 0;">{{item.evaluateGroupName}}</h1>
+          <textbox style="width: 15%;" [disabled]="true" [value]="item.totalPoints">Full score : {{item.totalPoint}}</textbox>
         </div>
         <hr/>
+
         <div *ngFor="let itemDetail of item.listDetail; let i = index" [formGroup]="itemDetail.form">
           <div class="flex" *ngIf="item.evaluateGroupCode == itemDetail.evaluateGroupCode">
             <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%;">
-            <h5 style="margin-right: 10px;">{{itemDetail.evaluateDetailName}}</h5>
-            <textbox style="width: 20%; margin: 15px;"[floatLabel]="true"
-            [formControlName]="'point'+i" (change)="getTotalWork(item.evaluateGroupName)">Full score : {{itemDetail.point}}</textbox>
+            <p style="font-size: 18px; margin-right: 10px;">{{itemDetail.evaluateDetailName}}</p>
+            <number [min]="0" [max]="itemDetail.point" style=" margin: 15px;"[floatLabel]="true"
+            [formControlName]="'point'+i" (ngModelChange)="getTotalWork(item.evaluateGroupCode , i)">Full score : {{itemDetail.point}}</number>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>

@@ -15,12 +15,12 @@ import { Etrt06Component } from './etrt06/etrt06.component';
 
 @NgModule({
   declarations: [
-    Etrt05Component,
     Etdt01Component,
-    Etdt02Component,
     Etdt01SkillComponent,
     Etdt01AssessmentComponent,
+    Etdt02Component,
     Etdt02DocumentComponent,
+    Etrt05Component,
     Etrt05DetailComponent,
     Etrt06Component
   ],

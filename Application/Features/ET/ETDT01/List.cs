@@ -33,7 +33,6 @@ public class List
     public class EvaluateDetail
     {
         public string EvaluateGroupCode { get; set; }
-
         public string EvaluateDetailCode { get; set; }
         public string EvaluateDetailName { get; set; }
         public int? Point { get; set; }
@@ -80,10 +79,16 @@ public class List
                                         ,case when @Lang = 'th' then eg.evaluate_group_name_th else eg.evaluate_group_name_en end as ""EvaluateGroupName""
                                         ,eg.total_point ""totalPoint""
                                         ,eg.xmin ""rowVersion""
+                                        ,eg.role_code ""role""
+                                        ,e.position_code 
                                         from et.evaluate_group eg 
+                                        inner join db.employee e  on e.position_code  = eg.role_code 
+                                        inner join et.evaluate_form ef on ef.role_code = eg.role_code 
+                                       	where e.user_id = @userId
                                         order by eg.sequene_id asc");
 
-            result.Evaluates = (List<Evaluate>)await _context.QueryAsync<Evaluate>(sql.ToString(), new { Lang = _user.Language }, cancellationToken);
+            result.Evaluates = (List<Evaluate>)await _context.QueryAsync<Evaluate>(sql.ToString(), new 
+            { userId = _user.UserId, Lang = _user.Language }, cancellationToken);
 
             sql = new StringBuilder();
             sql.AppendLine(@"select ed.evaluate_group_code ""EvaluateGroupCode""
@@ -91,10 +96,14 @@ public class List
                                         ,ed.point ""Point""
                                         ,ed.evaluate_detail_code ""EvaluateDetailCode""
                                         ,ed.xmin ""rowVersion""
+                                        ,e.position_code 
                                         from et.evaluate_detail ed
                                         inner join et.evaluate_group eg on eg.evaluate_group_code = ed.evaluate_group_code 
+                                        inner join db.employee e on e.position_code  = eg.role_code 
+                                        where e.user_id = @userId
                                         order by ed.sequene_id asc");
-            result.EvaluateDetails = (List<EvaluateDetail>)await _context.QueryAsync<EvaluateDetail>(sql.ToString(), new { Lang = _user.Language }, cancellationToken);
+            result.EvaluateDetails = (List<EvaluateDetail>)await _context.QueryAsync<EvaluateDetail>(sql.ToString(), new 
+            { userId = _user.UserId, Lang = _user.Language }, cancellationToken);
 
             return result;
         }
