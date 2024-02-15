@@ -4,8 +4,8 @@ import { NotifyService } from '@app/core/services/notify.service';
 import { ModalService } from '@app/shared/components/modal/modal.service';
 import { Etrt05Service } from './etrt05.service';
 import { filter, switchMap } from 'rxjs';
-import { EvaluationGroup } from '@app/models/et/evaluationGroup';
-import { EvaluationForm } from '@app/models/et/evaluationForm';
+import { EvaluateGroup } from '@app/models/et/evaluateGroup';
+import { EvaluateForm } from '@app/models/et/evaluateForm';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -15,8 +15,8 @@ import { MenuItem } from 'primeng/api';
 
 export class Etrt05Component {
 
-  evaluationForms: EvaluationForm[] = []
-  deletes: EvaluationForm[] = []
+  evaluationForms: EvaluateForm[] = []
+  deletes: EvaluateForm[] = []
   
   constructor(
     private sv: Etrt05Service,
@@ -28,7 +28,7 @@ export class Etrt05Component {
     })
   }
   search(value?: string) {
-    this.sv.list(value).subscribe((roleLists: EvaluationForm[]) => {this.evaluationForms = roleLists})
+    this.sv.list(value).subscribe((roleLists: EvaluateForm[]) => {this.evaluationForms = roleLists})
   }
   delete(roleCode: string) {
     this.md.confirm('message.STD00015').pipe(

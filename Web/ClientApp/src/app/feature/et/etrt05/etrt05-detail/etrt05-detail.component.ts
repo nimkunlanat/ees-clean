@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EvaluationGroup } from '@app/models/et/evaluationGroup';
+import { EvaluateGroup } from '@app/models/et/evaluateGroup';
 import { Etrt05Service } from '../etrt05.service';
 import { ActivatedRoute } from '@angular/router';
 import { NotifyService } from '@app/core/services/notify.service';
 import { ModalService } from '@app/shared/components/modal/modal.service';
 import { RowState } from '@app/shared/types/data.types';
-import { EvaluateDetail } from '@app/models/et/evaluationDetail';
+import { EvaluateDetail } from '@app/models/et/evaluateDetail';
 import { Observable, of, switchMap } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 
@@ -16,7 +16,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class Etrt05DetailComponent {
   form: FormGroup;
-  evaluationGroup: EvaluationGroup = new EvaluationGroup();
+  evaluationGroup: EvaluateGroup = new EvaluateGroup();
   deletes: EvaluateDetail[] = []
   breadcrumbItems: MenuItem[] = [
     { label: 'label.ETRT05.ProgramName', routerLink: '/et/etrt05' },
@@ -133,8 +133,8 @@ export class Etrt05DetailComponent {
         f.evaluateGroupCode = this.form.controls["evaluateGroupCode"].value;
       })
       this.sv.save(data).pipe(
-        switchMap((evaluationGroup: EvaluationGroup) => this.sv.detail(evaluationGroup.evaluateGroupCode))
-      ).subscribe((res: EvaluationGroup) => {
+        switchMap((evaluationGroup: EvaluateGroup) => this.sv.detail(evaluationGroup.evaluateGroupCode))
+      ).subscribe((res: EvaluateGroup) => {
         this.ms.success("message.STD00014")
         this.evaluationGroup = res
         this.rebuildForm()

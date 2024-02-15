@@ -1,17 +1,17 @@
 import { EntityBase } from "../entityBase";
-import { EvaluationGroup } from "./evaluationGroup";
+import { EvaluateGroup } from "./evaluateGroup";
 
-export class EvaluationForm extends EntityBase {
+export class EvaluateForm extends EntityBase {
     roleCode: string;
     roleNameTh: string;
     roleNameEn: string;
     languageCode: string;
     active: boolean;
-    evaluationGroups:  EvaluationGroup[]
+    evaluateGroups:  EvaluateGroup[]
 
     constructor() {
         super();
-        this.evaluationGroups = []
+        this.evaluateGroups = []
     }
 
 }

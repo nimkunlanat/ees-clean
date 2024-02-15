@@ -22,8 +22,8 @@ public class Delete
         public Handler(ICleanDbContext context) => _context = context;
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            EvaluateGroup evaluationGroup = await _context.Set<EvaluateGroup>().Where(w => w.EvaluateGroupCode == request.EvaluateGroupCode).FirstOrDefaultAsync();
-            _context.Set<EvaluateGroup>().RemoveRange(evaluationGroup);
+            EvaluateGroup evaluationGroup = await _context.Set<EvaluateGroup>().Where(w => w.EvaluateGroupCode == request.EvaluateGroupCode).Include(i => i.EvaluateDetails).FirstOrDefaultAsync();
+            _context.Set<EvaluateGroup>().Remove(evaluationGroup);
             await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

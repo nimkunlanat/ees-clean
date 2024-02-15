@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { EvaluationGroup } from '@app/models/et/evaluationGroup';
+import { EvaluateGroup } from '@app/models/et/evaluateGroup';
 import { Etrt05Service } from '../etrt05.service';
 import { ModalService } from '@app/shared/components/modal/modal.service';
 import { NotifyService } from '@app/core/services/notify.service';
 import { ActivatedRoute } from '@angular/router';
 import { filter, switchMap } from 'rxjs';
 import { MenuItem } from 'primeng/api';
-import { EvaluationForm } from '@app/models/et/evaluationForm';
+import { EvaluateForm } from '@app/models/et/evaluateForm';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RowState } from '@app/shared/types/data.types';
 
@@ -17,8 +17,8 @@ import { RowState } from '@app/shared/types/data.types';
 export class Etrt05EvaluationComponent {
 
   form: FormGroup;
-  evaluationGroups: EvaluationGroup[] = [];
-  deletes: EvaluationForm[] = []
+  evaluationGroups: EvaluateGroup[] = [];
+  deletes: EvaluateForm[] = []
   roleCode: string
   breadcrumbItems: MenuItem[] = [
     { label: 'label.ETRT05.ProgramName', routerLink: '/et/etrt05' },
@@ -55,22 +55,22 @@ export class Etrt05EvaluationComponent {
     })
   }
 
-  createFormDetail(evaluationGroup: EvaluationGroup){
+  createformDetail(evaluationGroup: EvaluateGroup) {
     const fg: FormGroup = this.fb.group({
-      roleCode:[null, [Validators.required, Validators.maxLength(50)]],
+      roleCode: [null, [Validators.required, Validators.maxLength(50)]],
       evaluateGroupCode: [null, [Validators.required, Validators.maxLength(50)]],
       evaluateGroupNameTh: [null, [Validators.required, Validators.pattern(/^[ก-๙0-9#$^+=!*(){}\[\]@%& /\\]+$/)]],
       evaluateGroupNameEn: [null, [Validators.required, Validators.pattern(/^[a-zA-Z#$.' ^+=!*(){}\[\]@%& /\\]+$/)]],
-      totalPoint: [0,[Validators.required]],
-      sequeneId: [0,[Validators.required]],
+      totalPoint: [0, [Validators.required]],
+      sequeneId: [0, [Validators.required]],
       active: true,
       rowState: null,
       rowVersion: null
     });
   }
 
-  rebuildForm(){
-    
+  rebuildForm() {
+
   }
 
   delete(evaluateGroupCode: string) {
@@ -85,8 +85,10 @@ export class Etrt05EvaluationComponent {
 
   validate = (): Boolean => false
 
-  save(){
-    
+  save() {
+    const data = this.form.getRawValue()
+    data["evaluationGroups"] = this.evaluationGroups
+    console.log(data)
   }
 }
 
