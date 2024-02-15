@@ -1,0 +1,71 @@
+<div class="grid">
+    <div class="col-12 flex flex-wrap gap-3 justify-content-between flex-column lg:flex-row lg:p-fluid">
+        <breadcrumb [items]="breadcrumbItems"></breadcrumb>
+        <button [label]="'label.ALL.Save' | translate" icon="pi pi-save" (click)="save()"></button>
+    </div>
+    <div class="col-12">
+        <p-fieldset [legend]="'label.ETRT06.Detail' | translate" [toggleable]="true">
+            <div class="grid p-fluid" [formGroup]="form">
+                <div class="col-12 lg:col-4">
+                    <textbox formControlName="groupName">{{ 'label.ETRT06.GroupName' | translate}}
+                    </textbox>
+                </div>
+                <div class="col-12 lg:col-4">
+                    <textbox formControlName="description">{{ 'label.ETRT06.Description' | translate}}
+                    </textbox>
+                </div>
+                <div class="col-12 lg:col-4 align-items-center flex flex-wrap">
+                    <checkbox formControlName="active" style="height: 20%;" [label]="'label.ALL.Active' | translate">
+                    </checkbox>
+                </div>
+            </div>
+        </p-fieldset>
+    </div>
+
+    <div class="col-12">
+        <p-fieldset [legend]="'label.ETRT06.SkillMatrixDetail' | translate" [toggleable]="true">
+            <div class="py-4 flex flex-wrap justify-content-end gap-3 flex-column md:flex-row md:p-fluid">
+                <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" (click)="add()"></button>
+            </div>
+            <datatable [rows]="skillMatrixGroup.skillMatrixSubjects">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th prop="subjectGroup" class="text-center">{{ 'label.ETRT06.SubjectGroup' | translate }} </th>
+                        <th prop="subjectName" class="text-center">{{ 'label.ETRT06.SubjectName' | translate }} </th>
+                        <th prop="description" class="text-center">{{ 'label.ETRT06.Description' | translate}} </th>
+                        <th class="text-center">{{ 'label.ETRT06.Grade' | translate }} </th>
+                        <th class="text-center">{{ 'label.ETRT05.Active' | translate }} </th>
+                        <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-row>
+                    <tr [formGroup]="row.form">
+                        <td>
+                            <textbox formControlName="subjectGroup" [hasLabel]="false"></textbox>
+                        </td>
+                        <td>
+                            <textbox formControlName="subjectName" [hasLabel]="false"></textbox>
+                        </td>
+                        <td>
+                            <textbox formControlName="description" [hasLabel]="false"></textbox>
+                        </td>
+                        <td class="flex justify-content-center">
+                            <button icon="pi pi-ellipsis-h" [routerLink]="['grade']" 
+                            [state]="{ groupId: row.groupId  }">
+                        </button>
+                        </td>
+                        <td>
+                            <div class="flex justify-content-center">
+                                <checkbox formControlName="active" [hasLabel]="false" ></checkbox>
+                            </div>
+                        </td>
+                        <td class="flex justify-content-center">
+                            <button icon="pi pi-trash" (click)="remove()"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </datatable>
+        </p-fieldset>
+    </div>
+</div>

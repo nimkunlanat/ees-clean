@@ -20,8 +20,9 @@ export class Etrt05DetailComponent {
   deletes: EvaluateDetail[] = []
   breadcrumbItems: MenuItem[] = [
     { label: 'label.ETRT05.ProgramName', routerLink: '/et/etrt05' },
-    { label: 'label.ETRT05.Detail', routerLink: '/et/etrt05/detail' },
+    { label: 'label.ETRT05.EvaluationProgramName', routerLink: '/et/etrt05/evaluation' },
   ]
+  roleCode: string;
 
   constructor(
     private sv: Etrt05Service,
@@ -29,8 +30,11 @@ export class Etrt05DetailComponent {
     private fb: FormBuilder,
     private ms: NotifyService,
     private md: ModalService) {
-    this.activatedRoute.data.subscribe(({ evaluationGroup }) => {
-      this.evaluationGroup = evaluationGroup ?? new EvaluationGroup()
+    this.activatedRoute.data.subscribe(({ evaluationDetail }) => {
+      this.evaluationGroup = evaluationDetail.detail ?? new EvaluateDetail()
+      this.roleCode = evaluationDetail.roleCode
+      this.breadcrumbItems[1]["state"] = { roleCode: this.roleCode }
+      console.log(this.evaluationGroup)
       this.createForm()
       this.rebuildForm()
     })
@@ -38,6 +42,7 @@ export class Etrt05DetailComponent {
 
   createForm() {
     this.form = this.fb.group({
+      roleCode:[null, [Validators.required, Validators.maxLength(50)]],
       evaluateGroupCode: [null, [Validators.required, Validators.maxLength(50)]],
       evaluateGroupNameTh: [null, [Validators.required, Validators.pattern(/^[ก-๙0-9#$^+=!*(){}\[\]@%& /\\]+$/)]],
       evaluateGroupNameEn: [null, [Validators.required, Validators.pattern(/^[a-zA-Z#$.' ^+=!*(){}\[\]@%& /\\]+$/)]],
@@ -83,6 +88,7 @@ export class Etrt05DetailComponent {
     this.form.patchValue(this.evaluationGroup)
     
     if (this.evaluationGroup.evaluateGroupCode) {
+      this.form.controls["roleCode"].disable()
       this.form.controls["evaluateGroupCode"].disable()
       this.form.controls["evaluateGroupNameTh"]
       this.form.controls["evaluateGroupNameEn"]
@@ -91,7 +97,7 @@ export class Etrt05DetailComponent {
     }
     else this.form.controls["rowState"].setValue(RowState.Add)
     
-    this.evaluationGroup.evaluateDetails .map(m => m.form = this.createFormDetail(m))
+    this.evaluationGroup.evaluateDetails.map(m => m.form = this.createFormDetail(m))
     this.form.markAsPristine();
     this.evaluationGroup.evaluateDetails.forEach(f => f.form.markAsPristine())
   }

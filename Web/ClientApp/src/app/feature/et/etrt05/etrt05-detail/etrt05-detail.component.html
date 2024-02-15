@@ -7,10 +7,14 @@
         <p-fieldset [legend]="'label.ETRT05.Detail' | translate" [toggleable]="true">
             <div class="grid p-fluid" [formGroup]="form">
                 <div class="col-12 lg:col-1">
+                    <textbox formControlName="roleCode">{{ 'label.ETRT05.RoleCode' | translate }}
+                    </textbox>
+                </div>
+                <div class="col-12 lg:col-1">
                     <textbox formControlName="sequeneId">{{ 'label.ETRT05.SequeneId' | translate }}
                     </textbox>
                 </div>
-                <div class="col-12 lg:col-3">
+                <div class="col-12 lg:col-2">
                     <textbox formControlName="evaluateGroupCode">{{ 'label.ETRT05.EvaluationGroupCode' | translate}}
                     </textbox>
                 </div>
