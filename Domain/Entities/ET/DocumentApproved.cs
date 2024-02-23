@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Domain.Entities.ET
 {
@@ -10,6 +11,6 @@ namespace Domain.Entities.ET
             public string ApproveBy { get; set; }
             public int Evaluated { get; set; }
             public int NotEvaluated { get; set; }
-
+            public ICollection<EvaluationDocument> EvaluationDocuments { get; set; }
     }
 }
