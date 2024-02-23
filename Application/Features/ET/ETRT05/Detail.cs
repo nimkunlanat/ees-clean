@@ -22,7 +22,8 @@ public class Detail
             StringBuilder sql = new StringBuilder();
             EvaluateGroup evaluationGroup = new();
 
-             sql.AppendLine(@"select eg.role_code ""roleCode"", eg.evaluate_group_code ""evaluateGroupCode""
+             sql.AppendLine(@"select eg.role_code ""roleCode""
+                                    , eg.evaluate_group_code ""evaluateGroupCode""
                                     , eg.evaluate_group_name_th ""evaluateGroupNameTh""
                                     , eg.evaluate_group_name_en ""evaluateGroupNameEn""
                                     , eg.total_point ""totalPoint""
@@ -38,7 +39,7 @@ public class Detail
             if (evaluationGroup != null)
             {
                 sql = new StringBuilder();
-                sql.AppendLine(@"select ef.role_code, ed.evaluate_group_code ""evaluateGroupCode""
+                sql.AppendLine(@"select ed.evaluate_group_code ""evaluateGroupCode""
                                         , ed.evaluate_detail_code ""evaluateDetailCode""
                                         , ed.evaluate_detail_name_th ""evaluateDetailNameTh""
                                         , ed.evaluate_detail_name_en ""evaluateDetailNameEn""

@@ -2,7 +2,7 @@
 
 namespace Domain.Entities.ET;
 
-public class EvaluationForm : EntityBase
+public class EvaluateForm : EntityBase
 {
     public string RoleCode { get; set; }
     public string RoleNameTh {  get; set; }

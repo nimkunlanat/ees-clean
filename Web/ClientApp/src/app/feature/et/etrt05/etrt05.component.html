@@ -12,8 +12,8 @@
             <datatable [rows]="evaluationForms">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th class="text-center">{{ 'label.ETRT05.Code' | translate }} </th>
-                        <th class="text-center">{{ 'label.ETRT05.Name' | translate }} </th>
+                        <th prop="roleCode" class="text-center">{{ 'label.ETRT05.Code' | translate }} </th>
+                        <th prop="roleName" class="text-center">{{ 'label.ETRT05.Name' | translate }} </th>
                         <th class="text-center">{{ 'label.ALL.Active' | translate }}</th>
                         <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
                     </tr>
@@ -34,7 +34,7 @@
                             }
                         </td>
                         <td class="text-center w-1">
-                            <button icon="pi pi-trash" (click)="delete(row.roleCode)"></button>
+                            <button icon="pi pi-trash" (click)="deleteForm(row.roleCode)"></button>
                         </td>
                     </tr>
                 </ng-template>

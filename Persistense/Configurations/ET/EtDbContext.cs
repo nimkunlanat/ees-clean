@@ -10,5 +10,5 @@ public partial class CleanDbContext : DbContext, ICleanDbContext
     public DbSet<EvaluateDetail> EvaluateDetails { get; set; }
     public DbSet<SkillMatrixGroup> SkillMatrixGroups { get; set; }
     public DbSet<SkillMatrixSubject> SkillMatrixSubjects { get; set; }
-    public DbSet<EvaluationForm> EvaluateForms { get; set; }
+    public DbSet<EvaluateForm> EvaluateForms { get; set; }
 }

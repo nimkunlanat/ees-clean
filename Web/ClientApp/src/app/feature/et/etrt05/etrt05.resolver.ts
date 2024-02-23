@@ -20,14 +20,13 @@ export const evaluationList: ResolveFn<any> = (route: ActivatedRouteSnapshot, st
     }))
 }
 
-export const evaluationDetail: ResolveFn<Observable<{ detail: EvaluateDetail[], roleCode: string }>> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-    const { evaluateGroupCode, roleCode } = inject(Router).getCurrentNavigation()?.extras.state as { evaluateGroupCode: string, roleCode: string } || { evaluateGroupCode: null, roleCode: null }
+export const evaluationDetail: ResolveFn<Observable<{ detail: EvaluateGroup, roleCode: string }>> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+    const { evaluateGroupCode, roleCode } = inject(Router).getCurrentNavigation()?.extras.state 
     const router = inject(Router)
-
     if (!roleCode) router.navigate(["et/etrt05"], { replaceUrl: true })
+    let detailInject = evaluateGroupCode ? inject(Etrt05Service).detail(evaluateGroupCode) : of(null)
 
-
-    return zip(inject(Etrt05Service).detail(evaluateGroupCode), of(roleCode)).pipe(map((res: any) => {
+    return zip(detailInject, of(roleCode)).pipe(map((res: any) => {
         return { detail: res[0], roleCode: res[1] }
     }))
 }

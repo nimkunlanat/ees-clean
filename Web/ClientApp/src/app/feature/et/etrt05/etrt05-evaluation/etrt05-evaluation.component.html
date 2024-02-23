@@ -1,10 +1,10 @@
 <div class="grid">
     <div class="col-12 flex flex-wrap gap-3 justify-content-between flex-column lg:flex-row lg:p-fluid">
         <breadcrumb [items]="breadcrumbItems"></breadcrumb>
-        <button [label]="'label.ALL.Save' | translate" icon="pi pi-save" (click)="save()"></button>
+        <button [label]="'label.ALL.Save' | translate" icon="pi pi-save" (click)="saveForm()"></button>
     </div>
     <div class="col-12">
-        <p-fieldset [legend]="'label.ETRT06.Detail' | translate" [toggleable]="true">
+        <p-fieldset [legend]="'label.ETRT05.FormDetail' | translate" [toggleable]="true">
             <div class="grid p-fluid" [formGroup]="form">
                 <div class="col-12 lg:col-4">
                     <textbox formControlName="roleCode">{{ 'label.ETRT05.RoleCode' | translate}}
@@ -32,17 +32,17 @@
     <p-fieldset [legend]="'label.ETRT05.EvaluationGroupDetail' | translate" [toggleable]="true">
         <div class="flex flex-wrap py-4 justify-content-end gap-3 flex-column lg:flex-row lg:p-fluid">
             <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['detail']"
-                [state]="{ roleCode }"></button>
+                [state]="{ evaluateGroupCode: null, roleCode : roleCode}"></button>
         </div>
 
         <datatable [rows]="evaluationGroups">
             <ng-template pTemplate="header">
                 <tr>
-                    <th class="text-center">{{ 'label.ETRT05.SequeneId' | translate }} </th>
-                    <th class="text-center">{{ 'label.ETRT05.EvaluationGroupCode' | translate}} </th>
-                    <th class="text-center">{{ 'label.ETRT05.EvaluationDescTh' | translate }} </th>
-                    <th class="text-center">{{ 'label.ETRT05.EvaluationDescEn' | translate }} </th>
-                    <th class="text-center">{{ 'label.ETRT05.TotalPoint' | translate }} </th>
+                    <th prop="sequeneId" class="text-center">{{ 'label.ETRT05.SequeneId' | translate}} </th>
+                    <th prop="evaluateGroupCode" class="text-center">{{ 'label.ETRT05.EvaluationGroupCode' | translate}} </th>
+                    <th prop="evaluateGroupNameTh" class="text-center">{{ 'label.ETRT05.EvaluationDescTh' | translate }} </th>
+                    <th prop="evaluateGroupNameEn" class="text-center">{{ 'label.ETRT05.EvaluationDescEn' | translate }} </th>
+                    <th prop="totalPoint" class="text-center">{{ 'label.ETRT05.TotalPoint' | translate }} </th>
                     <th class="text-center">{{ 'label.ALL.Active' | translate }}</th>
                     <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
                 </tr>
@@ -51,7 +51,7 @@
                 <tr>
                     <td class="text-center">{{row.sequeneId}}</td>
                     <td class="text-center">
-                        <a [routerLink]="['detail']" [state]="{ evaluateGroupCode: row.evaluateGroupCode, roleCode }">
+                        <a [routerLink]="['detail']" [state]="{ evaluateGroupCode: row.evaluateGroupCode , roleCode : roleCode }">
                             {{row.evaluateGroupCode}}
                         </a>
                     </td>

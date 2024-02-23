@@ -30,10 +30,10 @@ export class Etrt05Component {
   search(value?: string) {
     this.sv.list(value).subscribe((roleLists: EvaluateForm[]) => {this.evaluationForms = roleLists})
   }
-  delete(roleCode: string) {
+  deleteForm(roleCode: string) {
     this.md.confirm('message.STD00015').pipe(
       filter(confirm => confirm),
-      switchMap(() => this.sv.delete(roleCode)))
+      switchMap(() => this.sv.deleteForm(roleCode)))
       .subscribe((res: any) => {
         this.search()
         this.ms.success('message.STD00016');

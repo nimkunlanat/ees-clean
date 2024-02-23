@@ -6,6 +6,7 @@ export class EvaluateForm extends EntityBase {
     roleNameTh: string;
     roleNameEn: string;
     languageCode: string;
+    sequeneId: string;
     active: boolean;
     evaluateGroups:  EvaluateGroup[]
 

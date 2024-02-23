@@ -21,4 +21,8 @@ export class Etrt05Service {
 
   save = (data) => this.http.post('etrt05/update', data);
 
+  saveForm = (data) => this.http.post('etrt05/saveForm', data);
+
+  deleteForm = (roleCode: string) => this.http.delete("etrt05/deleteForm", { params: { roleCode} })
+
 }

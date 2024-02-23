@@ -10,17 +10,17 @@ namespace Application.Features.ET.ETRT05;
 
 public class List
 {
-    public class Query : IRequest<List<EvaluationFormDTO>>
+    public class Query : IRequest<List<EvaluateFormDTO>>
     {
         public string Keywords { get; set; }
     }
 
-    public class EvaluationFormDTO : EvaluationForm
+    public class EvaluateFormDTO : EvaluateForm
     {
         public string RoleName { get; set; }
     }
 
-    public class Handler : IRequestHandler<Query, List<EvaluationFormDTO>>
+    public class Handler : IRequestHandler<Query, List<EvaluateFormDTO>>
     {
         private readonly ICleanDbContext _context;
         private readonly ICurrentUserAccessor _user;
@@ -31,7 +31,7 @@ public class List
             _user = user;
         }
 
-        public async Task<List<EvaluationFormDTO>> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<List<EvaluateFormDTO>> Handle(Query request, CancellationToken cancellationToken)
         {
             StringBuilder sql = new StringBuilder();
 
@@ -42,11 +42,12 @@ public class List
                              , ef.active ""active""
                              , ef.language_code ""languageCode""
                              , ef.xmin ""rowVersion""
-                             from et.evaluate_form ef ");
+                             from et.evaluate_form ef 
+                             order by ef.sequene_id ");
 
             if (request.Keywords != null) sql.AppendLine(@"where concat( ef.role_code, ef.role_name_th, ef.role_name_en) ilike concat('%',@Keywords,'%')");
 
-            return await _context.QueryAsync<EvaluationFormDTO>(sql.ToString(), new { Lang = _user.Language, request.Keywords }, cancellationToken) as List<EvaluationFormDTO>;
+            return await _context.QueryAsync<EvaluateFormDTO>(sql.ToString(), new { Lang = _user.Language, request.Keywords }, cancellationToken) as List<EvaluateFormDTO>;
         }
     }
 }

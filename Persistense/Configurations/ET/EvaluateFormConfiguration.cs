@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Persistense.Configurations.ET;
 
-public class EvaluateFormConfiguration : BaseConfiguration<EvaluationForm>
+public class EvaluateFormConfiguration : BaseConfiguration<EvaluateForm>
 {
-    public override void Configure(EntityTypeBuilder<EvaluationForm> builder)
+    public override void Configure(EntityTypeBuilder<EvaluateForm> builder)
     {
         base.Configure(builder);
         builder.ToTable("evaluate_form", "et");
