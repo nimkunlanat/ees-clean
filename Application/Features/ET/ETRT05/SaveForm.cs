@@ -51,7 +51,7 @@ public class SaveForm
             _context.Set<EvaluateGroup>().RemoveRange(request.EvaluateGroups.Where(w => w.RowState == RowState.Delete));
             _context.Set<EvaluateGroup>().AddRange(request.EvaluateGroups.Where(w => w.RowState == RowState.Add));
             _context.Set<EvaluateGroup>().AttachRange(request.EvaluateGroups.Where(w => w.RowState == RowState.Edit));
-
+                                       
             request.EvaluateGroups.Where(w => w.RowState == RowState.Edit).ToList().ForEach(f => _context.Entry(f).State = EntityState.Modified);
             await _context.SaveChangesAsync(cancellationToken);
 

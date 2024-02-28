@@ -11,5 +11,6 @@ public class SkillMatrixSubjectConfiguration : BaseConfiguration<SkillMatrixSubj
         base.Configure(builder);
         builder.ToTable("skill_matrix_subject", "et");
         builder.HasKey(e => new { e.SubjectId, e.SubjectName, e.SubjectGroup });
+        builder.Property(e => e.SubjectId).ValueGeneratedOnAdd();
     }
 }

@@ -8,4 +8,5 @@ export class SkillMatrixSubject extends EntityBase {
     subjectName: string;
     description: string;
     active: boolean;
+    expectedGrade: string;
 }

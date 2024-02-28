@@ -24,7 +24,7 @@ import { Etrt05EvaluationComponent } from './etrt05/etrt05-evaluation/etrt05-eva
     Etrt05DetailComponent,
     Etrt06Component,
     Etrt06DetailComponent,
-    Etrt05EvaluationComponent
+    Etrt05EvaluationComponent,
   ],
   imports: [
     CommonModule,

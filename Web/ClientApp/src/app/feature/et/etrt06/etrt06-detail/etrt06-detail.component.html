@@ -1,7 +1,7 @@
 <div class="grid">
     <div class="col-12 flex flex-wrap gap-3 justify-content-between flex-column lg:flex-row lg:p-fluid">
         <breadcrumb [items]="breadcrumbItems"></breadcrumb>
-        <button [label]="'label.ALL.Save' | translate" icon="pi pi-save" (click)="save()"></button>
+        <button [label]="'label.ALL.Save' | translate" icon="pi pi-save" (click)="saveForm()"></button>
     </div>
     <div class="col-12">
         <p-fieldset [legend]="'label.ETRT06.Detail' | translate" [toggleable]="true">
@@ -61,7 +61,7 @@
                             </div>
                         </td>
                         <td class="flex justify-content-center">
-                            <button icon="pi pi-trash" (click)="remove()"></button>
+                            <button icon="pi pi-trash" (click)="remove(row)"></button>
                         </td>
                     </tr>
                 </ng-template>

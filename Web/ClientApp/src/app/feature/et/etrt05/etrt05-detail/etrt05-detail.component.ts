@@ -132,21 +132,6 @@ export class Etrt05DetailComponent {
       this.form.markAllAsTouched();
       this.evaluationGroup.evaluateDetails.forEach(f => f.form.markAllAsTouched())
     }
-    // else {
-    //   const data = this.form.getRawValue();
-    //   data["evaluateDetails"] = [...this.evaluationGroup.evaluateDetails.map(m => m.form.getRawValue()), ...this.deletes.map(m => m.form.getRawValue()).filter(f => f.rowState != RowState.Add)];
-    //   data["evaluateDetails"].filter(f => f.evaluateGroupCode == null).forEach(f => {
-    //     f.evaluateGroupCode = this.form.controls["evaluateGroupCode"].value;
-    //   })
-    //   this.sv.save(data).pipe(
-    //     switchMap((evaluationGroup: EvaluateGroup) => this.sv.detail(evaluationGroup.evaluateGroupCode))
-    //   ).subscribe((res: EvaluateGroup) => {
-    //     this.ms.success("message.STD00014")
-    //     this.evaluationGroup = res
-    //     this.rebuildForm()
-       
-    //   })
-    // }
     else {
       const data = this.form.getRawValue();
       console.log(data)
@@ -154,7 +139,6 @@ export class Etrt05DetailComponent {
       data["evaluateDetails"].filter(f => f.evaluateGroupCode == null).forEach(f => {
         f.evaluateGroupCode = this.form.controls["evaluateGroupCode"].value;
       })
-      console.log('valid',data);
       if(data.rowVersion) data.rowState = RowState.Edit;
       else data.rowState = RowState.Add;
       this.sv.save(data).pipe(

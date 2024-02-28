@@ -6,7 +6,7 @@ namespace Domain.Entities.ET;
 
 public class SkillMatrixGroup : EntityBase
 {
-    public Guid GroupId { get; set; }
+    public Guid? GroupId { get; set; }
     public string GroupName { get; set; }
     public string Description { get; set; }
     public bool Active { get; set; }

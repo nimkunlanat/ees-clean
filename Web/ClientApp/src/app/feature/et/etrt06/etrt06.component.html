@@ -12,7 +12,8 @@
             <datatable [rows]="skillMatrixGroups">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th class="text-center">{{ 'label.ETRT06.GroupName' | translate }} </th>
+                        <th prop="groupName" class="text-center">{{ 'label.ETRT06.GroupName' | translate }} </th>
+                        <th prop="description" class="text-center">{{ 'label.ETRT06.DescriptionGroup' | translate }} </th>
                         <th class="text-center">{{ 'label.ALL.Active' | translate }}</th>
                         <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
                     </tr>
@@ -23,6 +24,9 @@
                             <a [routerLink]="['detail']" [state]="{ groupId: row.groupId }">
                                 {{row.groupName}}
                             </a>
+                        </td>
+                        <td class="text-center">
+                            {{row.description}}
                         </td>
                         <td class="text-center text-green-600 w-1">
                             @if(row.active){

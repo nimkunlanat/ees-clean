@@ -15,4 +15,6 @@ public class Etrt06Controller : BaseController
     [HttpGet("detail")]
     public async Task<ActionResult> Detail([FromQuery] Detail.Query query) => Ok(await Mediator.Send(query));
 
+    [HttpPost("saveForm")]
+    public async Task<ActionResult> SaveForm([FromBody] SaveForm.Command command) => Ok(await Mediator.Send(command));
 }

@@ -11,5 +11,6 @@ public class SkillMatrixGroupConfiguration : BaseConfiguration<SkillMatrixGroup>
         base.Configure(builder);
         builder.ToTable("skill_matrix_group", "et");
         builder.HasKey(e => e.GroupId);
+        builder.HasMany(e => e.SkillMatrixSubjects).WithOne().HasForeignKey(o => o.GroupId).OnDelete(DeleteBehavior.Cascade);
     }
 }

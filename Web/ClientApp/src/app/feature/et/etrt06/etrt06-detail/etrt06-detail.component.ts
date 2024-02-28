@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NotifyService } from '@app/core/services/notify.service';
 import { ModalService } from '@app/shared/components/modal/modal.service';
 import { RowState } from '@app/shared/types/data.types';
+import { Observable, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'x-etrt06-detail',
@@ -30,7 +31,7 @@ export class Etrt06DetailComponent {
     private md: ModalService) {
     this.activatedRoute.data.subscribe(({ skillMatrixGroup }) => {
       console.log(skillMatrixGroup);
-      
+
       this.skillMatrixGroup = skillMatrixGroup ?? new SkillMatrixGroup()
       this.createForm()
       this.rebuildForm()
@@ -39,7 +40,7 @@ export class Etrt06DetailComponent {
 
   createForm() {
     this.form = this.fb.group({
-      groupId: [null, [Validators.required, Validators.maxLength(50)]],
+      groupId: [null, [Validators.maxLength(50)]],
       groupName: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9#$^+=!*(){}\[\]@%& /\\]+$/)]],
       description: [null, [Validators.required, Validators.pattern(/^[ก-ฮa-zA-Z0-9#$^+=!*(){}\[\]@%& /\\]+$/)]],
       active: true,
@@ -55,10 +56,10 @@ export class Etrt06DetailComponent {
   createFormDetail(skillMatrixSubject: SkillMatrixSubject) {
     const fg: FormGroup = this.fb.group({
       subjectId: null,
-      groupId:null,
+      groupId: null,
       subjectGroup: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/), Validators.maxLength(10)]],
-      subjectName:  [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/), Validators.maxLength(10)]],
-      description: [null, [Validators.required, Validators.pattern(/^[a-zA-Z#$.' ^+=!*(){}\[\]@%& /\\]+$/)]],
+      subjectName: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/), Validators.maxLength(10)]],
+      description: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9#$^+=!*(){}\[\]@%& /\\]+$/)]],
       active: true,
       rowState: null,
       rowVersion: null
@@ -77,7 +78,7 @@ export class Etrt06DetailComponent {
   rebuildForm() {
     this.deletes = [];
     this.form.patchValue(this.skillMatrixGroup)
-    
+
     if (this.skillMatrixGroup.groupId) {
 
       this.form.controls["groupName"]
@@ -85,21 +86,51 @@ export class Etrt06DetailComponent {
       this.form.controls["rowState"].setValue(RowState.Normal)
     }
     else this.form.controls["rowState"].setValue(RowState.Add)
-    
+
     this.skillMatrixGroup.skillMatrixSubjects.map(m => m.form = this.createFormDetail(m))
     this.form.markAsPristine();
     this.skillMatrixGroup.skillMatrixSubjects.forEach(f => f.form.markAsPristine())
   }
 
-    add() {
+  add() {
+    let skillMatrixSubjects = new SkillMatrixSubject();
+    skillMatrixSubjects.rowState = RowState.Add;
+    skillMatrixSubjects.form = this.createFormDetail(skillMatrixSubjects);
+    this.skillMatrixGroup.skillMatrixSubjects.push(skillMatrixSubjects);
+  }
 
+  remove(SkillMatrixSubjects: SkillMatrixSubject) {
+    if (SkillMatrixSubjects.form?.controls['rowState'].value != RowState.Add) {
+      SkillMatrixSubjects.form?.controls['rowState'].setValue(RowState.Delete);
     }
 
-    save(){
+    this.deletes.push(SkillMatrixSubjects)
+    this.skillMatrixGroup.skillMatrixSubjects = this.skillMatrixGroup.skillMatrixSubjects.filter((skillMatrixSubjects: SkillMatrixSubject) => skillMatrixSubjects.guid != SkillMatrixSubjects.guid);
+  }
 
-    }
+  validate = () => this.form.invalid
 
-    remove(){
-      
+  saveForm() {
+    if (this.validate()) {
+      this.ms.warning("message.STD000013");
+      this.form.markAllAsTouched();
+      this.skillMatrixGroup.skillMatrixSubjects.forEach(f => f.form.markAllAsTouched())
     }
+    else {
+      const data: SkillMatrixGroup = this.form.getRawValue();
+      data["skillMatrixSubjects"] = [...this.skillMatrixGroup.skillMatrixSubjects.map(m => m.form.getRawValue()), ...this.deletes.map(m => m.form.getRawValue()).filter(f => f.rowState != RowState.Add)];
+      data["skillMatrixSubjects"].filter(f => f.groupId == null).forEach(f => {
+        f.groupId = this.form.controls["groupId"].value;
+      })
+      if (data.rowVersion) data.rowState = RowState.Edit;
+      else data.rowState = RowState.Add;
+      this.sv.saveForm(data).pipe(
+        switchMap((skillMatrixGroup: any) => this.sv.detail(skillMatrixGroup.groupId))
+      ).subscribe((res: any) => {
+        this.ms.success("message.STD00014")
+        this.skillMatrixGroup = res
+        this.rebuildForm()
+      })
+    }
+  }
 }

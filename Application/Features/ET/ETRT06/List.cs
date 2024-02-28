@@ -31,11 +31,14 @@ public class List
         {
             StringBuilder sql = new StringBuilder();
 
-            sql.AppendLine(@"select smg.group_id ""groupId"", smg.group_name ""groupName""
+            sql.AppendLine(@"select smg.group_id ""groupId""
+                             , smg.group_name ""groupName""
                              , smg.active ""active""
+                             , smg.description ""description""
+                             , smg.xmin ""rowVersion""
                             from et.skill_matrix_group smg");
 
-            if (request.Keywords != null) sql.AppendLine(@"where concat(smg.group_name) ilike concat('%',@Keywords,'%')");
+            if (request.Keywords != null) sql.AppendLine(@"where concat(smg.group_name, smg.description) ilike concat('%',@Keywords,'%')");
 
             sql.AppendLine("order by smg.group_name");
 

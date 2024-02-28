@@ -15,4 +15,7 @@ export class Etrt06Service {
   delete = (groupName: any) => this.http.delete("etrt06/delete", { params: { groupName } })
 
   detail = (groupId: any): Observable<SkillMatrixGroup> => this.http.get<SkillMatrixGroup>("etrt06/detail", { params: { groupId } })
+
+  saveForm = (data) => this.http.post('etrt06/saveForm', data);
+
 }
