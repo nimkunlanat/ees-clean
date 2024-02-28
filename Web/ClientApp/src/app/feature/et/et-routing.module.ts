@@ -4,7 +4,7 @@ import { Etdt02Component } from './etdt02/etdt02.component';
 import { Approves, documentApproves } from './etdt02/etdt02.resolver';
 import { Etdt01Component } from './etdt01/etdt01.component';
 import { Etdt01SkillComponent } from './etdt01/etdt01-skill/etdt01-skill.component';
-import { etdt01Resolver, etdt01SkillResolver} from './etdt01/etdt01.resolver';
+import { Assessment, etdt01, etdt01SkillResolver} from './etdt01/etdt01.resolver';
 import { Etrt05Component } from './etrt05/etrt05.component';
 import { Etdt02DocumentComponent } from './etdt02/etdt02-document/etdt02-document.component';
 import { roleList, evaluationList, evaluationDetail } from './etrt05/etrt05.resolver';
@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'etdt02', component: Etdt02Component, title: 'Approve', resolve : {Approves, documentApproves} ,data: { code: 'etdt02' } },
   { path: 'etdt02/etdt02-document', component: Etdt02DocumentComponent, title: 'Approve', resolve : {Approves} , data : { code : 'etdt02'}},
   { path: 'etrt06', component: Etrt06Component, title: 'Skill Matrix Management', resolve: { etrt06Resolver }, data: { code: 'etrt06' } },
-  { path: 'etrt06/detail', component: Etrt06DetailComponent, title: 'Skill Matrix Management', resolve: { etrt06Resolver, skillMatrixGroup }, data: { code: 'etrt06' } },
+  { path: 'etrt06/detail', component: Etrt06DetailComponent, title: 'Skill Matrix Management', resolve: { etrt06Resolver, skillMatrixGroup }, data: { code: 'etrt06' } }
 ];
 
 @NgModule({

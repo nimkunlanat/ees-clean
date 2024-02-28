@@ -2,13 +2,13 @@
   <div class="col-12">
       <div class="card">
           <breadcrumb [items]="breadcrumbItems"></breadcrumb>
-          <div class="grid"[formGroup]="provinceForm">
-            <div class="col-3">
-              <dropdown class="w-full" formControlName="province" [items]="master.province" [disabled]="true"></dropdown>
-            </div>
-            <div class="col-3">
-              <dropdown class="w-full" formControlName="district" [items]="master.district" [disabled]="true"></dropdown>
-            </div>
+          <div class="grid">
+              <div class="col-3"[formGroup]="provinceForm">
+                <dropdown class="w-full" formControlName="province" [items]="master.province" [disabled]="true"></dropdown>
+              </div>
+              <div class="col-3"[formGroup]="provinceForm">
+                <dropdown class="w-full" formControlName="district" [items]="master.district" [disabled]="true"></dropdown>
+              </div>
             <div class="col-3 flex align-items-end ">
               <textbox  class="w-full" [placeholder]="'label.ALL.Search' | translate" icon="pi pi-search" [hasLabel]="false" [(ngModel)]="resetSearch"
                   (onInput)="search($event)">
