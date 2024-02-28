@@ -10,9 +10,10 @@ import { Router } from '@angular/router';
 export class Etdt01Component {
   constructor(
   private router: Router){
+
   }
 
-  createform(status: string){
-    this.router.navigate(['/et/etdt01/assessment'] , {state: {status: status}});
+  createform(){
+    this.router.navigateByUrl('et/etdt01/assessment');
   }
 }

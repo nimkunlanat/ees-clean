@@ -8,14 +8,8 @@ namespace Web.Controllers.ET;
 public class Etdt01Controller : BaseController
 {
     [AllowAnonymous]
-    [HttpGet("listAssessment")]
-    public async Task<ActionResult> ListAssessment([FromQuery] ListAssessment.Query query) => Ok(await Mediator.Send(query));
-
-    [HttpGet("listSkillmatrix")]
-    public async Task<ActionResult> ListSkillmatrix([FromQuery] ListSkillmatrix.Query query) => Ok(await Mediator.Send(query));
-
-    [HttpGet("calculate")]
-    public async Task<ActionResult> Calculate([FromQuery] Calculate.Query query) => Ok(await Mediator.Send(query));
+    [HttpGet("list")]
+    public async Task<ActionResult> List([FromQuery] List.Query query) => Ok(await Mediator.Send(query));
 
     [HttpGet("detail")]
     public async Task<ActionResult> Detail([FromQuery] Detail.Query query) => Ok(await Mediator.Send(query));

@@ -1,6 +1,6 @@
 <div class="grid">
   <div class="col-12">
-    <div class="card" style="border: none; background-color: rgba(201, 208, 211, 0.16)" >
+    <div class="card" style="background-color: rgba(201, 208, 211, 0.16)" >
       <div class="col-12">
       <div class="grid flex justify-content-between flex-column lg:flex-row lg:p-fluid">
         <div class="flex justify-content-start ">
@@ -10,9 +10,8 @@
           </span>
         </div>
 
-          <div class="flex justify-content-end" [formGroup]="form">
-            <dropdown class="mx-1"
-            formControlName="statusName"
+          <div class="flex justify-content-end ">
+            <dropdown class="mx-1 "
             [items]="status"
             [disabled]="true"
             ></dropdown>
@@ -67,16 +66,6 @@
                 {{ "label.ETDT01.email" | translate }} :
                 {{ this.data.email }}
               </p>
-              <div class="flex">
-              <p class="mr-4">
-                {{ 'label.ETDT01.Startdate' | translate }}
-                <calendar formControlName="dateFrom" [floatLabel]="true" (ngModelChange)="search()"></calendar>
-                </p>
-              <p>
-                {{ 'label.ETDT01.Duedate' | translate }}
-                <calendar formControlName="dateTo" [floatLabel]="true" (ngModelChange)="search()"></calendar>
-              </p>
-              </div>
             </div>
           </div>
         </div>
@@ -95,6 +84,12 @@
                 <h1 style="font-size: 100px;">{{ grade.grade }}</h1>
               </div>
             </td>
+            <!-- <td class="col-6">
+              <div class="card" style="background-color: {{grade.color}}; text-align: center;
+              padding-top: 1px; padding-bottom: 1px; padding-right: 50px; padding-left: 50px;">
+                <h1 style="font-size: 100px;">{{grade.grade}}</h1>
+              </div>
+            </td> -->
             <i class="pi pi-question-circle flex justify-content-end"
             pTooltip="Grade
             90 - 100  = A
@@ -107,18 +102,18 @@
         </table>
       </div>
 
-      <div class="card" *ngFor="let item of listAssessment ">
+      <div class="card" *ngFor="let item of list ">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%;">
         <h1 style="margin: 0;">{{item.evaluateGroupName}}</h1>
-          <number [minFractionDigits]="0" [maxFractionDigits]="2"  [disabled]="true" [value]="item.totalPoints">Full score : {{item.totalPoint}}</number>
+          <textbox style="width: 15%;" [disabled]="true" [value]="item.totalPoints">Full score : {{item.totalPoint}}</textbox>
         </div>
-        <hr>
+        <hr/>
 
         <div *ngFor="let itemDetail of item.listDetail; let i = index" [formGroup]="itemDetail.form">
           <div class="flex" *ngIf="item.evaluateGroupCode == itemDetail.evaluateGroupCode">
             <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%;">
             <p style="font-size: 18px; margin-right: 10px;">{{itemDetail.evaluateDetailName}}</p>
-            <number [min]="0" [max]="itemDetail.point" [minFractionDigits]="0" [maxFractionDigits]="2" style=" margin: 20px; "[floatLabel]="true"
+            <number [min]="0" [max]="itemDetail.point" style=" margin: 15px;"[floatLabel]="true"
             [formControlName]="'point'+i" (ngModelChange)="getTotalWork(item.evaluateGroupCode , i)">Full score : {{itemDetail.point}}</number>
             </div>
           </div>

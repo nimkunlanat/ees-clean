@@ -3,8 +3,7 @@
       <div class="card">
         <div class="flex flex-wrap py-4 justify-content-between flex-column lg:flex-row lg:p-fluid">
           <h1>{{'label.ETDT01.ProgramName' | translate }}</h1>
-          <button icon="pi pi-file" [label]="'label.ETDT01.createform' | translate" (click)="createform('Draft')"></button>
-          <!-- <button icon="pi pi-folder" [routerLink]="['assessment']" [state]="{Draft : 'Draft'}"></button> -->
+          <button icon="pi pi-file" [label]="'label.ETDT01.createform' | translate" (click)="createform()"></button>
         </div>
           <datatable [rows]="">
               <ng-template pTemplate="header">
