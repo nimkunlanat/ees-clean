@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { DocumentApproved } from '@app/models/et/documentApproved';
+import { Guid } from 'guid-typescript';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,9 +9,20 @@ import { Observable } from 'rxjs';
 })
 export class Etdt01Service {
   constructor(private http: HttpClient) { }
-  list = (): Observable<any[]> => this.http.disableLoading().get<any[]>("etdt01/list")
+  listAssessment = (): Observable<any[]> => this.http.disableLoading().get<any[]>("etdt01/listAssessment")
 
-  // detail = (ProvinceCode:Guid) => this.http.get<Province>('etdt01/detail', { params: { ProvinceCode : ProvinceCode.toString()} })
+  listSkillmatrix = (): Observable<any[]> => this.http.disableLoading().get<any[]>("etdt01/listSkillmatrix")
 
-  // save = (data:Province) => this.http.post("etdt01/update", data);
+  calculate = (DateFrom?: Date, DateTo?: Date): Observable<any[]> => {
+    return this.http.disableLoading().get<any[]>("etdt01/calculate", {
+        params: {
+            dateFrom: DateFrom?.toISOString(),
+            dateTo: DateTo?.toISOString()
+        }
+    });
+}
+
+  detail = (DocumentNo:Guid) => this.http.get<DocumentApproved>('etdt01/detail', { params: { DocumentNo : DocumentNo.toString()} })
+
+  save = (data:DocumentApproved) => this.http.post("etdt01/update", data);
 }

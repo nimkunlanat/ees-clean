@@ -17,12 +17,12 @@ import { Etrt05EvaluationComponent } from './etrt05/etrt05-evaluation/etrt05-eva
 
 @NgModule({
   declarations: [
-    Etrt05Component,
     Etdt01Component,
-    Etdt02Component,
     Etdt01SkillComponent,
     Etdt01AssessmentComponent,
+    Etdt02Component,
     Etdt02DocumentComponent,
+    Etrt05Component,
     Etrt05DetailComponent,
     Etrt06Component,
     Etrt06DetailComponent,
