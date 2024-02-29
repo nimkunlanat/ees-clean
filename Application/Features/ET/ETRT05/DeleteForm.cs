@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Application.Features.ET.ETRT05;
 
-public class Delete
+public class DeleteForm
 {
     public class Command : ICommand
     {
-        public string EvaluateGroupCode { get; set; }
+        public string RoleCode { get; set; }
 
     }
     public class Handler : IRequestHandler<Command, Unit>
@@ -22,8 +22,8 @@ public class Delete
         public Handler(ICleanDbContext context) => _context = context;
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            EvaluateGroup evaluationGroup = await _context.Set<EvaluateGroup>().Where(w => w.EvaluateGroupCode == request.EvaluateGroupCode).Include(i => i.EvaluateDetails).FirstOrDefaultAsync();
-            _context.Set<EvaluateGroup>().Remove(evaluationGroup);
+            EvaluateForm evaluateForm = await _context.Set<EvaluateForm>().Where(w => w.RoleCode == request.RoleCode).Include(i => i.EvaluateGroups).FirstOrDefaultAsync();
+            _context.Set<EvaluateForm>().Remove(evaluateForm);
             await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

@@ -11,6 +11,8 @@ import { Etdt01AssessmentComponent } from './etdt01/etdt01-assessment/etdt01-ass
 import { Etdt02DocumentComponent } from './etdt02/etdt02-document/etdt02-document.component';
 import { Etrt05DetailComponent } from './etrt05/etrt05-detail/etrt05-detail.component';
 import { Etrt06Component } from './etrt06/etrt06.component';
+import { Etrt06DetailComponent } from './etrt06/etrt06-detail/etrt06-detail.component';
+import { Etrt05EvaluationComponent } from './etrt05/etrt05-evaluation/etrt05-evaluation.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { Etrt06Component } from './etrt06/etrt06.component';
     Etdt02DocumentComponent,
     Etrt05Component,
     Etrt05DetailComponent,
-    Etrt06Component
+    Etrt06Component,
+    Etrt06DetailComponent,
+    Etrt05EvaluationComponent,
   ],
   imports: [
     CommonModule,

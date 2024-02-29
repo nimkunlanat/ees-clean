@@ -159,7 +159,7 @@ public class ErrorHandlingMiddleware
 
     private string GetExceptionMessage(Exception exception)
     {
-        if (exception.Message.Contains("Value cannot be null") && ((System.ArgumentException)exception).ParamName == "entity") return "message.STD00011";
+        if (exception.Message.Contains("Value cannot be null") && ((System.ArgumentException)exception).ParamName == "entity") return "message.STD00019";
         else if (string.IsNullOrEmpty(exception.Message)) return "Error";
         else return exception.Message;
     }
