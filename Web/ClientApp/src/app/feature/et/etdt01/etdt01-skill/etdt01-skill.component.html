@@ -39,36 +39,36 @@
                 <div class="matrix-box">
                   <div *ngFor="let skill of filterSkill; let i = index">
                     <div class="mb-4 flex justify-content-between flex-column lg:flex-row lg:p-fluid">
-                      <div class="card matrix-style" style="display: flex; flex-direction: column; justify-content: space-between;
-                      align-items: center; justify-content: center;">
+                      <div class="card matrix-style" style="display: flex; flex-direction: column; justify-content:space-between;
+                      align-items: center;">
                        <div style="position: absolute; top: -35px;"><p>{{skill.headerName}}</p></div>
                        <div *ngFor="let item of skill.groupItems">
                            <!-- ถ้าเป็น A ให้ใช้สีเขียววูปออกมา -->
-                           <div class="card" *ngIf="item.expectedGrade == 'A'" style="background-color: #25BF6C;
+                           <div class="card mt-8" *ngIf="item.expectedGrade == 'A'" style="background-color: #25BF6C;
                              text-align: center; width: 150px; height: 150px; display: flex;
                              justify-content: center; align-items: center;">
                              <h1 style="font-size: 80px;">{{item.expectedGrade}}</h1>
                            </div>
                            <!-- ถ้าเป็น B ให้ใช้สีเขียววูปออกมา -->
-                           <div class="card" *ngIf="item.expectedGrade == 'B'" style="background-color: #95B2EA;
+                           <div class="card mt-8" *ngIf="item.expectedGrade == 'B'" style="background-color: #95B2EA;
                              text-align: center; width: 150px; height: 150px; display: flex;
                              justify-content: center; align-items: center;">
                              <h1 style="font-size: 80px;">{{item.expectedGrade}}</h1>
                            </div>
                            <!-- ถ้าเป็น C ให้ใช้สีเขียววูปออกมา -->
-                           <div class="card" *ngIf="item.expectedGrade == 'C'" style="background-color: #E3DB34;
+                           <div class="card mt-8" *ngIf="item.expectedGrade == 'C'" style="background-color: #E3DB34;
                              text-align: center; width: 150px; height: 150px; display: flex;
                              justify-content: center; align-items: center;">
                              <h1 style="font-size: 80px;">{{item.expectedGrade}}</h1>
                            </div>
                            <!-- ถ้าเป็น D ให้ใช้สีเขียววูปออกมา -->
-                           <div class="card" *ngIf="item.expectedGrade == 'D'" style="background-color: #FFAF14;
+                           <div class="card mt-8" *ngIf="item.expectedGrade == 'D'" style="background-color: #FFAF14;
                              text-align: center; width: 150px; height: 150px; display: flex;
                              justify-content: center; align-items: center;">
                              <h1 style="font-size: 80px;">{{item.expectedGrade}}</h1>
                            </div>
                            <!-- ถ้าเป็น D ให้ใช้สีเขียววูปออกมา -->
-                           <div class="card" *ngIf="item.expectedGrade == 'N/A'" style="background-color: #D9D9D9;
+                           <div class="card mt-8" *ngIf="item.expectedGrade == 'N/A'" style="background-color: #D9D9D9;
                              text-align: center; width: 150px; height: 150px; display: flex;
                              justify-content: center; align-items: center;">
                              <h1 style="font-size: 70px;">{{item.expectedGrade}}</h1>
