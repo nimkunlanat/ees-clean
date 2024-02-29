@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Entities.ET
 {
     public class DocumentApproved : EntityBase
     {
-            public int DbNumber { get; set; }
-            public string EmployeeCode { get; set; }
-            public Boolean Active { get; set; }
+        public string EmployeeCode { get; set; }
+        public string EvaluationStatus { get; set; }
+        public Guid DocumentNo { get; set; }
+        public string ApproveBy { get; set; }
+        public int Evaluated { get; set; }
+        public int? NotEvaluated { get; set; }
+
     }
 }

@@ -1,1 +1,113 @@
-<p>etdt01-skill works!</p>
+<div class="grid">
+  <div class="col-12">
+    <div class="card" style="border: none; background-color: rgba(201, 208, 211, 0.16)" >
+      <div class="col-12">
+      <div class="grid flex justify-content-between flex-column lg:flex-row lg:p-fluid">
+        <div class="flex justify-content-start ">
+          <span class="p-buttonset">
+          <button class="border-0"  style="background-color: rgb(224,100,78)"  [label]="'label.ETDT01.AssessmentForm' | translate" (click)="next()"></button>
+          <button class="border-0" [disabled]="true" style="background-color: rgba(234,198,191)" [label]="'label.ETDT01.SkillForm' | translate" ></button>
+        </span>
+      </div>
+        <div class="flex justify-content-end ">
+            <dropdown class="mx-1 "
+            [items]="status"
+            ></dropdown>
+            <button
+              class="border-0"
+              style="background-color: rgb(15, 177, 246)"
+              [label]="'label.ETDT01.SaveAndSend' | translate"
+              icon="pi pi-send"
+            ></button>
+            <button
+              class="mx-1 border-0"
+              style="background-color: rgb(63, 164, 132)"
+              [label]="'label.ALL.Save' | translate"
+              icon="pi pi-save"
+            ></button>
+            <button
+              class="border-0"
+              style="background-color: rgb(220, 100, 80)"
+              [label]="'label.ALL.Cancel' | translate"
+              icon="pi pi-times"
+              (click)="cancel()"
+            ></button>
+          </div>
+        </div>
+      </div>
+      <br>
+                <div class="matrix-box">
+                  <div *ngFor="let skill of filterSkill; let i = index">
+                    <div class="mb-4 flex justify-content-between flex-column lg:flex-row lg:p-fluid">
+                      <div class="card matrix-style" style="display: flex; flex-direction: column; justify-content: space-between;
+                      align-items: center; justify-content: center;">
+                       <div style="position: absolute; top: -35px;"><p>{{skill.headerName}}</p></div>
+                       <div *ngFor="let item of skill.groupItems">
+                           <!-- ถ้าเป็น A ให้ใช้สีเขียววูปออกมา -->
+                           <div class="card" *ngIf="item.expectedGrade == 'A'" style="background-color: #25BF6C;
+                             text-align: center; width: 150px; height: 150px; display: flex;
+                             justify-content: center; align-items: center;">
+                             <h1 style="font-size: 80px;">{{item.expectedGrade}}</h1>
+                           </div>
+                           <!-- ถ้าเป็น B ให้ใช้สีเขียววูปออกมา -->
+                           <div class="card" *ngIf="item.expectedGrade == 'B'" style="background-color: #95B2EA;
+                             text-align: center; width: 150px; height: 150px; display: flex;
+                             justify-content: center; align-items: center;">
+                             <h1 style="font-size: 80px;">{{item.expectedGrade}}</h1>
+                           </div>
+                           <!-- ถ้าเป็น C ให้ใช้สีเขียววูปออกมา -->
+                           <div class="card" *ngIf="item.expectedGrade == 'C'" style="background-color: #E3DB34;
+                             text-align: center; width: 150px; height: 150px; display: flex;
+                             justify-content: center; align-items: center;">
+                             <h1 style="font-size: 80px;">{{item.expectedGrade}}</h1>
+                           </div>
+                           <!-- ถ้าเป็น D ให้ใช้สีเขียววูปออกมา -->
+                           <div class="card" *ngIf="item.expectedGrade == 'D'" style="background-color: #FFAF14;
+                             text-align: center; width: 150px; height: 150px; display: flex;
+                             justify-content: center; align-items: center;">
+                             <h1 style="font-size: 80px;">{{item.expectedGrade}}</h1>
+                           </div>
+                           <!-- ถ้าเป็น D ให้ใช้สีเขียววูปออกมา -->
+                           <div class="card" *ngIf="item.expectedGrade == 'N/A'" style="background-color: #D9D9D9;
+                             text-align: center; width: 150px; height: 150px; display: flex;
+                             justify-content: center; align-items: center;">
+                             <h1 style="font-size: 70px;">{{item.expectedGrade}}</h1>
+                           </div>
+                           <div class="card mb-4" style="background-color: rgba(201, 208, 211, 0.16); width: 150px; display: flex; justify-content: center; align-items: center;
+                             padding-bottom: 0; padding-top: 0; padding-left: 10px; padding-right: 10px;">
+                             <p style="text-align: center;">Expected Grade</p>
+                           </div>
+                       </div>
+                     </div>
+                      <div class="card w-full matrix-style mb-4">
+                          <div style="position: absolute; top: -30px;"><p>{{skill.headerName}}</p></div>
+                          <div class="col-full">
+                                <div *ngFor="let item of skill.groupItems">
+                                  <h1 style="margin-top: 0px;">{{item.subjectName}}</h1>
+                                  <div class="card flex" style="background-color: rgba(201, 208, 211, 0.16); display: flex; justify-content: space-between;">
+
+                                    <div class="flex-direction mt-3" style="display: flex; flex-direction: column; ">
+                                        <radio [vertical]="true" [items]="item.groupItemsDetail" [ngModel]="item['score']" (ngModelChange)="radiochange($event , item)"></radio>
+                                    </div>
+
+                                    <div class="flex-direction">
+                                      <div class="card mb-3" [ngStyle]="{ 'background-color': getBackgroundColor(item['score']) }" style="text-align: center;
+                                      width: 140px; height: 150px; display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+                                            <h1 style="font-size: 100px;">{{ getGrade(item['score']) }}</h1>
+                                        </div>
+
+                                      <div class="card" style=" width: 140px;
+                                      display: flex; justify-content: center; align-items: center; padding-bottom: 0; padding-top: 0;">
+                                        <p style="text-align: center; font-size: 15px;">My Grade</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    </div>
+  </div>
+

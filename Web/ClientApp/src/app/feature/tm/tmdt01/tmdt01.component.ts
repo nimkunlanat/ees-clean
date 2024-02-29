@@ -136,7 +136,7 @@ export class Tmdt01Component {
   }
 
   getTeam(event) {
-    // console.log(event)
+    console.log(event)
     this.setDataTosave = event;
   }
 

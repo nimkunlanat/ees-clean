@@ -1,50 +1,28 @@
-<div class="grid">
-    <div class="col-12">
-        <div class="card">
-            <h5>{{ 'label.ETDT02.ProgramName' | translate }}</h5>
-            <div class="flex flex-wrap py-4 justify-content-between gap-3 flex-column lg:flex-row lg:p-fluid">
-                <textbox [placeholder]="'label.ALL.Search' | translate" icon="pi pi-search" [hasLabel]="false"
-                    (onInput)="search($event)" class="w-full lg:w-6">
-                </textbox>
+<div class="col-12">
+    <div class="card">
+        <h5>{{ 'label.ETDT02.Document' | translate }}</h5>
+        <div class="grid p-fluid">
+            <div class="col-12 lg:col-6">
+                <div class="card flex flex-column align-items-center">
+                    <h5 class="text-left w-full"[routerLink]="'etdt02-document'"[state]="{assessment: 'AssessmentNo1'}">{{ 'label.ETDT02.AssessmentNo.1' | translate }}</h5>
+                    <p-chart type="doughnut" [data]="pieData1" [options]="pieOptions1"></p-chart>
+                </div>
             </div>
-            <datatable [rows]="Approves">
-                <ng-template pTemplate="header">
-                    <tr>
-                        
-                        <th class="text-center">{{ 'label.ETDT02.DbNumber' | translate}} </th>
-                        <th class="text-center">{{ 'label.ETDT02.DocumentApproveCode' | translate }}</th>
-                        <th class="text-center">{{ 'label.ETDT02.CreatedDate' | translate }} </th>
-                        <th class="text-center">{{ 'label.ETDT02.EmployeeCode' | translate }} </th>
-                        <th class="text-center">{{ 'label.ETDT02.EmployeeName' | translate }} </th>
-                        <th class="text-center">{{ 'label.ETDT02.Active' | translate }}</th>
-                        <th class="text-center">{{ 'label.ETDT02.CreatedBy' | translate }}</th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-row>
-                    <tr>
-                      <td class="text-center">
-                      <a [routerLink]="['detail']" [state]="{ DbNumber: row.DbNumber }">
-                        {{row.DbNumber}}
-                      </a>
-                      </td>
-                        <td class="text-center">{{row.DbNumber}}</td>
-                        <td class="text-center">{{row.CreatedDate}}</td>
-                        <td class="text-center">{{row.EmployeeCode}}</td>
-                        <td class="text-center">{{row.EmployeeName}}</td>
-                        <td class="text-center">{{row.Active}}</td>
-                        <td class="text-center">{{row.CreatedBy}}</td>
-                        <td class="text-center">{{row.DocumentApproveCode}}</td>
-                        <td class="text-center text-green-600 w-1">
-                            @if(row.active){
-                            <i class="pi pi-check" ></i>
-                            }</td>
-                        <!-- <td class="text-center w-1">
-                              <button icon="pi pi-trash" (click)="delete(row.employeeCode)"></button>
-                        </td> -->
-                    </tr>
-                </ng-template>
-            </datatable>
+            <div class="col-12 lg:col-6">
+                    <div class="card flex flex-column align-items-center">
+                    <h5 class="text-left w-full"[routerLink]="'etdt02-document'"[state]="{assessment: 'AssessmentNo2'}">{{ 'label.ETDT02.AssessmentNo.2' | translate }}</h5>
+                    <p-chart type="doughnut" [data]="pieData2" [options]="pieOptions2"></p-chart>
+                </div>
+            </div>
+            <ng-template pTemplate="body" let-row>
+                <tr>
+                  <td class="text-center">
+                    <a [routerLink]="'etdt02-document'" [state]="{ createdDate: row.createdDate }">
+                        {{row.createdDate}}
+                    </a>
+                  </td>
+                </tr>
+            </ng-template>
         </div>
-    </div> 
+    </div>
 </div>
-  

@@ -222,7 +222,8 @@ dragStart(event){
         element.children.map(m => m['headUser'] = element.data.userId)
         this.changeDataForSave(element.children);
         return;
-      }else {
+      }
+      else {
         let check = this.teamForSave.filter(f => f.data.name === element.data.name)
         element.children = []
         if(check.length === 0 || this.teamForSave.length === 0) this.teamForSave.unshift(element)
