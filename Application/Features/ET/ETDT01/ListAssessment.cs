@@ -6,7 +6,7 @@ using System.Threading;
 using System.Collections.Generic;
 
 namespace Application.Features.ET.ETDT01;
-public class List
+public class ListAssessment
 {
     public class Query : IRequest<AssessmentDTO>
     {
@@ -22,6 +22,7 @@ public class List
         public string Email { get; set; }
         public List<Evaluate> Evaluates { get; set; } = new List<Evaluate>();
         public List<EvaluateDetail> EvaluateDetails { get; set; } = new List<EvaluateDetail>();
+        public List<Status> Status { get; set; } = new List<Status>();
     }
     public class Evaluate
     {
@@ -38,10 +39,13 @@ public class List
         public int? Point { get; set; }
     }
 
-    public class SecondQuery : IRequest<List<Evaluate>>
+    public class Status
     {
-
+        public string value { get; set; }
+        public string label { get; set; }
+        public string seq { get; set; }
     }
+
 
     public class Handler : IRequestHandler<Query, AssessmentDTO>
     {
@@ -87,7 +91,7 @@ public class List
                                        	where e.user_id = @userId
                                         order by eg.sequene_id asc");
 
-            result.Evaluates = (List<Evaluate>)await _context.QueryAsync<Evaluate>(sql.ToString(), new 
+            result.Evaluates = (List<Evaluate>)await _context.QueryAsync<Evaluate>(sql.ToString(), new
             { userId = _user.UserId, Lang = _user.Language }, cancellationToken);
 
             sql = new StringBuilder();
@@ -102,8 +106,18 @@ public class List
                                         inner join db.employee e on e.position_code  = eg.role_code 
                                         where e.user_id = @userId
                                         order by ed.sequene_id asc");
-            result.EvaluateDetails = (List<EvaluateDetail>)await _context.QueryAsync<EvaluateDetail>(sql.ToString(), new 
+            result.EvaluateDetails = (List<EvaluateDetail>)await _context.QueryAsync<EvaluateDetail>(sql.ToString(), new
             { userId = _user.UserId, Lang = _user.Language }, cancellationToken);
+
+            sql = new StringBuilder();
+            sql.AppendLine(@"select code as value
+                                    ,case when :Lang = 'th' then s.desc_th else s.desc_en end as label
+                                    ,s.seq
+                                    from db.status s 
+                                    where table_name = 'ETDT01'
+                                    order by s.seq;");
+            result.Status = (List<Status>)await _context.QueryAsync<Status>(sql.ToString(), new
+            { Lang = _user.Language }, cancellationToken);
 
             return result;
         }

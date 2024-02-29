@@ -1,6 +1,6 @@
 <div class="grid">
   <div class="col-12">
-    <div class="card" style="background-color: rgba(201, 208, 211, 0.16)" >
+    <div class="card" style="border: none; background-color: rgba(201, 208, 211, 0.16)" >
       <div class="col-12">
       <div class="grid flex justify-content-between flex-column lg:flex-row lg:p-fluid">
         <div class="flex justify-content-start ">
@@ -11,7 +11,7 @@
       </div>
         <div class="flex justify-content-end ">
             <dropdown class="mx-1 "
-            [disabled]="true"
+            [items]="status"
             ></dropdown>
             <button
               class="border-0"
@@ -36,27 +36,78 @@
         </div>
       </div>
       <br>
-            <div class="flex justify-content-between flex-column lg:flex-row lg:p-fluid">
-              <div class="card mt-5" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <div class="card" style="background-color: #25BF6C; text-align: center; width: 150px; height: 150px; display: flex; justify-content: center; align-items: center;">
-                  <h1 style="font-size: 80px;">A</h1>
-                </div>
-                <div class="card" style="background-color: rgba(201, 208, 211, 0.16); width: 160px; height: 50px; display: flex; justify-content: center; align-items: center;">
-                  <p style="text-align: center;">Expected Grade</p>
-                </div>
-              </div>
-              <div class="card w-full ml-1 mr-1">
-                <p>Flowchart</p>
-                <hr>
-                <h1>1.Flowchart</h1>
-                  <div class="card" style="background-color: rgba(201, 208, 211, 0.16);">
-                  <p-radioButton [label]="'Grade A. Can design flow chart of the programs that they are responsible.' | translate"></p-radioButton><br><br>
-                  <p-radioButton [label]="'Grade B. Can explain How to use flowchart in real life and Can give an example.' | translate"></p-radioButton><br><br>
-                  <p-radioButton [label]="'Grade C. Understand flowchart symbol concept' | translate"></p-radioButton><br><br>
-                  <p-radioButton [label]="'Grade D. Can design flow chart of the programs that they are responsible.' | translate"></p-radioButton>
-                  </div>
-              </div>
-            </div>
+                <div class="matrix-box">
+                  <div *ngFor="let skill of filterSkill; let i = index">
+                    <div class="mb-4 flex justify-content-between flex-column lg:flex-row lg:p-fluid">
+                      <div class="card matrix-style" style="display: flex; flex-direction: column; justify-content: space-between;
+                      align-items: center; justify-content: center;">
+                       <div style="position: absolute; top: -35px;"><p>{{skill.headerName}}</p></div>
+                       <div *ngFor="let item of skill.groupItems">
+                           <!-- ถ้าเป็น A ให้ใช้สีเขียววูปออกมา -->
+                           <div class="card" *ngIf="item.expectedGrade == 'A'" style="background-color: #25BF6C;
+                             text-align: center; width: 150px; height: 150px; display: flex;
+                             justify-content: center; align-items: center;">
+                             <h1 style="font-size: 80px;">{{item.expectedGrade}}</h1>
+                           </div>
+                           <!-- ถ้าเป็น B ให้ใช้สีเขียววูปออกมา -->
+                           <div class="card" *ngIf="item.expectedGrade == 'B'" style="background-color: #95B2EA;
+                             text-align: center; width: 150px; height: 150px; display: flex;
+                             justify-content: center; align-items: center;">
+                             <h1 style="font-size: 80px;">{{item.expectedGrade}}</h1>
+                           </div>
+                           <!-- ถ้าเป็น C ให้ใช้สีเขียววูปออกมา -->
+                           <div class="card" *ngIf="item.expectedGrade == 'C'" style="background-color: #E3DB34;
+                             text-align: center; width: 150px; height: 150px; display: flex;
+                             justify-content: center; align-items: center;">
+                             <h1 style="font-size: 80px;">{{item.expectedGrade}}</h1>
+                           </div>
+                           <!-- ถ้าเป็น D ให้ใช้สีเขียววูปออกมา -->
+                           <div class="card" *ngIf="item.expectedGrade == 'D'" style="background-color: #FFAF14;
+                             text-align: center; width: 150px; height: 150px; display: flex;
+                             justify-content: center; align-items: center;">
+                             <h1 style="font-size: 80px;">{{item.expectedGrade}}</h1>
+                           </div>
+                           <!-- ถ้าเป็น D ให้ใช้สีเขียววูปออกมา -->
+                           <div class="card" *ngIf="item.expectedGrade == 'N/A'" style="background-color: #D9D9D9;
+                             text-align: center; width: 150px; height: 150px; display: flex;
+                             justify-content: center; align-items: center;">
+                             <h1 style="font-size: 70px;">{{item.expectedGrade}}</h1>
+                           </div>
+                           <div class="card mb-4" style="background-color: rgba(201, 208, 211, 0.16); width: 150px; display: flex; justify-content: center; align-items: center;
+                             padding-bottom: 0; padding-top: 0; padding-left: 10px; padding-right: 10px;">
+                             <p style="text-align: center;">Expected Grade</p>
+                           </div>
+                       </div>
+                     </div>
+                      <div class="card w-full matrix-style mb-4">
+                          <div style="position: absolute; top: -30px;"><p>{{skill.headerName}}</p></div>
+                          <div class="col-full">
+                                <div *ngFor="let item of skill.groupItems">
+                                  <h1 style="margin-top: 0px;">{{item.subjectName}}</h1>
+                                  <div class="card flex" style="background-color: rgba(201, 208, 211, 0.16); display: flex; justify-content: space-between;">
 
+                                    <div class="flex-direction mt-3" style="display: flex; flex-direction: column; ">
+                                        <radio [vertical]="true" [items]="item.groupItemsDetail" [ngModel]="item['score']" (ngModelChange)="radiochange($event , item)"></radio>
+                                    </div>
+
+                                    <div class="flex-direction">
+                                      <div class="card mb-3" [ngStyle]="{ 'background-color': getBackgroundColor(item['score']) }" style="text-align: center;
+                                      width: 140px; height: 150px; display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+                                            <h1 style="font-size: 100px;">{{ getGrade(item['score']) }}</h1>
+                                        </div>
+
+                                      <div class="card" style=" width: 140px;
+                                      display: flex; justify-content: center; align-items: center; padding-bottom: 0; padding-top: 0;">
+                                        <p style="text-align: center; font-size: 15px;">My Grade</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    </div>
   </div>
-</div>
+

@@ -9,7 +9,18 @@ import { Observable } from 'rxjs';
 })
 export class Etdt01Service {
   constructor(private http: HttpClient) { }
-  list = (): Observable<any[]> => this.http.disableLoading().get<any[]>("etdt01/list")
+  listAssessment = (): Observable<any[]> => this.http.disableLoading().get<any[]>("etdt01/listAssessment")
+
+  listSkillmatrix = (): Observable<any[]> => this.http.disableLoading().get<any[]>("etdt01/listSkillmatrix")
+
+  calculate = (DateFrom?: Date, DateTo?: Date): Observable<any[]> => {
+    return this.http.disableLoading().get<any[]>("etdt01/calculate", {
+        params: {
+            dateFrom: DateFrom?.toISOString(),
+            dateTo: DateTo?.toISOString()
+        }
+    });
+}
 
   detail = (DocumentNo:Guid) => this.http.get<DocumentApproved>('etdt01/detail', { params: { DocumentNo : DocumentNo.toString()} })
 
