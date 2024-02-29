@@ -82,7 +82,7 @@ public class ListSkillmatrix
                                         ,smsg.score ""Score""
                                         ,e.form_skill ""FormSkill""
                                         ,sms.xmin ""rowVersion""
-                                        from et.skill_matrix_subject_grade smsg 
+                                        from et.skill_matrix_grade smsg 
                                         inner join et.skill_matrix_subject sms on sms.subject_id = smsg.subject_id 
                                         inner join et.skill_matrix_group smg on smg.group_id = sms.group_id
                                         inner join db.employee e on e.form_skill  = smg.group_name 
