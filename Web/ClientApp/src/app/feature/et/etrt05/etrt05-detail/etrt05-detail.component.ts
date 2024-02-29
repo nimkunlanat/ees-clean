@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EvaluationGroup } from '@app/models/et/evaluationGroup';
+import { EvaluateGroup } from '@app/models/et/evaluateGroup';
 import { Etrt05Service } from '../etrt05.service';
 import { ActivatedRoute } from '@angular/router';
 import { NotifyService } from '@app/core/services/notify.service';
 import { ModalService } from '@app/shared/components/modal/modal.service';
 import { RowState } from '@app/shared/types/data.types';
-import { EvaluateDetail } from '@app/models/et/evaluationDetail';
-import { Observable, of, switchMap } from 'rxjs';
+import { EvaluateDetail } from '@app/models/et/evaluateDetail';
+import { Observable, of, pipe, switchMap } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -16,12 +16,14 @@ import { MenuItem } from 'primeng/api';
 })
 export class Etrt05DetailComponent {
   form: FormGroup;
-  evaluationGroup: EvaluationGroup = new EvaluationGroup();
+  evaluationGroup: EvaluateGroup = new EvaluateGroup();
   deletes: EvaluateDetail[] = []
   breadcrumbItems: MenuItem[] = [
     { label: 'label.ETRT05.ProgramName', routerLink: '/et/etrt05' },
-    { label: 'label.ETRT05.Detail', routerLink: '/et/etrt05/detail' },
+    { label: 'label.ETRT05.EvaluationMangement', routerLink: '/et/etrt05/evaluation' },
+    { label: 'label.ETRT05.EvaluationProgramName', routerLink: '/et/etrt05/evaluation/detail' },
   ]
+  roleCode: string;
 
   constructor(
     private sv: Etrt05Service,
@@ -29,20 +31,27 @@ export class Etrt05DetailComponent {
     private fb: FormBuilder,
     private ms: NotifyService,
     private md: ModalService) {
-    this.activatedRoute.data.subscribe(({ evaluationGroup }) => {
-      this.evaluationGroup = evaluationGroup ?? new EvaluationGroup()
+    this.activatedRoute.data.subscribe(({ evaluationDetail, roleCode }) => {
+      this.evaluationGroup = evaluationDetail?.detail ?? new EvaluateGroup()
+      this.roleCode = evaluationDetail?.roleCode ?? roleCode
+      this.evaluationGroup.roleCode = this.roleCode
+      this.breadcrumbItems[1]["state"] = { roleCode: this.roleCode }
       this.createForm()
       this.rebuildForm()
+      this.form.controls["roleCode"].disable();
     })
   }
 
+  
+
   createForm() {
     this.form = this.fb.group({
+      roleCode: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9 /\\]+$/)]],
       evaluateGroupCode: [null, [Validators.required, Validators.maxLength(50)]],
       evaluateGroupNameTh: [null, [Validators.required, Validators.pattern(/^[ก-๙0-9#$^+=!*(){}\[\]@%& /\\]+$/)]],
       evaluateGroupNameEn: [null, [Validators.required, Validators.pattern(/^[a-zA-Z#$.' ^+=!*(){}\[\]@%& /\\]+$/)]],
-      totalPoint: [0,[Validators.required]],
-      sequeneId: [0,[Validators.required]],
+      totalPoint: [0,[Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      sequeneId: [0,[Validators.required, Validators.pattern(/^[0-9]+$/)]],
       active: true,
       rowState: null,
       rowVersion: null
@@ -56,12 +65,12 @@ export class Etrt05DetailComponent {
 
   createFormDetail(evaluationDetail: EvaluateDetail) {
     const fg: FormGroup = this.fb.group({
-      evaluateGroupCode: null,
+      evaluateGroupCode: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9 /\\]+$/)]],
       evaluateDetailCode: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/), Validators.maxLength(10)]],
       evaluateDetailNameTh: [null, [Validators.required, Validators.pattern(/^[ก-๙0-9#$^+=!*(){}\[\]@%& /\\]+$/)]],
       evaluateDetailNameEn: [null, [Validators.required, Validators.pattern(/^[a-zA-Z#$.' ^+=!*(){}\[\]@%& /\\]+$/)]],
-      point: [0,[Validators.required]],
-      sequeneId: [0,[Validators.required]],
+      point: [0,[Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      sequeneId: [0,[Validators.required, Validators.pattern(/^[0-9]+$/)]],
       active: true,
       rowState: null,
       rowVersion: null
@@ -83,7 +92,8 @@ export class Etrt05DetailComponent {
     this.form.patchValue(this.evaluationGroup)
     
     if (this.evaluationGroup.evaluateGroupCode) {
-      this.form.controls["evaluateGroupCode"].disable()
+      this.form.controls["roleCode"].disable();
+      this.form.controls["evaluateGroupCode"].disable();
       this.form.controls["evaluateGroupNameTh"]
       this.form.controls["evaluateGroupNameEn"]
       this.form.controls["totalPoint"]
@@ -91,14 +101,14 @@ export class Etrt05DetailComponent {
     }
     else this.form.controls["rowState"].setValue(RowState.Add)
     
-    this.evaluationGroup.evaluateDetails .map(m => m.form = this.createFormDetail(m))
+    this.evaluationGroup.evaluateDetails.map(m => m.form = this.createFormDetail(m))
     this.form.markAsPristine();
     this.evaluationGroup.evaluateDetails.forEach(f => f.form.markAsPristine())
   }
 
   add() {
     let evaluateDetails = new EvaluateDetail();
-    evaluateDetails.rowState = RowState.Add;
+     evaluateDetails.rowState = RowState.Add;
     evaluateDetails.form = this.createFormDetail(evaluateDetails);
     this.evaluationGroup.evaluateDetails.push(evaluateDetails);
   }
@@ -112,7 +122,9 @@ export class Etrt05DetailComponent {
     this.evaluationGroup.evaluateDetails = this.evaluationGroup.evaluateDetails.filter((evaluateDetails: EvaluateDetail) => evaluateDetails.guid != EvaluateDetails.guid);
   }
 
-  validate = (): boolean => (this.form.invalid || this.evaluationGroup.evaluateDetails.some(s => s.form.invalid))
+  //validate = (): boolean => (this.form.invalid || this.evaluationGroup.evaluateDetails.some(s => s.form.invalid))
+
+  validate = () => this.form.invalid
 
   save() {
     if (this.validate()) {
@@ -122,18 +134,20 @@ export class Etrt05DetailComponent {
     }
     else {
       const data = this.form.getRawValue();
+      console.log(data)
       data["evaluateDetails"] = [...this.evaluationGroup.evaluateDetails.map(m => m.form.getRawValue()), ...this.deletes.map(m => m.form.getRawValue()).filter(f => f.rowState != RowState.Add)];
       data["evaluateDetails"].filter(f => f.evaluateGroupCode == null).forEach(f => {
         f.evaluateGroupCode = this.form.controls["evaluateGroupCode"].value;
       })
+      if(data.rowVersion) data.rowState = RowState.Edit;
+      else data.rowState = RowState.Add;
       this.sv.save(data).pipe(
-        switchMap((evaluationGroup: EvaluationGroup) => this.sv.detail(evaluationGroup.evaluateGroupCode))
-      ).subscribe((res: EvaluationGroup) => {
-        this.ms.success("message.STD00014")
-        this.evaluationGroup = res
-        this.rebuildForm()
-       
-      })
+            switchMap((evaluationGroup: EvaluateGroup) => this.sv.detail(evaluationGroup.evaluateGroupCode))
+          ).subscribe((res: EvaluateGroup) => {
+            this.ms.success("message.STD00014")
+             this.evaluationGroup = res
+             this.rebuildForm()
+          })
     }
   }
   canDeactivate(): Observable<boolean> {

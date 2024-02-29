@@ -4,7 +4,9 @@ import { NotifyService } from '@app/core/services/notify.service';
 import { ModalService } from '@app/shared/components/modal/modal.service';
 import { Etrt05Service } from './etrt05.service';
 import { filter, switchMap } from 'rxjs';
-import { EvaluationGroup } from '@app/models/et/evaluationGroup';
+import { EvaluateGroup } from '@app/models/et/evaluateGroup';
+import { EvaluateForm } from '@app/models/et/evaluateForm';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'x-etrt05',
@@ -13,28 +15,30 @@ import { EvaluationGroup } from '@app/models/et/evaluationGroup';
 
 export class Etrt05Component {
 
-  evaluationGroups: EvaluationGroup[] = []
-
+  evaluationForms: EvaluateForm[] = []
+  deletes: EvaluateForm[] = []
+  
   constructor(
     private sv: Etrt05Service,
     private md: ModalService,
     private ms: NotifyService,
     private activatedRoute: ActivatedRoute,) {
-    this.activatedRoute.data.subscribe(({ etrt05Resolver }) => {
-      this.evaluationGroups = etrt05Resolver
+    this.activatedRoute.data.subscribe(({ roleList }) => {
+      this.evaluationForms = roleList
     })
   }
   search(value?: string) {
-    this.sv.list(value).subscribe((etrt05Resolver: EvaluationGroup[]) => {this.evaluationGroups = etrt05Resolver})
+    this.sv.list(value).subscribe((roleLists: EvaluateForm[]) => {this.evaluationForms = roleLists})
   }
-  delete(evaluateGroupCode: string) {
+  deleteForm(roleCode: string) {
     this.md.confirm('message.STD00015').pipe(
       filter(confirm => confirm),
-      switchMap(() => this.sv.delete(evaluateGroupCode)))
+      switchMap(() => this.sv.deleteForm(roleCode)))
       .subscribe((res: any) => {
         this.search()
         this.ms.success('message.STD00016');
       })
   }
 
+    
 }

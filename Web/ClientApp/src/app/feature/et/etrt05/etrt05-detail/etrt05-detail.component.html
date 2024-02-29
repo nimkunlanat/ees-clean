@@ -4,14 +4,18 @@
         <button [label]="'label.ALL.Save' | translate" icon="pi pi-save" (click)="save()"></button>
     </div>
     <div class="col-12">
-        <p-fieldset [legend]="'label.ETRT05.Detail' | translate" [toggleable]="true">
+        <p-fieldset [legend]="'label.ETRT05.GroupDetail' | translate" [toggleable]="true">
             <div class="grid p-fluid" [formGroup]="form">
-                <div class="col-12 lg:col-1">
-                    <textbox formControlName="sequeneId">{{ 'label.ETRT05.SequeneId' | translate }}
+                <div class="col-12 lg:col-2">
+                    <textbox formControlName="roleCode">{{ 'label.ETRT05.RoleCode' | translate }}
                     </textbox>
                 </div>
-                <div class="col-12 lg:col-3">
+                <div class="col-12 lg:col-2">
                     <textbox formControlName="evaluateGroupCode">{{ 'label.ETRT05.EvaluationGroupCode' | translate}}
+                    </textbox>
+                </div>
+                <div class="col-12 lg:col-1">
+                    <textbox formControlName="sequeneId">{{ 'label.ETRT05.SequeneId' | translate}}
                     </textbox>
                 </div>
                 <div class="col-12 lg:col-3">
@@ -22,7 +26,7 @@
                     <textbox formControlName="evaluateGroupNameEn">{{ 'label.ETRT05.EvaluationDescEn' | translate }}
                     </textbox>
                 </div>
-                <div class="col-12 lg:col-2">
+                <div class="col-12 lg:col-1">
                     <number [min]="0" [max]="100" formControlName="totalPoint">{{ 'label.ETRT05.TotalPoint' | translate }}</number>
                 </div>
                 <div class="col-12 lg:col-3 align-items-center flex flex-wrap">

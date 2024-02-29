@@ -4,6 +4,7 @@ using Application.Interfaces;
 using Domain.Entities;
 using Domain.Entities.ET;
 using Domain.Entities.SU;
+using iText.Commons.Actions.Sequence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -63,9 +64,9 @@ public class Save
         private void Validate(EvaluateGroup evaluateGroup)
         {
             List<EvaluateDetail> etEvaluateDetails = evaluateGroup.EvaluateDetails.Where(w => w.RowState == RowState.Add).ToList();
-
+            
             if (_context.Set<EvaluateGroup>().Any(a => evaluateGroup.RowState == RowState.Add && a.EvaluateGroupCode.ToUpper() == evaluateGroup.EvaluateGroupCode.ToUpper())) throw new RestException(HttpStatusCode.BadRequest, "message.STD00018", evaluateGroup.EvaluateGroupCode);
-            else if (_context.Set<EvaluateDetail>().Any(a => etEvaluateDetails.Select(s => s.EvaluateDetailCode).Contains(a.EvaluateDetailCode) && a.EvaluateGroupCode == evaluateGroup.EvaluateGroupCode)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00045");
+            else if (_context.Set<EvaluateDetail>().Any(a => etEvaluateDetails.Select(s => s.SequeneId).Contains(a.SequeneId) && a.EvaluateGroupCode == evaluateGroup.EvaluateGroupCode)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00018", evaluateGroup.EvaluateGroupCode);
         }
     }
 }

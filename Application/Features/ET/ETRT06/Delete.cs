@@ -3,17 +3,20 @@ using Application.Interfaces;
 using Domain.Entities.ET;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Features.ET.ETRT05;
+namespace Application.Features.ET.ETRT06;
 
 public class Delete
 {
     public class Command : ICommand
     {
-        public string EvaluateGroupCode { get; set; }
+        public string GroupName { get; set; }
 
     }
     public class Handler : IRequestHandler<Command, Unit>
@@ -22,8 +25,8 @@ public class Delete
         public Handler(ICleanDbContext context) => _context = context;
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            EvaluateGroup evaluationGroup = await _context.Set<EvaluateGroup>().Where(w => w.EvaluateGroupCode == request.EvaluateGroupCode).Include(i => i.EvaluateDetails).FirstOrDefaultAsync();
-            _context.Set<EvaluateGroup>().Remove(evaluationGroup);
+            SkillMatrixGroup skillMatrixGroup = await _context.Set<SkillMatrixGroup>().Where(w => w.GroupName == request.GroupName).FirstOrDefaultAsync();
+            _context.Set<SkillMatrixGroup>().RemoveRange(skillMatrixGroup);
             await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
