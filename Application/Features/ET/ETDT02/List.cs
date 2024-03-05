@@ -19,7 +19,7 @@ namespace Application.Features.ET.ETDT02
         public class DocumentApprovedDTO : DocumentApproved
         {
             public string Name { get; set; }
-            public string approverName { get; set; }
+            public string approverBy { get; set; }
         }
 
         public class Handler : IRequestHandler<Query, List<DocumentApprovedDTO>>
@@ -40,9 +40,10 @@ namespace Application.Features.ET.ETDT02
                                         da.created_date ""createdDate"", 
                                         da.employee_code ""employeeCode"" ,
                                         case when @Lang = 'th' then concat(e.employee_firstname_th , ' ',e.employee_surname_th) else concat(e.employee_firstname_en , ' ',e.employee_surname_en) end ""name"",
-                                        da.evaluation_status ""evaluationStatus"",
+                                        case when @Lang = 'th' then s.desc_th else s.desc_en end ""evaluationStatus"",
                                         case when @Lang = 'th' then concat(e2.employee_firstname_th , ' ',e2.employee_surname_th) else concat(e2.employee_firstname_en , ' ',e2.employee_surname_en) end ""approveBy""
                                         from et.document_approved da 
+                                        left join db.status s on da.evaluation_status = s.id
                                         left join db.employee e on da.employee_code = e.employee_code
                                         left join tm.member_hierarchy mh on e.user_id = mh.user_id 
                                         left join db.employee e2 on da.approve_by = e2.employee_code
