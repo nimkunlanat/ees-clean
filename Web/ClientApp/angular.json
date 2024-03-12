@@ -48,7 +48,8 @@
             "scripts": [],
             "allowedCommonJsDependencies":[
               "quill",
-              "guid-typescript"
+              "guid-typescript",
+              "quill-delta"
             ]
           },
           "configurations": {
