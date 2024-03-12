@@ -104,8 +104,8 @@ public class ErrorHandlingMiddleware
                 break;
 
             case DbUpdateConcurrencyException ce:
-                errorResponse = new ErrorResponseType.Error("message.STD00011");
-                errorMessageDetail = await GetErrorMessageDetail(db, "message.STD00011");
+                errorResponse = new ErrorResponseType.Error("message.STD00019");
+                errorMessageDetail = await GetErrorMessageDetail(db, "message.STD00019");
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
                 break;
