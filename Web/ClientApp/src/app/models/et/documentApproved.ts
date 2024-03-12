@@ -1,16 +1,19 @@
 import { Guid } from "guid-typescript";
 import { EntityBase } from "../entityBase";
 import { DocumentApprovedDetail } from "./documentapprovedDetail";
+import { DocumentApprovedSkill } from "./documentapprovedSkill";
 
 export class DocumentApproved extends EntityBase {
     employeeCode: string;
-    evaluationStatus: string;
+    evaluationStatus: Guid;
     documentNo: Guid;
     approveBy: string;
-    documentapprovedDetail : DocumentApprovedDetail[]
+    documentapprovedDetails : DocumentApprovedDetail[]
+    documentapprovedSkills : DocumentApprovedSkill[]
 
     constructor(){
       super();
-      this.documentapprovedDetail =[]
+      this.documentapprovedDetails = []
+      this.documentapprovedSkills = []
     }
 }

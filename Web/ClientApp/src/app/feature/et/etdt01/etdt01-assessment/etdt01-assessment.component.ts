@@ -4,7 +4,12 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "@app/core/authentication/auth.service";
 import { NotifyService } from "@app/core/services/notify.service";
+import { Approve } from "@app/models/et/approve";
+import { DocumentApproved } from "@app/models/et/documentApproved";
 import { ModalService } from "@app/shared/components/modal/modal.service";
+import { RowState } from "@app/shared/types/data.types";
+import { Guid } from "guid-typescript";
+import { switchMap } from "rxjs";
 import { Etdt01Service } from "../etdt01.service";
 
 @Component({
@@ -20,6 +25,7 @@ export class Etdt01AssessmentComponent {
   listAssessment: any = [];
 
 
+
   constructor(
 
     private fb: FormBuilder,
@@ -31,11 +37,16 @@ export class Etdt01AssessmentComponent {
     private user : AuthService) {
     this.createForm()
 
-    this.route.data.subscribe(({ Assessment }) => {
+    this.route.data.subscribe(({ Assessment, etdt01master }) => {
       this.data = Assessment.listAssessment
-      this.status = Assessment.listAssessment.status
+      this.status = etdt01master.status
       this.listAssessment = Assessment.listAssessment.evaluates
-      this.form.get('statusName').setValue(Assessment.params.status)
+
+      if (this.data && ('evaluationStatus' in this.data) && this.data.evaluationStatus !== null) {
+        this.form.get('statusName').setValue(this.data.evaluationStatus);
+      } else {
+        this.form.get('statusName').setValue('93c5ef90-28f5-4197-8775-f8a009ca06bf');
+      }
       this.listAssessment.map(m => {
         m['listDetail'] = Assessment.listAssessment.evaluateDetails.filter(f => m.evaluateGroupCode === f.evaluateGroupCode)
         this.rebuildData(m['listDetail'])
@@ -53,17 +64,18 @@ export class Etdt01AssessmentComponent {
       email: [null],
       dateFrom: [null],
       dateTo: [null],
-      statusName:[null]
+      statusName:[null],
     })
   }
 
   createDetailForm(detailForm:any , index , point = null){
     let fg:FormGroup = this.fb.group({
       documentNo: [null],
+      documentDetailNo: [null],
       evaluateGroupCode: [null],
       evaluateDetailCode: [null],
+      rowState: [null],
       rowVersion: [null],
-      rowState: [null]
     })
     fg.addControl('point'+index , new FormControl(null, [Validators.required]));
     if(point) fg.get('point'+index).setValue(point);
@@ -106,31 +118,83 @@ export class Etdt01AssessmentComponent {
 
   validate = () => this.form.invalid;
 
+  rebuildForm() {
+    if (this.data) {
+      this.form.controls["rowState"].setValue(RowState.Normal);
+      this.detailForm.controls['rowState'].setValue(RowState.Normal);
+    } else {
+      this.form.controls["rowState"].setValue(RowState.Add);
+      this.detailForm.controls["rowState"].setValue(RowState.Add);
+    }
+    this.form.valueChanges.subscribe(() => {
+      if (this.form.controls['documentNo'].value) {
+        this.form.controls['rowState'].setValue(RowState.Edit);
+        this.detailForm.controls['rowState'].setValue(RowState.Edit);
+      }
+      else if (this.form.controls['rowState'].value === RowState.Normal) {
+        this.form.controls['rowState'].setValue(RowState.Edit);
+        this.detailForm.controls['rowState'].setValue(RowState.Edit);
+      }
+    });
+    this.form.markAsPristine();
+  }
+
   save() {
     if (this.validate()) {
       this.ms.warning("message.STD00013");
       this.form.markAllAsTouched();
-    }
-    else {
-      let data = [];
-      this.listAssessment.map(m => {
-        m.listDetail.map(lm => {
-          data.push(lm.form.getRawValue());
-        })
-      })
-      console.log(data);
+    } else {
+      let docApprove = new DocumentApproved();
+      this.data.evaluationStatus = 'eb801ae2-788d-45dd-b869-9d9e39e67deb';
+      docApprove.employeeCode = this.data.employeeCode;
+      docApprove.documentNo = this.data.documentNo ?? this.data.guid;
+      docApprove.evaluationStatus = this.data.evaluationStatus
 
-      // this.sv.save(data).pipe(
-      //   switchMap((res: any) => this.sv.detail(res.DocumentNo))
-      // ).subscribe(res => {
-      //   this.data = res
-      //   this.data.rowState = RowState.Normal;
-      //   this.form.patchValue(res)
-      //   // this.rebuildData()
-      //   this.ms.success("message.STD00014");
-      // })
+      if (this.data.documentNo) {
+        docApprove.rowState = RowState.Edit;
+      } else {
+        docApprove.rowState = RowState.Add;
+      }
+
+      this.listAssessment.forEach(assessment => {
+        assessment.listDetail.forEach(detail => {
+          const data = detail.form.getRawValue()
+          if(this.data.documentNo){
+            data.rowState = RowState.Edit;
+          }
+          else {
+            data.rowState = RowState.Add;
+          }
+          docApprove.documentapprovedDetails.push(data);
+        });
+      });
+
+      if (docApprove.documentapprovedDetails.length > 0) {
+        docApprove.documentapprovedDetails.map((m , index) => {
+          for(let i = 0 ; true ; i++){
+            if(m['point'+i] !==  undefined)
+            {
+              m['point'] = m['point'+i]
+              break;
+            }
+          }
+        })
+        this.sv.save(docApprove).pipe(
+
+          switchMap((res: DocumentApproved) => this.sv.listAssessment(res.documentNo))
+          ).subscribe((res: DocumentApproved[]) => {
+          console.log(res);
+          this.data = res;
+          this.data.rowState = RowState.Normal;
+          this.form.patchValue(res);
+          this.rebuildForm();
+          this.ms.success("message.STD00014");
+        });
+      }
     }
   }
+
+
 
   search() {
     let dateFrom = this.form.get('dateFrom').value;
@@ -155,8 +219,8 @@ export class Etdt01AssessmentComponent {
     }
   }
 
-  next(){
-    this.router.navigateByUrl('/et/etdt01/assessment/skill');
+  next(documentNo?: Guid){
+    this.router.navigate(['/et/etdt01/assessment/skill'], { state: { documentNo: documentNo }});
   }
 
   cancel(){
@@ -176,23 +240,25 @@ export class Etdt01AssessmentComponent {
   get grade(){
     let grade = "";
     let color = "";
-    if(this.totalPoint >= '90'){
+    let numericTotalPoint = parseFloat(this.totalPoint); // แปลงเป็นตัวเลข
+
+    if(numericTotalPoint >= 90){
       grade = "A";
       color = "#25BF6C";
     }
-    else if(this.totalPoint >= '80'){
+    else if(numericTotalPoint >= 80){
       grade = "B";
       color = "#95B2EA";
     }
-    else if(this.totalPoint >= '70'){
+    else if(numericTotalPoint >= 70){
       grade = "C";
       color = "#E3DB34";
     }
-    else if(this.totalPoint >= '50'){
+    else if(numericTotalPoint >= 50){
       grade = "D";
       color = "#FFAF14";
     }
-    else if(this.totalPoint  >= '1'){
+    else if(numericTotalPoint >= 0.01){
       grade = "F";
       color = "#FF5050";
     }
@@ -202,4 +268,5 @@ export class Etdt01AssessmentComponent {
     }
     return { grade, color };
   }
+
 }

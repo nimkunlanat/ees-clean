@@ -10,7 +10,9 @@ namespace Persistense.Configurations.ET
         {
             base.Configure(builder);
             builder.ToTable("document_approved", "et");
-            builder.HasKey(e => e.EmployeeCode);
+            builder.HasKey(e => e.DocumentNo);
+            builder.HasMany(p => p.DocumentApprovedDetails).WithOne().HasForeignKey(f => f.DocumentNo).OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(p => p.DocumentApprovedSkills).WithOne().HasForeignKey(f => f.DocumentNo).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

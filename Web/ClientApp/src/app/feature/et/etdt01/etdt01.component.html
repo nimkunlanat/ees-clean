@@ -3,37 +3,33 @@
       <div class="card">
         <div class="flex flex-wrap py-4 justify-content-between flex-column lg:flex-row lg:p-fluid">
           <h1>{{'label.ETDT01.ProgramName' | translate }}</h1>
-          <button icon="pi pi-file" [label]="'label.ETDT01.createform' | translate" (click)="createform('Draft')"></button>
-          <!-- <button icon="pi pi-folder" [routerLink]="['assessment']" [state]="{Draft : 'Draft'}"></button> -->
+          <button icon="pi pi-file" [label]="'label.ETDT01.createform' | translate" (click)="createform()"></button>
         </div>
-          <datatable [rows]="">
+          <datatable [rows]="DocumentApproveds">
               <ng-template pTemplate="header">
                   <tr>
-                      <th class="text-center">{{ 'label.ETDT01.DbNumber' | translate}} </th>
                       <th class="text-center">{{ 'label.ETDT01.CreatedDate' | translate }} </th>
                       <th class="text-center">{{ 'label.ETDT01.EmployeeCode' | translate }} </th>
                       <th class="text-center">{{ 'label.ETDT01.EmployeeName' | translate }} </th>
                       <th class="text-center">{{ 'label.ETDT01.Status' | translate }}</th>
-                      <th class="text-center">{{ 'label.ETDT01.ApproveBy' | translate }}</th>
+                      <th class="text-center">{{ 'label.ETDT01.ApprovedBy' | translate }}</th>
                       <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
                   </tr>
               </ng-template>
               <ng-template pTemplate="body" let-row>
                   <tr>
                     <td class="text-center">
-                    <a [routerLink]="['detail']" [state]="{ DbNumber: row.DbNumber }">
-                      {{row.DbNumber}}
+                    <a (click)="createform(row.documentNo)">
+                      {{row.createdDate}}
                     </a>
                     </td>
-                      <td class="text-center">{{row.DbNumber}}</td>
-                      <td class="text-center">{{row.CreatedDate}}</td>
-                      <td class="text-center">{{row.EmployeeCode}}</td>
-                      <td class="text-center">{{row.EmployeeName}}</td>
-                      <td class="text-center">{{row.Status}}</td>
-                      <td class="text-center">{{row.ApproveBy}}</td>
-                      <!-- <td class="text-center w-1">
-                            <button icon="pi pi-trash" (click)="delete(row.employeeCode)"></button>
-                      </td> -->
+                      <td class="text-center">{{row.employeeCode}}</td>
+                      <td class="text-center">{{row.employeeName}}</td>
+                      <td class="text-center">{{row.status}}</td>
+                      <td class="text-center">{{row.approveBy}}</td>
+                      <td class="text-center w-1">
+                        <button icon="pi pi-trash" (click)="delete(row.documentNo)"></button>
+                      </td>
                   </tr>
               </ng-template>
           </datatable>
