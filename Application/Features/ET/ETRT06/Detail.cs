@@ -25,8 +25,8 @@ public class Detail
             SkillMatrixGroup skillMatrixGroup = new();
 
             sql.AppendLine(@"select 
-                             smg.group_id ""groupId"",
-                             smg.group_name ""groupName""
+                             smg.group_id ""groupId""
+                             , smg.group_name ""groupName""
                              , smg.description ""description""
                              , smg.active ""active""
                              , smg.xmin ""rowVersion""

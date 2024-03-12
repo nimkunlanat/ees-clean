@@ -1,0 +1,75 @@
+<div class="grid">
+    <div class="col-12 flex flex-wrap gap-3 justify-content-between flex-column lg:flex-row lg:p-fluid">
+        <breadcrumb [items]="breadcrumbItems"></breadcrumb>
+        <button [label]="'label.ALL.Save' | translate" icon="pi pi-save" (click)="saveGrade()"></button>
+    </div>
+    <div class="col-12">
+        <p-fieldset [legend]="'label.ETRT06.SkillMatrixDetail' | translate" [toggleable]="true">
+            <div class="grid p-fluid" [formGroup]="form">
+                <div class="col-12 lg:col-3">
+                    <textbox formControlName="subjectGroup">{{ 'label.ETRT06.SubjectGroup' | translate }}
+                    </textbox>
+                </div>
+                <div class="col-12 lg:col-4">
+                    <textbox formControlName="subjectName">{{ 'label.ETRT06.SubjectName' | translate}}
+                    </textbox>
+                </div>
+                <div class="col-12 lg:col-4">
+                    <textbox formControlName="description">{{ 'label.ETRT06.Description' | translate}}
+                    </textbox>
+                </div>
+                <div class="col-12 lg:col-1 align-items-center flex flex-wrap">
+                    <checkbox formControlName="active" style="height: 20%;" [label]="'label.ALL.Active' | translate">
+                    </checkbox>
+                </div>
+            </div>
+        </p-fieldset>
+    </div>
+    <div class="col-12">
+        <p-fieldset [legend]="'label.ETRT06.SkillMatrixGradeDetail' | translate" [toggleable]="true">
+            <div class="py-4 flex flex-wrap justify-content-end gap-3 flex-column md:flex-row md:p-fluid">
+                <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" (click)="addGrade()"></button>
+            </div>
+            <datatable [rows]="skillMatrixSubject.skillMatrixGrades">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th prop="grade" class="text-center">{{ 'label.ETRT06.Grade' | translate }} </th>
+                        <th prop="description" class="text-center">{{ 'label.ETRT06.Description' | translate }} </th>
+                        <th prop="score" class="text-center">{{ 'label.ETRT06.Score' | translate}} </th>
+                        <th prop="expectedScore" class="text-center">{{ 'label.ETRT06.ExpectedScore' | translate}} </th>
+                        <th prop="example" class="text-center">{{ 'label.ETRT06.Example' | translate }} </th>
+                        <th class="text-center">{{ 'label.ALL.Active' | translate }} </th>
+                        <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row >
+                    <tr [formGroup]="row.form">
+                        <td >
+                            <textbox formControlName="grade" [hasLabel]="false"></textbox>
+                        </td>
+                        <td >
+                            <textbox formControlName="description" [hasLabel]="false"></textbox>
+                        </td>
+                        <td >
+                            <number [min]="0" [max]="100" formControlName="score" [hasLabel]="false"></number>
+                        </td>
+                        <td >
+                            <number [min]="0" [max]="100" formControlName="expectedScore" [hasLabel]="false"></number>
+                        </td>
+                        <td >
+                            <textbox formControlName="example" [hasLabel]="false"></textbox>
+                        </td>
+                        <td >
+                            <div class="flex justify-content-center">
+                                <checkbox formControlName="active" [hasLabel]="false"></checkbox>
+                            </div>
+                        </td>
+                        <td class="text-center w-10rem">
+                            <button icon="pi pi-trash" (click)="remove(row)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </datatable>
+        </p-fieldset>
+    </div>
+</div>

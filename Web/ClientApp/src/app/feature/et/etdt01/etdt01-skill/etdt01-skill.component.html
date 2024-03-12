@@ -5,13 +5,15 @@
       <div class="grid flex justify-content-between flex-column lg:flex-row lg:p-fluid">
         <div class="flex justify-content-start ">
           <span class="p-buttonset">
-          <button class="border-0"  style="background-color: rgb(224,100,78)"  [label]="'label.ETDT01.AssessmentForm' | translate" (click)="next()"></button>
+          <button class="border-0"  style="background-color: rgb(224,100,78)"  [label]="'label.ETDT01.AssessmentForm' | translate" (click)="next(this.data.documentNo)"></button>
           <button class="border-0" [disabled]="true" style="background-color: rgba(234,198,191)" [label]="'label.ETDT01.SkillForm' | translate" ></button>
         </span>
       </div>
-        <div class="flex justify-content-end ">
+        <div class="flex justify-content-end" [formGroup]="form">
             <dropdown class="mx-1 "
+            formControlName="statusName"
             [items]="status"
+            [disabled]="true"
             ></dropdown>
             <button
               class="border-0"
@@ -80,14 +82,16 @@
                        </div>
                      </div>
                       <div class="card w-full matrix-style mb-4">
-                          <div style="position: absolute; top: -30px;"><p>{{skill.headerName}}</p></div>
+                            <div style="position: absolute; top: -30px;">
+                              <p>{{skill.headerName}}</p>
+                          </div>
                           <div class="col-full">
                                 <div *ngFor="let item of skill.groupItems">
                                   <h1 style="margin-top: 0px;">{{item.subjectName}}</h1>
                                   <div class="card flex" style="background-color: rgba(201, 208, 211, 0.16); display: flex; justify-content: space-between;">
 
-                                    <div class="flex-direction mt-3" style="display: flex; flex-direction: column; ">
-                                        <radio [vertical]="true" [items]="item.groupItemsDetail" [ngModel]="item['score']" (ngModelChange)="radiochange($event , item)"></radio>
+                                    <div class="flex-direction mt-3" style="display: flex; flex-direction: column;" [formGroup]="form">
+                                        <radio formControlName = "point" [vertical]="true" [items]="item.groupItemsDetail" [ngModel]="item['score']" (ngModelChange)="radiochange($event , item)"></radio>
                                     </div>
 
                                     <div class="flex-direction">

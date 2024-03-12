@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Domain.Entities.ET;
 using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
@@ -20,6 +21,7 @@ namespace Application.Features.ET.ETDT02
         {
             public string Name { get; set; }
             public string approverBy { get; set; }
+            public string Status { get; set; }
         }
 
         public class Handler : IRequestHandler<Query, List<DocumentApprovedDTO>>
@@ -40,7 +42,8 @@ namespace Application.Features.ET.ETDT02
                                         da.created_date ""createdDate"", 
                                         da.employee_code ""employeeCode"" ,
                                         case when @Lang = 'th' then concat(e.employee_firstname_th , ' ',e.employee_surname_th) else concat(e.employee_firstname_en , ' ',e.employee_surname_en) end ""name"",
-                                        case when @Lang = 'th' then s.desc_th else s.desc_en end ""evaluationStatus"",
+                                        da.evaluation_status ""evaluationStatus"",
+                                        case when @Lang = 'th' then s.desc_th else s.desc_en end ""Status"",
                                         case when @Lang = 'th' then concat(e2.employee_firstname_th , ' ',e2.employee_surname_th) else concat(e2.employee_firstname_en , ' ',e2.employee_surname_en) end ""approveBy""
                                         from et.document_approved da 
                                         left join db.status s on da.evaluation_status = s.id

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MenuItem } from 'primeng/api';
+import { Guid } from 'guid-typescript';
+// import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'x-etdt01-skill',
@@ -16,35 +17,67 @@ export class Etdt01SkillComponent {
   filterSkill:any[] = [];
   filterSkillDetails:any[] = [];
   selectedGrade: string = '';
+  form: FormGroup;
 
   constructor(
   private fb: FormBuilder,
   private router: Router,
   private route: ActivatedRoute,) {
-    this.route.data.subscribe(({ Skillmatrix }) => {
-    this.status = Skillmatrix.status
-    this.data = Skillmatrix
-    this.listSkills = Skillmatrix.skills
-    this.listSkillsDetails = Skillmatrix.skillDetails
+    this.createForm()
+
+    this.route.data.subscribe(({ Skillmatrix , etdt01master }) => {
+    this.data = Skillmatrix.listSkillmatrix
+    console.log(this.data);
+
+
+    this.status = etdt01master.status
+
+    this.listSkills = Skillmatrix.listSkillmatrix.skills
+    this.listSkillsDetails = Skillmatrix.listSkillmatrix.skillDetails
+
+
+    if (this.data && ('evaluationStatus' in this.data) && this.data.evaluationStatus !== null) {
+      this.form.get('statusName').setValue(this.data.evaluationStatus);
+    } else {
+      this.form.get('statusName').setValue('93c5ef90-28f5-4197-8775-f8a009ca06bf');
+    }
+
+  //   this.listSkillsDetails.forEach(item => {
+  //     if (item.point) {
+  //       this.form.get('point').setValue(item.point);
+  //       console.log(item.point);
+  //     }
+  // });
+
 
     this.listSkills.map(m => {
-        let check = this.filterSkill.filter(f => f.headerName === m.subjectGroup);
-        let groupItemsFromSkills = this.listSkills.filter(f => f.subjectGroup === m.subjectGroup);
-        m['groupItems'] = groupItemsFromSkills;
-        m['groupItems'].map(m => m['groupItemsDetail'] = this.listSkillsDetails?.filter(f => f.subjectId === m.subjectId).map(m => {
-          m['label'] = m.description
-          m['value'] = m.score
-        // console.log(this.listSkillsDetails);
-          return m
-        }))
-        if (check.length === 0) {
+      let check = this.filterSkill.filter(f => f.headerName === m.subjectGroup);
+      let groupItemsFromSkills = this.listSkills.filter(f => f.subjectGroup === m.subjectGroup);
+      m['groupItems'] = groupItemsFromSkills;
+      m['groupItems'].map(m => m['groupItemsDetail'] = this.listSkillsDetails?.filter(f => f.subjectId === m.subjectId).map(m => {
+          m['label'] = m.description;
+          if (m.documentSkillNo) {
+              m['value'] == m.score;
+          } else {
+              m['value'] = m.score;
+          }
+          return m;
+      }));
+      if (check.length === 0) {
           this.filterSkill.push({ headerName: m.subjectGroup, groupItems: m['groupItems'] });
-        }
-        return m;
+      }
+      return m;
       });
     })
   }
 
+
+  createForm(){
+    this.form = this.fb.group({
+      point:[null],
+      statusName:[null]
+    })
+  }
 
   radiochange(event , item){
     this.filterSkill.map(m => {
@@ -91,8 +124,8 @@ export class Etdt01SkillComponent {
 }
 
 
-  next(){
-    this.router.navigateByUrl('/et/etdt01/assessment');
+  next(documentNo?: Guid){
+    this.router.navigate(['/et/etdt01/assessment'], { state: { documentNo: documentNo }});
   }
 
   cancel(){

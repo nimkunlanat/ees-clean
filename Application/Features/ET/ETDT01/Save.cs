@@ -2,9 +2,10 @@
 using Application.Exceptions;
 using Application.Interfaces;
 using Domain.Entities;
-using Domain.Entities.DB;
+using Domain.Entities.ET;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -15,11 +16,11 @@ namespace Application.Features.ET.ETDT01;
 
 public class Save
 {
-    public class Command : Position, ICommand<Position>
+    public class Command : DocumentApproved, ICommand<DocumentApproved>
     {
 
     }
-    public class Handler : IRequestHandler<Command, Position>
+    public class Handler : IRequestHandler<Command, DocumentApproved>
     {
         private readonly ICleanDbContext _context;
         public Handler(ICleanDbContext context)
@@ -27,37 +28,34 @@ public class Save
             _context = context;
         }
 
-        public async Task<Position> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<DocumentApproved> Handle(Command request, CancellationToken cancellationToken)
         {
             Validate(request);
-            Position position = new Position();
+
+            if (request.DocumentApprovedDetails == null) request.DocumentApprovedDetails = new List<DocumentApprovedDetail>();
 
             if (request.RowState == RowState.Add)
             {
-                _context.Set<Position>().Add(request);
+                _context.Set<DocumentApproved>().Add(request);
+
             }
             else if (request.RowState == RowState.Edit)
             {
-                position = await _context.Set<Position>().Where(w => w.PositionCode == request.PositionCode).FirstOrDefaultAsync();
-                position.PositionNameTh = request.PositionNameTh;
-                position.PositionNameEn = request.PositionNameEn;
-                position.Description = request.Description;
-                position.Active = request.Active;
-                position.LanguageCode = request.LanguageCode;
-
-
-
-                _context.Set<Position>().Attach(position);
-                _context.Entry(position).State = EntityState.Modified;
+                _context.Set<DocumentApproved>().Attach(request);
+                _context.Entry(request).State = EntityState.Modified;
             }
 
+            _context.Set<DocumentApprovedDetail>().AddRange(request.DocumentApprovedDetails.Where(w => w.RowState == RowState.Add));
+            _context.Set<DocumentApprovedDetail>().AttachRange(request.DocumentApprovedDetails.Where(w => w.RowState == RowState.Edit));
+
+            request.DocumentApprovedDetails.Where(w => w.RowState == RowState.Edit).ToList().ForEach(f => _context.Entry(f).State = EntityState.Modified);
             await _context.SaveChangesAsync(cancellationToken);
 
             return request;
         }
-        private void Validate(Position position)
+        private void Validate(DocumentApproved document)
         {
-            if (_context.Set<Position>().Any(a => position.RowState == RowState.Add && a.PositionCode == position.PositionCode)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00004", position.PositionCode);
+            if (_context.Set<DocumentApproved>().Any(a => document.RowState == RowState.Add && a.DocumentNo == document.DocumentNo)) throw new RestException(HttpStatusCode.BadRequest, "message.STD00004");
         }
     }
 }

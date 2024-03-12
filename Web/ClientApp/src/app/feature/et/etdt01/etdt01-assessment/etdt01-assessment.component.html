@@ -6,7 +6,7 @@
         <div class="flex justify-content-start ">
           <span class="p-buttonset">
             <button class="border-0" [disabled]="true" style="background-color: rgba(234,198,191)" [label]="'label.ETDT01.AssessmentForm' | translate" ></button>
-            <button class="border-0" style="background-color: rgb(224,100,78)" [label]="'label.ETDT01.SkillForm' | translate" (click)="next()"></button>
+            <button class="border-0" style="background-color: rgb(224,100,78)" [label]="'label.ETDT01.SkillForm' | translate" (click)="next(this.data.documentNo)"></button>
           </span>
         </div>
 
@@ -118,8 +118,8 @@
           <div class="flex" *ngIf="item.evaluateGroupCode == itemDetail.evaluateGroupCode">
             <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%;">
             <p style="font-size: 18px; margin-right: 10px;">{{itemDetail.evaluateDetailName}}</p>
-            <number [min]="0" [max]="itemDetail.point" [minFractionDigits]="0" [maxFractionDigits]="2" style=" margin: 20px; "[floatLabel]="true"
-            [formControlName]="'point'+i" (ngModelChange)="getTotalWork(item.evaluateGroupCode , i)">Full score : {{itemDetail.point}}</number>
+            <number [min]="0" [max]="itemDetail.exPoint" [minFractionDigits]="0" [maxFractionDigits]="2" style=" margin: 20px; "[floatLabel]="true"
+            [formControlName]="'point'+i" [ngModel]="itemDetail.point" (ngModelChange)="getTotalWork(item.evaluateGroupCode , i)">Full score : {{itemDetail.exPoint}}</number>
             </div>
           </div>
         </div>
