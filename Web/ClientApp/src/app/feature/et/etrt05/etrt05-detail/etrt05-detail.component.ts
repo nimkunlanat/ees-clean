@@ -42,7 +42,7 @@ export class Etrt05DetailComponent {
     })
   }
 
-  
+
 
   createForm() {
     this.form = this.fb.group({
@@ -50,8 +50,8 @@ export class Etrt05DetailComponent {
       evaluateGroupCode: [null, [Validators.required, Validators.maxLength(50)]],
       evaluateGroupNameTh: [null, [Validators.required, Validators.pattern(/^[ก-๙0-9#$^+=!*(){}\[\]@%& /\\]+$/)]],
       evaluateGroupNameEn: [null, [Validators.required, Validators.pattern(/^[a-zA-Z#$.' ^+=!*(){}\[\]@%& /\\]+$/)]],
-      totalPoint: [0,[Validators.required, Validators.pattern(/^[0-9]+$/)]],
-      sequeneId: [0,[Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      totalPoint: [0, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      sequeneId: [0, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       active: true,
       rowState: null,
       rowVersion: null
@@ -69,8 +69,8 @@ export class Etrt05DetailComponent {
       evaluateDetailCode: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/), Validators.maxLength(10)]],
       evaluateDetailNameTh: [null, [Validators.required, Validators.pattern(/^[ก-๙0-9#$^+=!*(){}\[\]@%& /\\]+$/)]],
       evaluateDetailNameEn: [null, [Validators.required, Validators.pattern(/^[a-zA-Z#$.' ^+=!*(){}\[\]@%& /\\]+$/)]],
-      point: [0,[Validators.required, Validators.pattern(/^[0-9]+$/)]],
-      sequeneId: [0,[Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      point: [0, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      sequeneId: [0, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       active: true,
       rowState: null,
       rowVersion: null
@@ -90,7 +90,7 @@ export class Etrt05DetailComponent {
   rebuildForm() {
     this.deletes = [];
     this.form.patchValue(this.evaluationGroup)
-    
+
     if (this.evaluationGroup.evaluateGroupCode) {
       this.form.controls["roleCode"].disable();
       this.form.controls["evaluateGroupCode"].disable();
@@ -100,7 +100,7 @@ export class Etrt05DetailComponent {
       this.form.controls["rowState"].setValue(RowState.Normal)
     }
     else this.form.controls["rowState"].setValue(RowState.Add)
-    
+
     this.evaluationGroup.evaluateDetails.map(m => m.form = this.createFormDetail(m))
     this.form.markAsPristine();
     this.evaluationGroup.evaluateDetails.forEach(f => f.form.markAsPristine())
@@ -108,7 +108,7 @@ export class Etrt05DetailComponent {
 
   add() {
     let evaluateDetails = new EvaluateDetail();
-     evaluateDetails.rowState = RowState.Add;
+    evaluateDetails.rowState = RowState.Add;
     evaluateDetails.form = this.createFormDetail(evaluateDetails);
     this.evaluationGroup.evaluateDetails.push(evaluateDetails);
   }
@@ -139,19 +139,19 @@ export class Etrt05DetailComponent {
       data["evaluateDetails"].filter(f => f.evaluateGroupCode == null).forEach(f => {
         f.evaluateGroupCode = this.form.controls["evaluateGroupCode"].value;
       })
-      if(data.rowVersion) data.rowState = RowState.Edit;
+      if (data.rowVersion) data.rowState = RowState.Edit;
       else data.rowState = RowState.Add;
       this.sv.save(data).pipe(
-            switchMap((evaluationGroup: EvaluateGroup) => this.sv.detail(evaluationGroup.evaluateGroupCode))
-          ).subscribe((res: EvaluateGroup) => {
-            this.ms.success("message.STD00014")
-             this.evaluationGroup = res
-             this.rebuildForm()
-          })
+        switchMap((evaluationGroup: EvaluateGroup) => this.sv.detail(evaluationGroup.evaluateGroupCode))
+      ).subscribe((res: EvaluateGroup) => {
+        this.ms.success("message.STD00014")
+        this.evaluationGroup = res
+        this.rebuildForm()
+      })
     }
   }
   canDeactivate(): Observable<boolean> {
     if (this.form.dirty || this.evaluationGroup.evaluateDetails.some(s => s.form.dirty) || this.deletes.length > 0 || this.evaluationGroup.evaluateDetails.some(s => s.form.controls["rowState"].value == RowState.Add)) return this.md.confirm("message.STD00010");
     return of(true);
-}
+  }
 }

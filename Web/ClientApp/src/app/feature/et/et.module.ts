@@ -13,6 +13,7 @@ import { Etrt05DetailComponent } from './etrt05/etrt05-detail/etrt05-detail.comp
 import { Etrt06Component } from './etrt06/etrt06.component';
 import { Etrt06DetailComponent } from './etrt06/etrt06-detail/etrt06-detail.component';
 import { Etrt05EvaluationComponent } from './etrt05/etrt05-evaluation/etrt05-evaluation.component';
+import { Etrt06GradeComponent } from './etrt06/etrt06-grade/etrt06-grade.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { Etrt05EvaluationComponent } from './etrt05/etrt05-evaluation/etrt05-eva
     Etrt06Component,
     Etrt06DetailComponent,
     Etrt05EvaluationComponent,
+    Etrt06GradeComponent,
   ],
   imports: [
     CommonModule,
