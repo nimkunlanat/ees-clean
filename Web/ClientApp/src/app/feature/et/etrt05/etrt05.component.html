@@ -6,39 +6,35 @@
                 <textbox [placeholder]="'label.ALL.Search' | translate" icon="pi pi-search" [hasLabel]="false"
                     (onInput)="search($event)" class="w-full lg:w-6">
                 </textbox>
-                <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['detail']"></button>
+                <button icon="pi pi-plus" [label]="'label.ALL.Add' | translate" [routerLink]="['evaluation']"></button>
             </div>
 
-            <datatable [rows]="evaluationGroups">
+            <datatable [rows]="evaluationForms">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th class="text-center">{{ 'label.ETRT05.SequeneId' | translate }} </th>
-                        <th class="text-center">{{ 'label.ETRT05.EvaluationGroupCode' | translate}} </th>
-                        <th class="text-center">{{ 'label.ETRT05.EvaluationDescTh' | translate }} </th>
-                        <th class="text-center">{{ 'label.ETRT05.EvaluationDescEn' | translate }} </th>
-                        <th class="text-center">{{ 'label.ETRT05.TotalPoint' | translate }} </th>
+                        <th prop="roleCode" class="text-center">{{ 'label.ETRT05.Code' | translate }} </th>
+                        <th prop="roleName" class="text-center">{{ 'label.ETRT05.Name' | translate }} </th>
                         <th class="text-center">{{ 'label.ALL.Active' | translate }}</th>
                         <th class="text-center">{{ 'label.ALL.Delete' | translate }}</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-row>
                     <tr>
-                        <td class="text-center">{{row.sequeneId}}</td>
                         <td class="text-center">
-                            <a [routerLink]="['detail']" [state]="{ evaluateGroupCode: row.evaluateGroupCode }">
-                                {{row.evaluateGroupCode}}
+                            <a [routerLink]="['evaluation']" [state]="{ roleCode: row.roleCode }">
+                                {{row.roleCode}}
                             </a>
                         </td>
-                        <td class="text-center">{{row.evaluateGroupNameTh}}</td>
-                        <td class="text-center">{{row.evaluateGroupNameEn}}</td>
-                        <td class="text-center">{{row.totalPoint}}</td>
+                        <td class="text-center">
+                            {{row.roleName}}
+                        </td>
                         <td class="text-center text-green-600 w-1">
                             @if(row.active){
                             <i class="pi pi-check"></i>
                             }
                         </td>
                         <td class="text-center w-1">
-                            <button icon="pi pi-trash" (click)="delete(row.evaluateGroupCode)"></button>
+                            <button icon="pi pi-trash" (click)="deleteForm(row.roleCode)"></button>
                         </td>
                     </tr>
                 </ng-template>

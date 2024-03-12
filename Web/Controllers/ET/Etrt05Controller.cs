@@ -19,5 +19,13 @@ public class Etrt05Controller : BaseController
     [HttpPost("update")]
     public async Task<ActionResult> Post([FromBody] Save.Command command) => Ok(await Mediator.Send(command));
 
+    [HttpGet("evaluation")]
+    public async Task<ActionResult> ListEvaluation([FromQuery] ListEvaluation.Query query) => Ok(await Mediator.Send(query));
+
+    [HttpPost("saveForm")]
+    public async Task<ActionResult> SaveForm([FromBody] SaveForm.Command command) => Ok(await Mediator.Send(command));
+
+    [HttpDelete("deleteForm")]
+    public async Task<ActionResult> DeleteForm([FromQuery] DeleteForm.Command command) => Ok(await Mediator.Send(command));
 }
 

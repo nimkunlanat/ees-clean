@@ -22,9 +22,9 @@ export class Dbrt04SubdistrictsDetailComponent {
   districtCode: Guid;
   breadcrumbItems: MenuItem[] = [
     { label: 'label.DBRT04.ProgramName', routerLink: '/db/dbrt04' },
-    { label: 'label.DBRT04.District', routerLink: '/db/dbrt04/dbrt04-district'},
-    { label: 'label.DBRT04.Subdistrict',routerLink: '/db/dbrt04/dbrt04-district/dbrt04-subdistricts'},
-    { label: 'label.DBRT04.Detail', routerLink: '/db/dbrt04/dbrt04-district/dbrt04-subdistricts/dbrt04-subdistricts-detail' },
+    { label: 'label.DBRT04.District', routerLink: '/db/dbrt04/district'},
+    { label: 'label.DBRT04.Subdistrict',routerLink: '/db/dbrt04/district/subdistricts/'},
+    { label: 'label.DBRT04.Detail', routerLink: '/db/dbrt04/district/subdistricts/subdistricts-detail' },
 ]
 constructor(
   private fb: FormBuilder,
@@ -38,8 +38,8 @@ constructor(
     this.provinceCode = dbrt04SubdistrictDetail.provinceCode
     this.districtCode = dbrt04SubdistrictDetail.districtCode
     this.breadcrumbItems.map(m => {
-      if(m.routerLink === '/db/dbrt04/dbrt04-district') m.state = {districtCode : this.districtCode , provinceCode : this.provinceCode}
-      else if(m.routerLink === '/db/dbrt04/dbrt04-district/dbrt04-subdistricts')m.state = {districtCode : this.districtCode , provinceCode : this.provinceCode}
+      if(m.routerLink === '/db/dbrt04/district') m.state = {districtCode : this.districtCode , provinceCode : this.provinceCode}
+      else if(m.routerLink === '/db/dbrt04/district/subdistricts/')m.state = {districtCode : this.districtCode , provinceCode : this.provinceCode}
     })
      this.data = dbrt04SubdistrictDetail
      if(this.data) this.form.patchValue(this.data)

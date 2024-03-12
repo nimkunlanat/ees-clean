@@ -21,11 +21,11 @@ export class Dbrt04SubdistrictsComponent {
   provinceCode: Guid;
   districtCode: Guid;
   data: Subdistrict;
-  resetSearch:string = '';
+  resetSearch: any = '';
   breadcrumbItems: MenuItem[] = [
     { label: 'label.DBRT04.ProgramName', routerLink: '/db/dbrt04' },
-    { label: 'label.DBRT04.District',routerLink: '/db/dbrt04/dbrt04-district'},
-    { label: 'label.DBRT04.Subdistrict',routerLink: '/db/dbrt04/dbrt04-district/dbrt04-subdistricts'},
+    { label: 'label.DBRT04.District',routerLink: '/db/dbrt04/district'},
+    { label: 'label.DBRT04.Subdistrict',routerLink: '/db/dbrt04/district/subdistricts'},
   ];
   constructor(
     private fb: FormBuilder,
@@ -41,7 +41,7 @@ export class Dbrt04SubdistrictsComponent {
       this.districtCode = subdistricts.districtCode
 
       this.breadcrumbItems.map(m => {
-        if(m.routerLink === '/db/dbrt04/dbrt04-district') m.state = {districtCode : this.districtCode , provinceCode : this.provinceCode}
+        if(m.routerLink === '/db/dbrt04/district') m.state = {districtCode : this.districtCode , provinceCode : this.provinceCode}
         })
       this.provinceForm.get('province').setValue(this.provinceCode);
       this.provinceForm.get('district').setValue(this.districtCode);

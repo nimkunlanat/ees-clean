@@ -22,7 +22,8 @@ public class Detail
             StringBuilder sql = new StringBuilder();
             EvaluateGroup evaluationGroup = new();
 
-             sql.AppendLine(@"select eg.evaluate_group_code ""evaluateGroupCode""
+             sql.AppendLine(@"select eg.role_code ""roleCode""
+                                    , eg.evaluate_group_code ""evaluateGroupCode""
                                     , eg.evaluate_group_name_th ""evaluateGroupNameTh""
                                     , eg.evaluate_group_name_en ""evaluateGroupNameEn""
                                     , eg.total_point ""totalPoint""
@@ -30,6 +31,7 @@ public class Detail
                                     , eg.sequene_id ""sequeneId""
                                     , eg.xmin ""rowVersion""
                                     from et.evaluate_group eg
+                                    left join et.evaluate_form ef on eg.role_code = ef.role_code 
                                     where eg.evaluate_group_code = @evaluateGroupCode");
 
             evaluationGroup = await _context.QueryFirstOrDefaultAsync<EvaluateGroup>(sql.ToString(), new { evaluateGroupCode = request.EvaluateGroupCode }, cancellationToken);
@@ -46,11 +48,14 @@ public class Detail
                                         , ed.active ""active""
                                         , ed.xmin ""rowVersion""
                                         from et.evaluate_detail ed 
+                                        inner join et.evaluate_group eg on ed.evaluate_group_code = eg.evaluate_group_code
+                                        inner join et.evaluate_form ef on eg.role_code = ef.role_code
                                         where ed.evaluate_group_code = @evaluateGroupCode
-                                        order by evaluate_detail_code asc");
+                                        order by ed.evaluate_detail_code asc");
 
                 evaluationGroup.EvaluateDetails = await _context.QueryAsync<EvaluateDetail>(sql.ToString(), new { evaluateGroupCode = request.EvaluateGroupCode }, cancellationToken) as List<EvaluateDetail>;
             }
+            sql.AppendLine("order by ed.evaluate_detail_code");
 
             return evaluationGroup;
         }

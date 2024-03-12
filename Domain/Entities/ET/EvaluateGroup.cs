@@ -10,5 +10,6 @@ public class EvaluateGroup : EntityBase
     public int SequeneId { get; set; }
     public int? TotalPoint {  get; set; }
     public bool? Active { get; set; }
+    public string RoleCode { get; set; }
     public ICollection<EvaluateDetail> EvaluateDetails { get; set; }
 }

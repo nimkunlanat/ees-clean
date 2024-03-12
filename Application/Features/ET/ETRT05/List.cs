@@ -10,12 +10,17 @@ namespace Application.Features.ET.ETRT05;
 
 public class List
 {
-    public class Query : IRequest<List<EvaluateGroup>>
+    public class Query : IRequest<List<EvaluateFormDTO>>
     {
         public string Keywords { get; set; }
     }
 
-    public class Handler : IRequestHandler<Query, List<EvaluateGroup>>
+    public class EvaluateFormDTO : EvaluateForm
+    {
+        public string RoleName { get; set; }
+    }
+
+    public class Handler : IRequestHandler<Query, List<EvaluateFormDTO>>
     {
         private readonly ICleanDbContext _context;
         private readonly ICurrentUserAccessor _user;
@@ -26,26 +31,29 @@ public class List
             _user = user;
         }
 
-        public async Task<List<EvaluateGroup>> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<List<EvaluateFormDTO>> Handle(Query request, CancellationToken cancellationToken)
         {
             StringBuilder sql = new StringBuilder();
 
-            sql.AppendLine(@"select eg.evaluate_group_code ""evaluateGroupCode""
-                                    , eg.evaluate_group_name_th ""evaluateGroupNameTh""
-                                    , eg.evaluate_group_name_en ""evaluateGroupNameEn""
-                                    , eg.total_point ""totalPoint""
-                                    , eg.active ""active""
-                                    , eg.sequene_id ""sequeneId""
-                                    , eg.xmin ""rowVersion""
-                                    from et.evaluate_group eg");
+            sql.AppendLine(@"select ef.role_code ""roleCode""
+                             , CASE WHEN @Lang = 'th' THEN ef.role_name_th ELSE ef.role_name_en END as ""roleName""
+                             , ef.role_name_th ""RoleNameTh""
+                             , ef.role_name_en ""RoleNameEn""
+                             , ef.active ""active""
+                             , ef.language_code ""languageCode""
+                             , ef.xmin ""rowVersion""
+                             from et.evaluate_form ef 
+                             order by ef.sequene_id ");
 
+            if (request.Keywords != null) sql.AppendLine(@"where concat( ef.role_code, ef.role_name_th, ef.role_name_en) ilike concat('%',@Keywords,'%')");
 
-
-            if (request.Keywords != null) sql.AppendLine(@"where concat(eg.evaluate_group_code, eg.evaluate_group_name_th, eg.evaluate_group_name_en, eg.total_point) ilike concat('%',@Keywords,'%')");
-
-            sql.AppendLine("order by eg.sequene_id");
-
-            return await _context.QueryAsync<EvaluateGroup>(sql.ToString(), new { request.Keywords }, cancellationToken) as List<EvaluateGroup>;
+            return await _context.QueryAsync<EvaluateFormDTO>(sql.ToString(), new { Lang = _user.Language, request.Keywords }, cancellationToken) as List<EvaluateFormDTO>;
         }
     }
 }
+
+
+
+
+
+

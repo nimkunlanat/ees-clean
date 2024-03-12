@@ -12,8 +12,8 @@ import { filter, switchMap } from 'rxjs';
   templateUrl: './dbrt04.component.html'
 })
 export class Dbrt04Component {
-  Provinces: Province[] = []
-  resetSearch = ''
+  Provinces: Province[] = [];
+  resetSearch: any = '';
   constructor(
     private sv: Dbrt04Service,
     private activatedRoute: ActivatedRoute,
@@ -31,7 +31,7 @@ export class Dbrt04Component {
       switchMap(() => this.sv.delete(provinceCode)))
       .subscribe(() => {
         this.search()
-        this.resetSearch = ''
+        this.resetSearch = '';
         this.ms.success('message.STD00016');
       })
   }
