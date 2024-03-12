@@ -43,19 +43,39 @@ public class SaveForm
             }
             else if (request.RowState == RowState.Edit)
             {
-                _context.Set<SkillMatrixSubject>().RemoveRange(request.SkillMatrixSubjects.Where(w => w.RowState == RowState.Delete));
-                _context.Set<SkillMatrixSubject>().AddRange(request.SkillMatrixSubjects.Where(w => w.RowState == RowState.Add));
-                _context.Set<SkillMatrixSubject>().AttachRange(request.SkillMatrixSubjects.Where(w => w.RowState == RowState.Edit));
-                request.SkillMatrixSubjects.Where(w => w.RowState == RowState.Edit).ToList().ForEach(f => _context.Entry(f).State = EntityState.Modified);
-                
-                _context.Set<SkillMatrixGroup>().Attach(request);
+                List<SkillMatrixSubject> subjectDb = request.SkillMatrixSubjects.Where(w => w.GroupId == request.GroupId).ToList();
+                if (subjectDb.Count > 0)
+                {
+                    _context.Set<SkillMatrixSubject>().RemoveRange(subjectDb.Select(s =>
+                    {
+                        s.RowState = RowState.Delete;
+                        return s;
+                    }));
+                    _context.SaveChangesAsync(cancellationToken);
+                }
+                _context.Set<SkillMatrixSubject>().AddRange(request.SkillMatrixSubjects.Select(s =>
+                {
+                    s.RowState = RowState.Add;
+                    return s;
+                }));
+
+                _context.Set<SkillMatrixGroup>().AttachRange(request);
                 _context.Entry(request).State = EntityState.Modified;
-                
+
+               
             }
             else if (request.RowState == RowState.Delete)
             {
                 _context.Set<SkillMatrixGroup>().Remove(request);
             }
+
+            //if(request.SkillMatrixSubjects.Where(w => w.RowState == RowState.Delete).ToList().Count > 0)  _context.Set<SkillMatrixSubject>().RemoveRange(request.SkillMatrixSubjects.Where(w => w.RowState == RowState.Delete));
+            //if (request.SkillMatrixSubjects.Where(w => w.RowState == RowState.Add).ToList().Count > 0) _context.Set<SkillMatrixSubject>().AddRange(request.SkillMatrixSubjects.Where(w => w.RowState == RowState.Add));
+            //if (request.SkillMatrixSubjects.Where(w => w.RowState == RowState.Edit).ToList().Count > 0)
+            //{
+            //    _context.Set<SkillMatrixSubject>().AttachRange(request.SkillMatrixSubjects.Where(w => w.RowState == RowState.Edit));
+            //    request.SkillMatrixSubjects.Where(w => w.RowState == RowState.Edit).ToList().ForEach(f => _context.Entry(f).State = EntityState.Modified);
+            //}
             await _context.SaveChangesAsync(cancellationToken);
 
             return request;

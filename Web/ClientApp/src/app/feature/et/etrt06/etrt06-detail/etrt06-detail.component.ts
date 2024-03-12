@@ -9,6 +9,7 @@ import { NotifyService } from '@app/core/services/notify.service';
 import { ModalService } from '@app/shared/components/modal/modal.service';
 import { RowState } from '@app/shared/types/data.types';
 import { Observable, of, switchMap } from 'rxjs';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'x-etrt06-detail',
@@ -18,9 +19,10 @@ export class Etrt06DetailComponent {
   form: FormGroup;
   skillMatrixGroup: SkillMatrixGroup = new SkillMatrixGroup();
   deletes: SkillMatrixSubject[] = []
+  groupId: Guid;
   breadcrumbItems: MenuItem[] = [
     { label: 'label.ETRT06.ProgramName', routerLink: '/et/etrt06' },
-    { label: 'label.ETRT06.Detail', routerLink: '/et/etrt06/detail' },
+    { label: 'label.ETRT06.Detail', routerLink: '/et/etrt06/detail'},
   ]
 
   constructor(
@@ -30,9 +32,10 @@ export class Etrt06DetailComponent {
     private ms: NotifyService,
     private md: ModalService) {
     this.activatedRoute.data.subscribe(({ skillMatrixGroup }) => {
-      console.log(skillMatrixGroup);
-
-      this.skillMatrixGroup = skillMatrixGroup ?? new SkillMatrixGroup()
+      this.skillMatrixGroup = skillMatrixGroup.detail ?? new SkillMatrixGroup()
+      console.log(this.skillMatrixGroup)
+      this.groupId = skillMatrixGroup.params
+      this.breadcrumbItems[1]['state'] = this.groupId
       this.createForm()
       this.rebuildForm()
     })
@@ -57,8 +60,8 @@ export class Etrt06DetailComponent {
     const fg: FormGroup = this.fb.group({
       subjectId: null,
       groupId: null,
-      subjectGroup: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/), Validators.maxLength(10)]],
-      subjectName: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/), Validators.maxLength(10)]],
+      subjectGroup: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
+      subjectName: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
       description: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9#$^+=!*(){}\[\]@%& /\\]+$/)]],
       active: true,
       rowState: null,
