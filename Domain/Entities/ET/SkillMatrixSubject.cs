@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Domain.Entities.ET;
 
@@ -11,4 +12,5 @@ public class SkillMatrixSubject : EntityBase
     public string Description { get; set; }
     public string ExpectedGrade { get; set; }
     public bool? Active {  get; set; }
+    public ICollection<SkillMatrixGrade> SkillMatrixGrades { get; set; }
 }

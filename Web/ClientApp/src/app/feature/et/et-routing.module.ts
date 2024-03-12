@@ -11,9 +11,10 @@ import { roleList, evaluationList, evaluationDetail } from './etrt05/etrt05.reso
 import { Etrt05DetailComponent } from './etrt05/etrt05-detail/etrt05-detail.component';
 import { Etrt06Component } from './etrt06/etrt06.component';
 import { Etdt01AssessmentComponent } from './etdt01/etdt01-assessment/etdt01-assessment.component';
-import { etrt06Resolver, skillMatrixGroup } from './etrt06/etrt06.resolver';
+import { etrt06Resolver, skillMatrixGrade, skillMatrixGroup } from './etrt06/etrt06.resolver';
 import { Etrt06DetailComponent } from './etrt06/etrt06-detail/etrt06-detail.component';
 import { Etrt05EvaluationComponent } from './etrt05/etrt05-evaluation/etrt05-evaluation.component';
+import { Etrt06GradeComponent } from './etrt06/etrt06-grade/etrt06-grade.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'etrt05/evaluation', component: Etrt05EvaluationComponent, title: 'Evaluation Form Management', resolve: { evaluationList ,roleList }, data: { code: 'etrt05' } },
   { path: 'etrt05/evaluation/detail', component: Etrt05DetailComponent, title: 'Evaluation Form Management', resolve : { evaluationDetail }, data: { code: 'etrt05' } },
   { path: 'etrt06', component: Etrt06Component, title: 'Skill Matrix Management', resolve: { etrt06Resolver }, data: { code: 'etrt06' } },
-  { path: 'etrt06/detail', component: Etrt06DetailComponent, title: 'Skill Matrix Management', resolve: { etrt06Resolver, skillMatrixGroup }, data: { code: 'etrt06' } }
+  { path: 'etrt06/detail', component: Etrt06DetailComponent, title: 'Skill Matrix Management', resolve: { etrt06Resolver, skillMatrixGroup }, data: { code: 'etrt06' } },
+  { path: 'etrt06/detail/grade', component: Etrt06GradeComponent, title: 'Skill Matrix Management',resolve: {skillMatrixGrade }, data: { code: 'etrt06' } } 
 ];
 
 @NgModule({

@@ -25,7 +25,7 @@ public class Etrt05Controller : BaseController
     [HttpPost("saveForm")]
     public async Task<ActionResult> SaveForm([FromBody] SaveForm.Command command) => Ok(await Mediator.Send(command));
 
-    [HttpDelete("deleteForm")]
-    public async Task<ActionResult> DeleteForm([FromQuery] DeleteForm.Command command) => Ok(await Mediator.Send(command));
+    //[HttpDelete("deleteForm")]
+    //public async Task<ActionResult> DeleteForm([FromQuery] DeleteForm.Command command) => Ok(await Mediator.Send(command));
 }
 
