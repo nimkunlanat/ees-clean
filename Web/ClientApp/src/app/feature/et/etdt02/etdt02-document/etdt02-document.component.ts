@@ -18,6 +18,8 @@ export class Etdt02DocumentComponent {
     Approves: Approve[] = []
     assessment: string
 
+
+
     constructor(
       private sv: Etdt02Service,
       private activatedRoute: ActivatedRoute,

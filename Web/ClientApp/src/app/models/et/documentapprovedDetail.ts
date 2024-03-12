@@ -3,8 +3,7 @@ import { EntityBase } from "../entityBase";
 
 export class DocumentApprovedDetail extends EntityBase {
     documentNo: Guid;
-    evaluateGroupCode: string;
-    evaluateDetailCode: string;
-    point: number;
-
+    documentdetailNo: Guid;
+    evaluateDetailCode: Guid;
+    point?: number;
 }

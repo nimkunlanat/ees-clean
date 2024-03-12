@@ -14,7 +14,7 @@
                         <th class="text-center">{{ 'label.ETDT02.EmployeeCode' | translate }} </th>
                         <th class="text-center">{{ 'label.ETDT02.EmployeeName' | translate }} </th>
                         <th class="text-center">{{ 'label.ETDT02.EvaloationStatus' | translate }} </th>
-                        <th class="text-center">{{ 'label.ETDT02.CreatedBy' | translate }}</th>
+                        <th class="text-center">{{ 'label.ETDT02.ApprovedBy' | translate }}</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-row>
@@ -26,12 +26,12 @@
                       </td>
                         <td class="text-center">{{row.employeeCode}}</td>
                         <td class="text-center">{{row.name}}</td>
-                        <td class="text-center">{{row.evaluationStatus}}</td>
+                        <td class="text-center">{{row.status}}</td>
                         <td class="text-center">{{row.approveBy}}</td>
                     </tr>
                 </ng-template>
             </datatable>
         </div>
-    </div> 
+    </div>
 </div>
-  
+

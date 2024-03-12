@@ -75,10 +75,11 @@ export class Dbrt01DetailComponent {
       this.form.markAllAsTouched();
     }
     else {
+      console.log(this.data);
       const data = this.form.getRawValue();
       this.sv.save(data).pipe(
         switchMap((res: any) => this.sv.detail(res.id))
-      ).subscribe(res => {
+        ).subscribe(res => {
         this.data = res
         this.data.rowState = RowState.Normal;
         this.form.patchValue(res)
